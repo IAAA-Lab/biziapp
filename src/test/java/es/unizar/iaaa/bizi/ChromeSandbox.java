@@ -19,30 +19,25 @@ public class ChromeSandbox {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	@Test
-	public void testPrueba() throws Exception {
-		driver.get(baseUrl + "about:newtab");
-		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
-		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
-		driver.findElement(By.linkText("Conjunto de datos")).click();
-		driver.findElement(By.linkText("Conjunto de datos")).click();
-		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
-		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
-		driver.findElement(By.linkText("CSV")).click();
-		driver.findElement(By.linkText("CSV")).click();
-	}
+//	@Test
+//	public void testPrueba() throws Exception {
+//		driver.get(baseUrl + "about:newtab");
+//		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
+//		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
+//		driver.findElement(By.linkText("Conjunto de datos")).click();
+//		driver.findElement(By.linkText("Conjunto de datos")).click();
+//		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
+//		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
+//		driver.findElement(By.linkText("CSV")).click();
+//		driver.findElement(By.linkText("CSV")).click();
+//	}
 	
 	@Test
 	public void testPrueba2() throws Exception {
-		driver.get(baseUrl + "about:newtab");
-		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
-		driver.findElement(By.cssSelector("span.newtab-thumbnail.enhanced-content")).click();
-		driver.findElement(By.linkText("Conjunto de datos")).click();
-		driver.findElement(By.linkText("Conjunto de datos")).click();
-		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
-		driver.findElement(By.linkText("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar")).click();
+		driver.get("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar");
 		driver.findElement(By.linkText("CSV")).click();
-		driver.findElement(By.linkText("CSV")).click();
+		//Necesario calcular un tiempo para que sea posible la descarga
+		Thread.sleep(5000);
 	}
 
 	@After
