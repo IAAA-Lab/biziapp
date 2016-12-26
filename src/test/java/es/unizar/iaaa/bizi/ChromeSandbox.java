@@ -4,18 +4,18 @@ import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChromeSandbox {
 	private WebDriver driver;
-	private String baseUrl;
+	//private String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Daniel\\AppData\\Local\\Google\\Application\\chromedriver.exe");
 		driver = new ChromeDriver();
-		baseUrl = "http://www.zaragoza.es/";
+		//baseUrl = "http://www.zaragoza.es/";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
