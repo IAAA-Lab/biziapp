@@ -11,9 +11,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class UsoEstaciones {
+	private String loginLocation ="C:\\Users\\686013\\git\\UNIZAR-TFG-BIZI\\login";
 	private WebDriver driver;
+	private String chromeDriverLocation ="C:\\Users\\686013\\AppData\\Local\\Google\\Application\\chromedriver.exe";
 	private String baseURL;
 	private StringBuffer verificationErrors = new StringBuffer();
+	
 	
 	/**
 	 * Obtiene de un fichero el usuario y contrasena a introducir
@@ -28,7 +31,7 @@ public class UsoEstaciones {
 		BufferedReader buffer;
 		String conjunto="";
 		try {
-			fichero = new FileReader("C:\\Users\\Daniel\\git\\UNIZAR-TFG-BIZI\\login");
+			fichero = new FileReader(loginLocation);
 			buffer = new BufferedReader(fichero);
 			int i=0;
 			while((conjunto=buffer.readLine())!=null){
@@ -62,12 +65,14 @@ public class UsoEstaciones {
 	
 	public void accesoUsoEstaciones(){
 		driver.findElement(By.linkText("Uso de las estaciones")).click();
+		driver.findElement(By.linkText("3.1-Usos de las estaciones")).click();
+		
 		//TODO
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Daniel\\AppData\\Local\\Google\\Application\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
 		driver = new ChromeDriver();
 		baseURL = "http://reportingportal-zar.clearchannel.com/";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

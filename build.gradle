@@ -4,11 +4,19 @@ repositories {
 	mavenCentral()
 }
 
+apply plugin: 'eclipse'
+eclipse {
+  classpath {
+    downloadSources = true
+    downloadJavadoc = true
+  }
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
 	compile "org.seleniumhq.selenium:selenium-chrome-driver:3.0.1"
+	compile "org.apache.poi:poi-ooxml:3.16"
 	testCompile "junit:junit:4.12"
 }
-

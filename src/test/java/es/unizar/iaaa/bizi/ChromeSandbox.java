@@ -13,7 +13,7 @@ public class ChromeSandbox {
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Daniel\\AppData\\Local\\Google\\Application\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\686013\\AppData\\Local\\Google\\Application\\chromedriver.exe");
 		driver = new ChromeDriver();
 		//baseUrl = "http://www.zaragoza.es/";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -32,7 +32,7 @@ public class ChromeSandbox {
 //		driver.findElement(By.linkText("CSV")).click();
 //	}
 	
-	@Test
+	//@Test
 	public void testPrueba2() throws Exception {
 		driver.get("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar");
 		driver.findElement(By.linkText("CSV")).click();
