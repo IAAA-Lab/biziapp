@@ -25,12 +25,12 @@ public class convertxlstocsvApachePoi {
 	
 	public static void main(String[] args) {
 		
+//		extraerDatosExcel();
+		
 		 try {
-			FileInputStream excelFile = new FileInputStream(new File(EXCEL_FILE_LOCATION));
+			 FileInputStream excelFile = new FileInputStream(new File(EXCEL_FILE_LOCATION));
 			
-//			Workbook workbook = new HSSFWorkbook(excelFile);
 			HSSFWorkbook workbook = new HSSFWorkbook(excelFile);
-//			Sheet sheet = workbook.getSheetAt(0);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
 //			CellReference cellReference = new CellReference("B12");
@@ -40,29 +40,54 @@ public class convertxlstocsvApachePoi {
 ////			System.out.println(hssfcell.getCellStyle().getFont(workbook));
 //			System.out.println(hssfcell.getCellStyle().getFillForegroundColorColor());
 			
-			
 			Iterator<Row> iterator = sheet.iterator();
-
+			String nombre=null;
+			
+			iteradores:
             while (iterator.hasNext()) {
 
                 Row currentRow = iterator.next();
+                
                 Iterator<Cell> cellIterator = currentRow.iterator();
+                boolean saltoDeLinea = false;
 
-                while (cellIterator.hasNext()) {
-
-                	HSSFCell currentCell = (HSSFCell) cellIterator.next();
-                    //getCellTypeEnum shown as deprecated for version 3.15
-                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                    if (currentCell.getCellTypeEnum() == CellType.STRING) {
-                        System.out.print(currentCell.getStringCellValue().replace(",", ".") + 
-                        		"(font size: " + currentCell.getCellStyle().getFont(workbook).getFontHeightInPoints() +")" + ",");
-                        
-                    } else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
-                        System.out.print(currentCell.getNumericCellValue() + ",");
-                    }
-
+                if(nombre!=null){
+                	System.out.print("row " + currentRow.getRowNum() + " ");
+                	System.out.print(nombre + ",");
                 }
-                System.out.println();
+                
+                while (cellIterator.hasNext() && currentRow.getRowNum()>=11) {
+                	
+                	HSSFCell currentCell = (HSSFCell) cellIterator.next();
+//                	System.out.print("currentCell.getRowIndex()+1: " + (currentCell.getRowIndex()+1) + " ");
+
+                	if (currentCell.getCellTypeEnum() == CellType.STRING) {
+                    	
+                    	if(currentCell.getStringCellValue().equals("Total Todos los horarios")){
+
+                        	nombre = null;
+                        	break iteradores;
+                        }else{
+                        	if(currentCell.getColumnIndex()==1){
+                        		nombre = currentCell.getStringCellValue();
+                        		System.out.print(nombre + ",");
+                        	}else{
+                            	System.out.print(currentCell.getStringCellValue().replace(",", ".") + ",");
+                        	}
+                        	saltoDeLinea=true;
+                        	
+                        }
+                    }else if(currentCell.getAddress().getColumn()==5){
+                    	nombre = null;
+                    	break iteradores;
+                    }
+                    
+                }
+                if(saltoDeLinea==true){
+                	System.out.println();                	
+                }
+                
+                
             }
             excelFile.close();
 			
@@ -71,8 +96,73 @@ public class convertxlstocsvApachePoi {
 		 } catch (IOException e) {
 			 e.printStackTrace();
 		 }
-		
 
+	}
+	
+	private static void extraerDatosExcel(){
+		
+		String idEstacion, nombreEstacion, fechaDeUso, 
+		IntervaloDeTiempo, devolucionTotal, devolucionMedia, 
+		retiradasTotal, retiradasMedia, neto, total, 
+		fechaObtencionDatos, ficheroCSV, ficheroXLS;
+		
+		try {
+			FileInputStream excelFile = new FileInputStream(new File(EXCEL_FILE_LOCATION));
+			
+			HSSFWorkbook workbook = new HSSFWorkbook(excelFile);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+			
+			idEstacion = extraerIdEstacion(sheet);
+			System.out.println(idEstacion);
+			nombreEstacion = extraerNombreEstacion(sheet);
+			System.out.println(nombreEstacion);
+			fechaDeUso = extraerFechaDeUso(sheet);
+			System.out.println(fechaDeUso);
+			
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private static String extraerIdEstacion(HSSFSheet sheet){
+		String idEstacion = null;
+		CellReference cellReference = new CellReference("B12");
+		HSSFRow hssfrow = sheet.getRow(cellReference.getRow());
+		HSSFCell hssfcell = hssfrow.getCell(cellReference.getCol());
+		String[] split = hssfcell.toString().split(" ");
+		idEstacion = split[0];
+		return idEstacion;
+	}
+	
+	private static String extraerNombreEstacion(HSSFSheet sheet){
+		String nombreEstacion = null;
+		CellReference cellReference = new CellReference("B12");
+		HSSFRow hssfrow = sheet.getRow(cellReference.getRow());
+		HSSFCell hssfcell = hssfrow.getCell(cellReference.getCol());
+		nombreEstacion = hssfcell.toString();
+		nombreEstacion = nombreEstacion.substring(hssfcell.toString().indexOf("- ")+1);
+		nombreEstacion = nombreEstacion.trim();
+		return nombreEstacion;
+	}
+	
+	private static String extraerFechaDeUso(HSSFSheet sheet){
+		String fechaDeUso = null;
+		CellReference cellReference = new CellReference("C9");
+		HSSFRow hssfrow = sheet.getRow(cellReference.getRow());
+		HSSFCell hssfcell = hssfrow.getCell(cellReference.getCol());
+		fechaDeUso = hssfcell.toString();
+		String[] split = fechaDeUso.split(" ");
+		fechaDeUso = split[split.length-1];
+		return fechaDeUso;
+	}
+	
+	
+	private void crearCSV(String datos){
+		
 	}
 
 }
