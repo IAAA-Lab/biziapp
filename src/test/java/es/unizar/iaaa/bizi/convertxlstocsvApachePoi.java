@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +31,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 
 public class convertxlstocsvApachePoi {
-	
+
 	// TODO: Modificar extraer id y nombre de estación. Hacer genericos
 
 	private static final String nombreFicheroXLS = "usoEstacion3.xls";
@@ -45,33 +46,14 @@ public class convertxlstocsvApachePoi {
 			HSSFWorkbook workbook = new HSSFWorkbook(excelFile);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
+			// Obtencion de datos relevantes para el fichero CSV
 			Map<String, ArrayList<String>> datos = extraerDatosExcel(sheet);
-			// datos.forEach((k,v) -> System.out.println("Key: " + k + ": Value:
-			// " + v));
-
-			String idEstacion = extraerIdEstacion(sheet);
-			// System.out.println(idEstacion);
-
-			String nombreEstacion = extraerNombreEstacion(sheet);
-			// System.out.println(nombreEstacion);
-
 			String fechaUso = extraerFechaDeUso(sheet);
-			// System.out.println(fechaUso);
-
 			String fechaExtraccion = extraerFechaDeExtraccion(sheet);
-			// System.out.println(fechaExtraccion);
 
 			excelFile.close();
 
-			// Generar nombre del fichero a partir de la fecha y el nombre del
-			// fichero XLS original
-			Date now = new Date();
-			String nombreFichero = FORMATO_FECHA.format(now);
-			String fichero = nombreFicheroXLS.substring(0, nombreFicheroXLS.indexOf("."));
-			System.out.println(fichero);
-			String nombreFicheroCSV = nombreFichero + "-" + fichero + ".csv";
-
-			crearCSV(datos, idEstacion, nombreEstacion, fechaUso, fechaExtraccion, nombreFicheroCSV, nombreFicheroXLS);
+			crearCSV(datos, fechaUso, fechaExtraccion, nombreFicheroXLS);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -128,27 +110,6 @@ public class convertxlstocsvApachePoi {
 		return datos;
 	}
 
-	private static String extraerIdEstacion(HSSFSheet sheet) {
-		String idEstacion = null;
-		CellReference cellReference = new CellReference("B12");
-		HSSFRow hssfrow = sheet.getRow(cellReference.getRow());
-		HSSFCell hssfcell = hssfrow.getCell(cellReference.getCol());
-		String[] split = hssfcell.toString().split(" ");
-		idEstacion = split[0];
-		return idEstacion;
-	}
-
-	private static String extraerNombreEstacion(HSSFSheet sheet) {
-		String nombreEstacion = null;
-		CellReference cellReference = new CellReference("B12");
-		HSSFRow hssfrow = sheet.getRow(cellReference.getRow());
-		HSSFCell hssfcell = hssfrow.getCell(cellReference.getCol());
-		nombreEstacion = hssfcell.toString();
-		nombreEstacion = nombreEstacion.substring(hssfcell.toString().indexOf("- ") + 1);
-		nombreEstacion = nombreEstacion.trim();
-		return nombreEstacion;
-	}
-
 	private static String extraerFechaDeUso(HSSFSheet sheet) {
 		String fechaDeUso = null;
 		CellReference cellReference = new CellReference("C9");
@@ -169,8 +130,13 @@ public class convertxlstocsvApachePoi {
 		return fechaDeExtraccion;
 	}
 
-	private static void crearCSV(Map<String, ArrayList<String>> datos, String idEstacion, String nombreEstacion,
-			String fechaUso, String fechaExtraccion, String nombreFicheroCSV, String nombreFicheroXLS) {
+	private static void crearCSV(Map<String, ArrayList<String>> datos, String fechaUso, String fechaExtraccion,
+			String nombreFicheroXLS) {
+
+		// Prueba de generacion de nombre con messageFormat
+		String nombreFicheroCSV = MessageFormat.format("{0}_{1}.csv", nombreFicheroXLS.substring(0, nombreFicheroXLS.indexOf(".")),
+				fechaExtraccion.replace("/", ""));
+		System.out.println(nombreFicheroCSV);
 
 		String ruta = "C:\\Users\\686013\\Desktop\\FicherosCSV\\" + nombreFicheroCSV;
 		try {
@@ -182,12 +148,17 @@ public class convertxlstocsvApachePoi {
 				System.out.println("Generando fichero: " + nombreFicheroCSV);
 
 				// Introducir cabeceras
-				bw.write("nombreCompleto,idEstacion,nombreEstacion," + "fechaDeUso,IntervaloDeTiempo,devolucionTotal,"
+				bw.write("nombreCompleto,idEstacion,nombreEstacion," + "fechaDeUso,intervaloDeTiempo,devolucionTotal,"
 						+ "devolucionMedia,retiradasTotal,retiradasMedia,"
-						+ "neto(d-r),total,fechaObtencionDatos,ficheroCSV," + "ficheroXLS\n");
+						+ "neto,total,fechaObtencionDatos,ficheroCSV," + "ficheroXLS\n");
 
 				// Introducir datos
 				for (Entry<String, ArrayList<String>> dato : datos.entrySet()) {
+					// Extraer el id de la estacion
+					String idEstacion = dato.getKey().split(" ")[0];
+					// Extraer el nombre de la estacion
+					String nombreEstacion = dato.getKey().substring(dato.getKey().indexOf("- ") + 1).trim();
+
 					for (int i = 0; i < dato.getValue().size(); i++) {
 						bw.write(dato.getKey() + "," + idEstacion + "," + nombreEstacion + "," + fechaUso + ","
 								+ dato.getValue().get(i) + fechaExtraccion + "," + nombreFicheroCSV + ","
@@ -197,12 +168,12 @@ public class convertxlstocsvApachePoi {
 
 				bw.close();
 				System.out.println("Generado fichero: " + nombreFicheroCSV);
+
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
