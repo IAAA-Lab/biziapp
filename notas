@@ -1,0 +1,206 @@
+PRUEBA DE CONCEPTO
+02/06
+10:00 - Instalación Hortonworks (Virtual Machine) - Proceso fallido, no suficiente RAM para arrancar la maquina virtual (minimo 8GB de RAM)
+
+05/06
+8:30 - (OPCIONAL) PLantear cambiar el fichero de credenciales de la web por un json
+9:30 - Intento instalar hortonworks en docker siguiendo las instrucciones de:
+	https://es.hortonworks.com/hadoop-tutorial/sandbox-deployment-install-guide/#load-sandbox-into-docker
+9:40 -	Proceso fallido, no suficiente RAM para arrancar la maquina virtual (minimo 8GB de RAM)
+
+06/06
+10:30 - Descarga e instalación de Hortonworks 2.4 en PC universidad
+11:00 - Configuración VM
+	Bajada de recursos de la VM: RAM y CPU
+	LOGIN	User:root	Pass:hadoop o pumuki.2017
+12:10 - Primera entrada al entorno web
+12:20 - Tutoriales guiados por hdp
+
+07/06
+10:00 - Paso a Hortonworks 2.6 (excesivamente lento a la hora de ser lanzado)
+10:25 - Tutoriales guiados por hdp
+10:57 - Anotación: las consultas en shell son más rapidas ya que las consultas atacan directamente el directorio de hadoop, mientras que las que se hacen con Ambari Hive View deben ser aceptadas por un servidor en reposo antes de ser enviadas a hadoop
+12:41 - Tutoriales de Hortonworks realizados, hasta el momento:
+	Hadoop Tutorial - Getting Started with HDP
+	How to Process Data with Apache Hive
+	Loading a Querying Data with Hadoop
+
+09/06
+10:00 - Prueba de carga de ficheros en HDFS por medio de consola
+	Se ha creado una carpeta "pruebaDani" en /home de la VM
+	Se ha pasado el fichero de ejemplo "FL_insurance_sample.csv" por medio de WinSCP.
+	Se ha copiado el fichero de /home/pruebaDani a /user/maria_dev/data en el sistema de ficheros hdfs:
+			dzone.com/articles/top-10-hadoop-shell-commands
+	Se accede a beeline (beeline -u jdbc:hive2://localhost:10000 -n maria_dev)
+		SHOW DATABASES; --Mostrar las bases de datos creadas
+		USE <database>; --Seleccionar la base de datos a usar
+		SHOW TABLES; 	--Ver las tablas de la base de datos seleccionada
+	Crear nueva tabla CREATE TABLE pruebaDani(...)
+12:00 - Anotación: Es más optimo generar las tablas con "STORED AS ORC", ya que se nota mucho la diferencia de la velocidad en las consultas.
+	SELECT COUNT(*) FROM pruebaDani;
+	Sin ORC -> 24.451 segundos
+	Con ORC -> 0.699 segundos
+	Al estar sin ORC, la consulta despliega un MapReduce para devolver el resultado.
+
+12:45 - Para realizar desde consola una tabla con formato ORC es necesario:
+	1. Generar una tabla que use formato textFile CREATE TABLE holamundotmp(...);
+	2. Insertar los datos del CSV
+	3. Generar una tabla que use formato orcFile CREATE TABLE holamundo(...);
+	4. Pasar los datos de una a otra: insert overwrite table holamundo select * from holamundotmp;
+
+12/06
+09:30 - Instalación Eclipse Neon
+09:40 - Programa de prueba
+
+
+----------------------------------------------- INCLUIR LAS NOTAS RECOGIDAS EN WINDOWS ----------------------------
+13/06
+09:50 - Descarga de chromedriver (https://chromedriver.storage.googleapis.com/index.html?path=2.30/)
+09:55 - Configuración de Eclipse (instalación Gradle y JUnit)
+10:00 - Programa de pruebas
+	Problema: Ficheros CSV sin contenido. Al convertir xls en csv introduce mucha basura. UTILIZAR JEXCEL
+		http://profesores.elo.utfsm.cl/~agv/elo330/2s05/projects/CeronSilva/tutorial.htm
+	Problema: Insertar fechas no posible manualmente. Posibilidad: introducir en la petición POST a pelo
+13:00 - Descanso
+15:30 - Vuelta
+17:00 - Uso de jxl para tratamiento de hoja de excel (compile "net.sourceforge.jexcelapi:jxl:2.6.12")
+	Se detectan problemas con jxl 2.6.12. Solución: Activar con clave de producto Office
+	Se decide que es mejor utilizar Apache POI, para no depender de Microsoft Office
+18:00 - Fin
+
+15/06
+09:30 - Estudio e implementación de Apache POI (compile "org.apache.poi:poi-ooxml:3.16")
+13:30 - Comer
+14:50 - Estudio e implementación de Apache POI
+16:20 - Fin
+
+16/06
+11:00 - Estudiar como extraer la información de Excel para introducirla en un fichero CSV
+12:10 - Comer
+13:00 - Estudiar como extraer la información de Excel para introducirla en un fichero CSV
+17:00 - Fin
+
+19/06
+09:20 - Estudiar como extraer la información de Excel para introducirla en un fichero CSV
+12:20 - Generar fichero CSV para Uso de estaciones
+13:07 - Primera generacion de CSV correcta
+14:30 - Descanso
+15:00 - Depurar generar CSV
+	Anotación: Para el nombrado de los ficheros de salida, mirar messageFormat.
+	Hecho nombrado con messageFormat. DEPURARLO MAS ADELANTE
+16:00 - Pruebas de carga de datos y consultas en hortonworks
+	ANOTACIÓN: Modificar el formato de las fechas de DD/MM/YYYY a YYYY-MM-DD. 
+		Para poder convertirlo en la BD a tipo Date. (Idea: hacerlo con un split y luego un messageFormat)
+17:00 - Fin. No se ha llegado a probar el último paso porque la maquina virtual no termina de arrancar
+
+20/06
+11:00 - Carga de datos por medio de interfaz gráfica de HDP.
+	ANOTACIÓN: Cambiar el guión(-) por guión bajo(_) en el nombre del fichero CSV 
+11:30 - Conversación con Pellicer: Probar a integrar JHipster cambiando la BD por la BD de Hortonworks(Hive - ip y puerto).
+		Para la descarga de ficheros: Estudiar como se realiza la petición de los datos (sobretodo la fecha)
+		y utilizar la funcionalidad de SeleniumHQ para realizar peticiones por httpRequest.
+		http://www.swtestacademy.com/selenium-11-javascriptexecutor/
+12:41 - Definir pasos a seguir para insertar nuevos datos en una tabla.
+13:10 - Instalación de JHipster
+17:00 - Fin
+
+21/06
+10:30 - JHipster instalación (maven, MySQL, H2, ...)
+	Cambio de puerto: src/main/resources/config/application-dev.yml
+16:00 - JHipster instalación (gradle, MySQL, MySQL, ...)
+17:20 - Tutorial blog con JHipster 
+	JHipster 2.x (https://www.youtube.com/watch?v=ZGF4gEM4FuA) REALIZADO CON EXITO
+	JHipster 4 (https://www.youtube.com/watch?v=XRREt1KB4Y8&feature=youtu.be) Igual que el anterior
+	Lanzar desde consola: gradle bootrun
+
+26/06
+10:00 - Trasteando con JHipster
+	Insertar modelo de datos realizado a partir de JDL (yo jhipster:import-jdl C:\Users\686013\Desktop\dani\jhipster-jdl-usoEstacion.jh)
+11:40 - Acoplar Hive a JHipster. NO LOGRADO
+13:15 - Pellicer plantea que hay que empezar a pensar en la propuesta de proyecto.
+13:20 - Se decide sustituir la actual máquina virtual (Hortonworks), debido a la lentitud a la hora de iniciar. Se procede a instalar
+	una máquina virtual prediseñada (bitnami), que dispone de Hadoop y Hive. (https://bitnami.com/stack/hadoop/virtual-machine) 
+	(https://docs.bitnami.com/virtual-machine/apps/hadoop/)
+13:40 - Instalación de Bitnami-hadooop completada
+	username: bitnami	password: pumuki.2017
+	Configuración Red: Adaptador puente. Dar IP manualmente (sudo ifconfig eth0 155.210.155.122 netmask 255.255.255.0 up). DETECTADO PROBLEMA:
+		NO TIENE ACCESO A INTERNET
+	Configuración teclado (http://www.losteatinos.com/linux/poner-teclado-linux-en-espa%C3%B1ol.html)
+	Hay que abrir todos los puertos(sudo ufw allow PORT) para poder acceder desde el navegador
+	Configuración Red: NAT + Host-Only con DHCP. Funciona correctamente
+	Añadir en /etc/network/interfaces:
+		auto eth1
+		iface eth0 inet dhcp
+20:12 - FIN
+
+27/06
+10:30 - Solucionar error hive_metastore not running
+10:50 - Se opta por reinstalar la máquina virtual ya que no se ha conseguido solucionar el problema anterior y no se desea perder más tiempo.
+	Se habilita la conexión por SSH con autenticación por RSA:
+		En linux se han seguido los pasos típicos para la creación de las claves RSA.
+		En windows se han descargado Pageant y Puttygen para poder generar las clave RSA en la máquina local.
+		(https://docs.bitnami.com/virtual-machine/faq/#how-to-enable-the-ssh-server)
+
+11:30 - Descanso
+12:30 - Probar desde Putty que funcionan correctamente hadoop y Hive
+	https://docs.bitnami.com/virtual-machine/apps/hadoop/#how-to-run-a-test-job-in-hadoop
+	https://docs.bitnami.com/virtual-machine/apps/hadoop/#how-to-test-hive
+13:00 - Detectado problema al realizar mapreduce. Se procede a intentar solucionar. 
+15:53 - No se consigue solucionar el problema, ya que se debe a problemas de memoria de la propia máquina.
+	Se decide volver a utilizar dockers (https://github.com/big-data-europe/docker-hive/blob/master/README.md)
+15:55 - Instalar Docker en Windows - Problemas con virtualización
+16:18 - FIN
+-------------------------------------------------------------------------------------------------------------------
+
+29/06
+10:00 - Pedir prorroga de tarjeta de acceso.
+10:30 - Descarga de "docker-hive" realizado por Big Data Europe.
+	Instalación de docker-hive:
+		docker-compose build
+		docker-compose up -d namenode hive-metastore-postgresql
+		docker-compose up -d datanode hive-metastore
+		docker-compose up -d hive-server
+10:50 - Tras la instalación se prueba a acceder al cliente Beeline para ejecutar consultas de Hive
+11:00 - Se exponen los puertos al exterior con ayuda de la herramienta Kitematic.
+11:24 - Se prueba con exito una prueba de Mapreduce para comprobar que funciona correctamente:
+		hadoop jar /opt/bitnami/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.8.0.jar pi 10 100
+		resultado: "Estimated value of Pi is 3.14800000000000000000"
+12:30 - Habilitar acceso por ssh a la máquina.
+13:00 - Descanso
+14:30 - Detectado error en la máquina, por lo que se elimina todo el contenido y se vuelve a generar el docker
+16:00 - Prueba de conexión a Hive desde Java
+17:09 - Se conecta a la base de datos y es capaz de crear una tabla, si no existe (ConexionHive.java).
+17:20 - Pruebas varias con la base de datos desde Java
+18:30 - Comportamiento inesperado: Al hacer un LOAD DATA mueve el fichero de la carpeta donde esta guardado(en hdfs) a otra.
+				Al añadir fichero elimina el anterior.
+19:00 - FIN. Pendiente revisar comportamiento inesperado.
+
+03/07
+10:30 - Tutorial Docker Compose (https://docs.docker.com/compose/gettingstarted/#prerequisites)
+11:30 - Se detecta que en algunas ocaciones la conexión con el cliente beeline a la BD no funciona correctamente. Solo es necesario
+	volver a intentar la conexión.
+11:33 - Estudio del comportamiento inesperado encontrado el 29/06. Estudio del atributo OVERWRITE en la sentencia LOAD DATA.
+		Es correcto que al realizar un LOAD DATA, mueva el fichero de la carpeta donde esta alojado (en el sistema HDFS)
+		a la carpeta "/user/hive/warehouse/<nombreBD>/". Esto se debe a que esos ficheros serán los que luego serán
+		utilizados para las consultas a realizar.
+		Al realizar el LOAD DATA con el atributo OVERWRITE lo que sucede es que elimina los ficheros existentes en la carpeta
+		"/user/hive/warehouse/<nombreBD>/" e introduce el que se le ha indicado. Desde ese momento los datos anteriores no existen
+		en nuestra base de datos, por lo que habría que volver a volcarlos.
+		No se ve ningún caso donde sea necesario un OVERWRITE de estas caracteristicas.
+13:20 - Investigación previa para Integración Jhipster y Hive. (Mirar spring hadoop)
+13:30 - Comida
+14:00 - Vuelta
+15:16 - Instalación de JHipster en portatil con Linux (utilizando opción YARN)
+16:36 - FIN
+
+05/07
+
+10:00 - Prueba de conexión al docker desde el exterior de la máquina host
+	Se consigue conectar desde el exterior con la base de datos y realizar consultas.
+11:00 - Rellenar documento oficial para PROPUESTA DE TFG.
+11:20 - Prueba de carga de datos desde el exterior de la máquina host
+	Al realizar un LOAD DATA los ficheros deben estar en la misma máquina que Hive (en el sistema de ficheros local o en HDFS), no es posible realizar la carga desde una máquina remota.
+	Lo normal es que los ficheros a cargar en la base de datos ya se encuentren en esa máquina. En caso contrario, pasos a seguir:
+		1) Los ficheros deben copiarse a la máquina correspondiente (ssh, scp, ...).
+		2) Realizar el LOAD DATA LOCAL como anteriormente.
+
