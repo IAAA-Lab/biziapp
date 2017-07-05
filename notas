@@ -194,7 +194,6 @@ PRUEBA DE CONCEPTO
 16:36 - FIN
 
 05/07
-
 10:00 - Prueba de conexión al docker desde el exterior de la máquina host
 	Se consigue conectar desde el exterior con la base de datos y realizar consultas.
 11:00 - Rellenar documento oficial para PROPUESTA DE TFG.
@@ -203,4 +202,11 @@ PRUEBA DE CONCEPTO
 	Lo normal es que los ficheros a cargar en la base de datos ya se encuentren en esa máquina. En caso contrario, pasos a seguir:
 		1) Los ficheros deben copiarse a la máquina correspondiente (ssh, scp, ...).
 		2) Realizar el LOAD DATA LOCAL como anteriormente.
+
+13:00 - Modificación del fichero docker-compose.yml.
+	namenode -> Se expone el puerto 50070.
+	hive-server -> Se genera el volume "compartida" para compartir ficheros entre máquina host y el docker.
+14:00 - Se insertan datos en el volumen compartido y se cargan en la base de datos desde remoto a partir de una aplicación Java.
+	Si se inserta el mismo fichero varias veces, en HDFS se genera un fichero nombre_copy_X. Al consultar en la BD saldrán los datos duplicados (en caso de que el fichero con mismo nombre contenga los mismos datos).
+14:22 - Trasladar los datos a una tabla con formato de almacenamiento ORC.
 
