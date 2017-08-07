@@ -111,7 +111,7 @@ PRUEBA DE CONCEPTO
 17:20 - Tutorial blog con JHipster 
 	JHipster 2.x (https://www.youtube.com/watch?v=ZGF4gEM4FuA) REALIZADO CON EXITO
 	JHipster 4 (https://www.youtube.com/watch?v=XRREt1KB4Y8&feature=youtu.be) Igual que el anterior
-	Lanzar desde consola: gradle bootrun
+	Lanzar desde consola: gradlew bootrun
 
 26/06
 10:00 - Trasteando con JHipster
@@ -209,4 +209,51 @@ PRUEBA DE CONCEPTO
 14:00 - Se insertan datos en el volumen compartido y se cargan en la base de datos desde remoto a partir de una aplicación Java.
 	Si se inserta el mismo fichero varias veces, en HDFS se genera un fichero nombre_copy_X. Al consultar en la BD saldrán los datos duplicados (en caso de que el fichero con mismo nombre contenga los mismos datos).
 14:22 - Trasladar los datos a una tabla con formato de almacenamiento ORC.
+15:30 - FIN
 
+06/07
+10:30 - Analizar como acoplar JHipster con Hive
+14:00 - Descanso
+14:30 - Analizar como acoplar JHipster con Hive
+17:30 - Revisión Propuesta TFG
+18:00 - FIN
+
+10/07
+09:30 - Analizar como acoplar JHipster con Hive
+13:00 - Comer
+14:00 - Analizar como acoplar JHipster con Hive
+17:30 - FIN
+
+12/07
+09:00 - Analizar como acoplar JHipster con Hive
+14:00 - FIN
+
+14/07
+10:00 - Analizar como acoplar JHipster con Hive
+14:00 - FIN
+
+17/07
+09:30 - Analizar como acoplar JHipster con Hive
+	dependencias
+	liquibase
+	import.sql(schema.sql y data.sql)
+12:00 - Descanso
+16:00 - Prueba JHipster sin liquibase y con MySQL
+19:20 - Prueba JHipster sin liquibase y con Hive
+20:30 - FIN
+
+19/07
+10:30 - Acoplar JHipster con Hive
+15:00 - Descanso
+17:00 - Acoplar JHipster con Hive
+21:00 - FIN
+
+03/08
+09:20 - Retomar TFG tras vacaciones
+09:30 - Instalación Apache Sqoop
+
+sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --password toor --table probando --columns "id,name,apellido" --m 1 --target-dir /user/hive/warehouse/default/prueba --hive-import --hive-overwrite
+
+06/08
+21:00 - Instalación de MySQL en local
+	root password: daniel12345
