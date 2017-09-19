@@ -7,17 +7,38 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChromeSandbox {
-	private WebDriver driver;
-	//private String baseUrl;
-	private StringBuffer verificationErrors = new StringBuffer();
+	
+	/*
+	 * Test obtenido de https://sites.google.com/a/chromium.org/chromedriver/getting-started
+	 */
+	
+	@Test
+	public void testGoogleSearch() throws InterruptedException {
+	  // Optional, if not specified, WebDriver will search your path for chromedriver.
+	  System.setProperty("webdriver.chrome.driver", "/home/dani/Escritorio/TFG/herramientas/chromedriver");
 
-	@Before
-	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\686013\\AppData\\Local\\Google\\Application\\chromedriver.exe");
-		driver = new ChromeDriver();
-		//baseUrl = "http://www.zaragoza.es/";
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  WebDriver driver = new ChromeDriver();
+	  driver.get("http://www.google.com/xhtml");
+	  Thread.sleep(5000);  // Let the user actually see something!
+	  WebElement searchBox = driver.findElement(By.name("q"));
+	  searchBox.sendKeys("ChromeDriver");
+	  searchBox.submit();
+	  Thread.sleep(5000);  // Let the user actually see something!
+	  driver.quit();
 	}
+	
+	
+//	private WebDriver driver;
+//	private String baseUrl;
+//	private StringBuffer verificationErrors = new StringBuffer();
+
+//	@Before
+//	public void setUp() throws Exception {
+//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\686013\\AppData\\Local\\Google\\Application\\chromedriver.exe");
+//		driver = new ChromeDriver();
+//		//baseUrl = "http://www.zaragoza.es/";
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//	}
 
 //	@Test
 //	public void testPrueba() throws Exception {
@@ -32,21 +53,21 @@ public class ChromeSandbox {
 //		driver.findElement(By.linkText("CSV")).click();
 //	}
 	
-	//@Test
-	public void testPrueba2() throws Exception {
-		driver.get("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar");
-		driver.findElement(By.linkText("CSV")).click();
-		//Necesario calcular un tiempo para que sea posible la descarga
-		Thread.sleep(5000);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-		String verificationErrorString = verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
+//	//@Test
+//	public void testPrueba2() throws Exception {
+//		driver.get("http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/solar");
+//		driver.findElement(By.linkText("CSV")).click();
+//		//Necesario calcular un tiempo para que sea posible la descarga
+//		Thread.sleep(5000);
+//	}
+//
+//	@After
+//	public void tearDown() throws Exception {
+//		driver.quit();
+//		String verificationErrorString = verificationErrors.toString();
+//		if (!"".equals(verificationErrorString)) {
+//			fail(verificationErrorString);
+//		}
+//	}
 
 }
