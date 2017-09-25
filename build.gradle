@@ -18,7 +18,6 @@ targetCompatibility = 1.8
 dependencies {
 	compile "org.seleniumhq.selenium:selenium-chrome-driver:3.0.1"
 	compile "org.seleniumhq.selenium:selenium-support:3.0.1"
-	
 	compile "org.apache.poi:poi-ooxml:3.16"
 	compile "org.apache.hive:hive-exec:2.1.1"
 	compile "org.apache.hive:hive-jdbc:2.1.1"

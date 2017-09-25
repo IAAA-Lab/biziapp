@@ -30,7 +30,7 @@ public class Configuracion {
 	 * Obtiene parametros de login del fichero JSON
 	 * @return ["user","password"]
 	 */
-	public static ArrayList<String> getCredenciales() {
+	public ArrayList<String> getCredenciales() {
 		ArrayList<String> result = new ArrayList<String>();
 		JSONObject login = (JSONObject) jsonObject.get("login");
 		String user = login.get("user").toString();
@@ -40,15 +40,21 @@ public class Configuracion {
 		return result;
 	}
 	
-	public static String getBaseURL() {
+	public String getBaseURL() {
 		JSONObject legacySystem = (JSONObject) jsonObject.get("legacySystem");
 		String result = legacySystem.get("baseURL").toString();
 		return result;
 	}
 	
-	public static String getChromeDriverLocation() {
+	public String getChromeDriverLocation() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
 		String result = fileLocation.get("chromeDriverLocation").toString();
+		return result;
+	}
+	
+	public String getDownloadPath() {
+		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
+		String result = fileLocation.get("downloadLocation").toString();
 		return result;
 	}
 	

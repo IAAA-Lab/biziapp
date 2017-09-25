@@ -1,8 +1,6 @@
 package es.unizar.iaaa.bizi;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.*;
-import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,16 +13,15 @@ public class ChromeSandbox {
 	@Test
 	public void testGoogleSearch() throws InterruptedException {
 	  // Optional, if not specified, WebDriver will search your path for chromedriver.
-	  System.setProperty("webdriver.chrome.driver", "/home/dani/Escritorio/TFG/herramientas/chromedriver");
-
-	  WebDriver driver = new ChromeDriver();
-	  driver.get("http://www.google.com/xhtml");
-	  Thread.sleep(5000);  // Let the user actually see something!
-	  WebElement searchBox = driver.findElement(By.name("q"));
-	  searchBox.sendKeys("ChromeDriver");
-	  searchBox.submit();
-	  Thread.sleep(5000);  // Let the user actually see something!
-	  driver.quit();
+		System.setProperty("webdriver.chrome.driver", "/home/dani/Escritorio/TFG/herramientas/chromedriver");
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("http://apache.rediris.es/sqoop/1.4.6/");
+		Thread.sleep(5000);  // Let the user actually see something!
+		driver.findElement(By.linkText("sqoop-1.4.6.bin__hadoop-0.23.tar.gz")).click();
+		Thread.sleep(50000);  // Let the user actually see something!
+		driver.quit();
 	}
 	
 	
