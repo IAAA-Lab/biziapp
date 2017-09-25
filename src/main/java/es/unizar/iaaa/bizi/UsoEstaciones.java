@@ -33,7 +33,8 @@ public class UsoEstaciones {
 	private static StringBuffer verificationErrors = new StringBuffer();
 	private static Configuracion config;
 	private static String downloadPath;
-
+	
+	// FINALMENTE ESTE MAIN SE CONVERTIRA EN UNA FUNCION LLAMADA DESDE UN MAIN EXTERNO
 	public static void main(String[] args) throws Exception {
 
 		config = new Configuracion();
