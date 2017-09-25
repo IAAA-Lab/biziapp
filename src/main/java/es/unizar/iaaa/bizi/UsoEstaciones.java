@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -94,6 +95,9 @@ public class UsoEstaciones {
 		options.setExperimentalOption("prefs", prefs);
 		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
 		driver = new ChromeDriver(options);
+		// Hacer que la pantalla se posicione en una zona no visible de la pantalla
+		Point punto = new Point(10000,10000);
+		driver.manage().window().setPosition(punto);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
