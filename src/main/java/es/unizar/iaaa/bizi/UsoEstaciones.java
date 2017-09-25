@@ -6,6 +6,8 @@
  */
 package es.unizar.iaaa.bizi;
 
+
+import es.unizar.iaaa.bizi.Configuracion;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -23,7 +25,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
-import es.unizar.iaaa.bizi.Configuracion;
 
 public class UsoEstaciones {
 
@@ -235,6 +236,16 @@ public class UsoEstaciones {
 		return fecha;
 	}
 
+	/**
+	 * Renombrar el fichero anadiendole la fecha de la información que contiene
+	 * 
+	 * @param downloadPath
+	 *            donde se encuentra el fichero a renombrar
+	 * @param nombreFichero
+	 *            nombre que tiene el fichero a renombrar
+	 * @param fecha
+	 *            fecha que se quiere anadir al nombre (formato "dd/MM/yyyy")
+	 */
 	private static void renameFile(String downloadPath, String nombreFichero, String fecha) {
 		// Obtener path completo del fichero
 		String path = downloadPath + System.getProperty("file.separator") + nombreFichero;
@@ -250,9 +261,10 @@ public class UsoEstaciones {
 			// Renombrar
 			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
 			fichero.renameTo(dest);
+			// TODO: GENERAR ENTRADA EN FICHERO DE LOGS PARA REALIZAR CONVERSION A CSV
 			System.out.println("existe");
 		} else {
-			// TODO: GENERAR ENTRADA EN FICHERO LOGS DE ERRORES
+			// TODO: GENERAR ENTRADA EN FICHERO DE LOGS DE ERRORES
 			System.out.println("no existe");
 		}
 	}
