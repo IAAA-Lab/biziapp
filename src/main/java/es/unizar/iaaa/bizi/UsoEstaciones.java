@@ -6,7 +6,6 @@
  */
 package es.unizar.iaaa.bizi;
 
-
 import es.unizar.iaaa.bizi.Configuracion;
 import static org.junit.Assert.fail;
 
@@ -34,40 +33,51 @@ public class UsoEstaciones {
 	private static StringBuffer verificationErrors = new StringBuffer();
 	private static Configuracion config;
 	private static String downloadPath;
-	
-	// FINALMENTE ESTE MAIN SE CONVERTIRA EN UNA FUNCION LLAMADA DESDE UN MAIN EXTERNO
-	public static void main(String[] args) throws Exception {
 
+	public UsoEstaciones() {
 		config = new Configuracion();
 		downloadPath = System.getProperty("user.dir") + config.getDownloadPath();
 		chromeDriverLocation = config.getChromeDriverLocation();
+	}
 
-		setUp();
+	/**
+	 * 
+	 * @param fecha
+	 *            fecha del fichero que se desea descargar. Formato 'dd/MM/yyyy'
+	 * @return
+	 */
+	public int descargar(String fecha) {
+		try {
+			String date = fecha;
+			setUp();
+			// Login
+			ArrayList<String> credenciales = config.getCredenciales();
+			String baseURL = config.getBaseURL();
+			login(credenciales, baseURL);
 
-		// Login
-		ArrayList<String> credenciales = config.getCredenciales();
-		String baseURL = config.getBaseURL();
-		login(credenciales, baseURL);
+			// Acceso hasta zona de descarga
+			accesoA("Uso de las estaciones", "3.1-Usos de las estaciones");
+			
+			// Rellenar campos de busqueda
+			rellenarCamposDeBusqueda(date);
+			
+			// Descarga de fichero xls
+			descargarFichero();
+			
+			Thread.sleep(10000);
 
-		// Acceso hasta zona de descarga
-		accesoA("Uso de las estaciones", "3.1-Usos de las estaciones");
+			// Desconexion
+			tearDown();
 
-		// Fecha del fichero que se quiere descargar(dd-MM-yyyy)
-		String fecha = obtenerFecha();
+			// Comprobar existencia del fichero y renombrar
+			renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
 
-		// Rellenar campos de busqueda (Esta hecho para el caso de uso de estaciones)
-		rellenarCamposDeBusqueda(fecha);
-
-		// Descarga de fichero xls
-		descargarFichero();
-
-		Thread.sleep(10000);
-
-		// Desconexion
-		tearDown();
-
-		// Comprobar existencia del fichero y renombrar
-		renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	/**
@@ -96,8 +106,8 @@ public class UsoEstaciones {
 		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
 		driver = new ChromeDriver(options);
 		// Hacer que la pantalla se posicione en una zona no visible de la pantalla
-		Point punto = new Point(10000,10000);
-		driver.manage().window().setPosition(punto);
+//		Point punto = new Point(10000, 10000);
+//		driver.manage().window().setPosition(punto);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
@@ -223,22 +233,6 @@ public class UsoEstaciones {
 
 		// Devolver foco a origen
 		driver.switchTo().defaultContent();
-	}
-
-	/**
-	 * Obtener fecha del dia anterior (según la fecha del sistema) Hace de manera
-	 * correcta la resta, incluso en años bisiesto.
-	 * 
-	 * @return fecha en formato "dd/MM/yyyy"
-	 */
-	private static String obtenerFecha() {
-		String fecha = null;
-		// Obtener fecha del dia anterior
-		LocalDate date = LocalDate.now().plusDays(-1);
-		// Dar formato de salida
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		fecha = date.format(formatter);
-		return fecha;
 	}
 
 	/**
