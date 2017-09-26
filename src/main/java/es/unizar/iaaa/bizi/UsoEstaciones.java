@@ -10,8 +10,7 @@ import es.unizar.iaaa.bizi.Configuracion;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,12 +18,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+
 
 public class UsoEstaciones {
 
@@ -33,11 +32,19 @@ public class UsoEstaciones {
 	private static StringBuffer verificationErrors = new StringBuffer();
 	private static Configuracion config;
 	private static String downloadPath;
+	private static String registerPath;
 
 	public UsoEstaciones() {
 		config = new Configuracion();
 		downloadPath = System.getProperty("user.dir") + config.getDownloadPath();
 		chromeDriverLocation = config.getChromeDriverLocation();
+		registerPath = config.getLogPath();
+		// Comprobar que la carpeta donde se generan los logs existe
+		File registerDirectory = new File(registerPath);
+		if (!registerDirectory.exists()) {
+			// Si no existe se crea
+			registerDirectory.mkdir();
+		}
 	}
 
 	/**
@@ -47,6 +54,16 @@ public class UsoEstaciones {
 	 * @return
 	 */
 	public int descargar(String fecha) {
+		/*
+		 * Variables para la generacion de logs
+		 * timestamp: guardar momento en el que se genera la accion
+		 * fichero: apunta al directorio, mas adelante se le da el nombre del fichero a abrir
+		 * mensaje: entrada que se incluira en el fichero log correspondiente
+		 */
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		String fichero = registerPath + System.getProperty("file.separator");
+		String mensaje = "";
+		
 		try {
 			String date = fecha;
 			setUp();
@@ -71,9 +88,15 @@ public class UsoEstaciones {
 
 			// Comprobar existencia del fichero y renombrar
 			renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
-
+			
+			//TODO: TRASPASAR LA CREACION DEL LOG A ESTE PUNTO, TANTO PARA EXITO COMO FALLO
+			// Asi tenemos todos los parametros necesarios para añadir al fichero log
+			//TODO: MIRAR FICHERO MapToJson EN TEST
+			
 			return 1;
 		} catch (Exception e) {
+			
+
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
 			return -1;
