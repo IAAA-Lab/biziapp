@@ -60,7 +60,7 @@ public class Configuracion {
 	
 	protected String getLogPath() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
-		String result = fileLocation.get("logsLocation").toString();
+		String result = fileLocation.get("logsDirectory").toString();
 		return result;
 	}
 	

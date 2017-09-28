@@ -10,6 +10,9 @@ import es.unizar.iaaa.bizi.Configuracion;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +27,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UsoEstaciones {
 
@@ -51,19 +57,18 @@ public class UsoEstaciones {
 	 * 
 	 * @param fecha
 	 *            fecha del fichero que se desea descargar. Formato 'dd/MM/yyyy'
-	 * @return
+	 * @throws JsonProcessingException 
 	 */
-	public int descargar(String fecha) {
+	public void descargar(String fecha) throws JsonProcessingException {
 		/*
-		 * Variables para la generacion de logs
-		 * timestamp: guardar momento en el que se genera la accion
-		 * fichero: apunta al directorio, mas adelante se le da el nombre del fichero a abrir
-		 * mensaje: entrada que se incluira en el fichero log correspondiente
+		 * Variables para la generacion de logs timestamp: guardar momento en el que se
+		 * genera la accion fichero: apunta al directorio, mas adelante se le da el
+		 * nombre del fichero a abrir mensaje: entrada que se incluira en el fichero log
+		 * correspondiente
 		 */
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		String fichero = registerPath + System.getProperty("file.separator");
-		String mensaje = "";
 		
+
 		try {
 			String date = fecha;
 			setUp();
@@ -74,32 +79,31 @@ public class UsoEstaciones {
 
 			// Acceso hasta zona de descarga
 			accesoA("Uso de las estaciones", "3.1-Usos de las estaciones");
-			
+
 			// Rellenar campos de busqueda
 			rellenarCamposDeBusqueda(date);
-			
+
 			// Descarga de fichero xls
 			descargarFichero();
-			
-			Thread.sleep(10000);
 
 			// Desconexion
 			tearDown();
 
-			// Comprobar existencia del fichero y renombrar
-			renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
-			
-			//TODO: TRASPASAR LA CREACION DEL LOG A ESTE PUNTO, TANTO PARA EXITO COMO FALLO
-			// Asi tenemos todos los parametros necesarios para añadir al fichero log
-			//TODO: MIRAR FICHERO MapToJson EN TEST
-			
-			return 1;
-		} catch (Exception e) {
-			
+			// Renombrar el fichero e intentar acceder a el para ver que existe
+			String pathFichero = renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
+			FileReader archivo = new FileReader(pathFichero);
+			archivo.read();
+			archivo.close();
 
+			// TODO: TRASPASAR LA CREACION DEL LOG A ESTE PUNTO, TANTO PARA EXITO COMO FALLO
+			// Asi tenemos todos los parametros necesarios para añadir al fichero log
+			// TODO: MIRAR FICHERO MapToJson EN TEST
+			generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones");
+
+		} catch (Exception e) {
+			generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones");
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			return -1;
+			// e.printStackTrace();
 		}
 	}
 
@@ -129,9 +133,9 @@ public class UsoEstaciones {
 		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
 		driver = new ChromeDriver(options);
 		// Hacer que la pantalla se posicione en una zona no visible de la pantalla
-//		Point punto = new Point(10000, 10000);
-//		driver.manage().window().setPosition(punto);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// Point punto = new Point(10000, 10000);
+		// driver.manage().window().setPosition(punto);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -252,7 +256,7 @@ public class UsoEstaciones {
 		// Descargar fichero
 		driver.findElement(By.id("ReportViewer1_ctl01_ctl05_ctl01")).click();
 
-		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
 		// Devolver foco a origen
 		driver.switchTo().defaultContent();
@@ -267,11 +271,13 @@ public class UsoEstaciones {
 	 *            nombre que tiene el fichero a renombrar
 	 * @param fecha
 	 *            fecha que se quiere anadir al nombre (formato "dd/MM/yyyy")
+	 * @return Ruta absoluta del fichero renombrado
 	 */
-	private static void renameFile(String downloadPath, String nombreFichero, String fecha) {
+	private static String renameFile(String downloadPath, String nombreFichero, String fecha) {
 		// Obtener path completo del fichero
 		String path = downloadPath + System.getProperty("file.separator") + nombreFichero;
 		File fichero = new File(path);
+		String result = null;
 
 		// Comprobar si existe el fichero
 		if (fichero.exists()) {
@@ -279,15 +285,77 @@ public class UsoEstaciones {
 			String nombreSinExt = nombreFichero.substring(0, nombreFichero.lastIndexOf("."));
 			// Anadir al nombre la fecha y de nuevo la extension
 			String nuevoNombre = nombreSinExt + fecha.replaceAll("/", "") + ".xls";
-			System.out.println(nuevoNombre);
 			// Renombrar
 			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
 			fichero.renameTo(dest);
-			// TODO: GENERAR ENTRADA EN FICHERO DE LOGS PARA REALIZAR CONVERSION A CSV
-			System.out.println("existe");
-		} else {
-			// TODO: GENERAR ENTRADA EN FICHERO DE LOGS DE ERRORES
-			System.out.println("no existe");
+			result = dest.getAbsolutePath();
+			System.out.println(result);
+		}
+		return result;
+	}
+
+	/**
+	 * Genera una entrada en el fichero log correspondiente(error.log o
+	 * download.log) El contenido de la linea es un objeto JSON.
+	 * 
+	 * @param registro
+	 *            Timestamp de la operacion a registrar
+	 * @param estado
+	 *            Estado de la operacion a registrar
+	 * @param fechaFichero
+	 *            Fecha del contenido del fichero que se ha descargado o intentado
+	 *            descargar
+	 * @param pathCompleto
+	 *            Ruta completa del fichero descargado, NULL en caso de error
+	 * @param categoria
+	 *            Representa la categoria del fichero descargado (definido por la
+	 *            web clearchannel)
+	 * @param subcategoria
+	 *            Representa la subcategoria del fichero descargado (definido por la
+	 *            web clearchannel)
+	 * @throws JsonProcessingException
+	 */
+	private void generarLog(Timestamp registro, Estado estado, String fechaFichero, String pathCompleto,
+			String categoria, String subcategoria) throws JsonProcessingException {
+		// regPath: ruta donde se encuentran los ficheros de log
+		String regPath = registerPath + System.getProperty("file.separator");
+		File myFile = null;
+		File generalFile = new File(regPath+"general.log");
+		
+		// Generar mapa con los elementos de la entrada a log
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> testMap = new HashMap<String, String>();		
+		testMap.put("Registro", registro.toString());
+		testMap.put("Estado", estado.toString());
+		testMap.put("FechaFichero", fechaFichero);
+		testMap.put("PathCompleto", pathCompleto);
+		testMap.put("Categoria", categoria);
+		testMap.put("Subcategoria", subcategoria);
+		
+		// Generar un string con formato JSON a partir del mapa
+		String json = mapper.writeValueAsString(testMap);
+
+		// Comprobar en que fichero de log se debe escribir
+		if(estado.equals(Estado.ERROR)) {
+			myFile = new File(regPath + "error.log");
+		}else if (estado.equals(Estado.SUCCESSDOWNLOAD)) {
+			myFile = new File(regPath + "download.log");
+		}
+		// Realizar escritura en fichero log
+		FileWriter fw;
+		try {
+			fw = new FileWriter(myFile, true);
+			fw.write(json);
+			fw.append("\n");
+			fw.close();
+			// Escribir la entrada en el fichero log general del sistema
+			fw = new FileWriter(generalFile, true);
+			fw.write(json);
+			fw.append("\n");
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
