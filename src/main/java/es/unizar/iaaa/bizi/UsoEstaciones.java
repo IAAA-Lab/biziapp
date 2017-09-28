@@ -44,7 +44,7 @@ public class UsoEstaciones {
 		config = new Configuracion();
 		downloadPath = System.getProperty("user.dir") + config.getDownloadPath();
 		chromeDriverLocation = config.getChromeDriverLocation();
-		registerPath = config.getLogPath();
+		registerPath = System.getProperty("user.dir") + config.getLogPath();
 		// Comprobar que la carpeta donde se generan los logs existe
 		File registerDirectory = new File(registerPath);
 		if (!registerDirectory.exists()) {
@@ -59,7 +59,7 @@ public class UsoEstaciones {
 	 *            fecha del fichero que se desea descargar. Formato 'dd/MM/yyyy'
 	 * @throws JsonProcessingException 
 	 */
-	public void descargar(String fecha) throws JsonProcessingException {
+	public int descargar(String fecha) throws JsonProcessingException {
 		/*
 		 * Variables para la generacion de logs timestamp: guardar momento en el que se
 		 * genera la accion fichero: apunta al directorio, mas adelante se le da el
@@ -99,9 +99,11 @@ public class UsoEstaciones {
 			// Asi tenemos todos los parametros necesarios para añadir al fichero log
 			// TODO: MIRAR FICHERO MapToJson EN TEST
 			generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones");
-
+			return 1;
+			
 		} catch (Exception e) {
 			generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones");
+			return -1;
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 		}
@@ -289,7 +291,6 @@ public class UsoEstaciones {
 			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
 			fichero.renameTo(dest);
 			result = dest.getAbsolutePath();
-			System.out.println(result);
 		}
 		return result;
 	}
