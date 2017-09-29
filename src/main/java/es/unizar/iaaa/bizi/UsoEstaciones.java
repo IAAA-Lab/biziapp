@@ -325,7 +325,8 @@ public class UsoEstaciones {
 		
 		// Generar mapa con los elementos de la entrada a log
 		ObjectMapper mapper = new ObjectMapper();
-		Map<String, String> testMap = new HashMap<String, String>();		
+		Map<String, String> testMap = new HashMap<String, String>();
+		testMap.put("id", (categoria+subcategoria+fechaFichero.replaceAll("/", "")).replaceAll(" ", ""));
 		testMap.put("Registro", registro.toString());
 		testMap.put("Estado", estado.toString());
 		testMap.put("FechaFichero", fechaFichero);
