@@ -46,11 +46,11 @@ public class DescargaUnica {
 		String registerErrorPath = System.getProperty("user.dir") + config.getLogPath() + System.getProperty("file.separator") + "error.log";
 		
 		// Lectura del fichero log en busca de alguna descarga fallida anterior
-		File errorFile = new File(registerErrorPath);
+		File errorLogFile = new File(registerErrorPath);
 		
 		// Comprobar si el fichero existe
-		if(errorFile.exists()) {
-			repetirDescarga(errorFile);
+		if(errorLogFile.exists()) {
+			repetirDescarga(errorLogFile);
 		}
 	}
 
@@ -92,42 +92,10 @@ public class DescargaUnica {
 			// Si la descarga se desarrolle correctamente
 			if(result==1) {
 				// Eliminar la linea del fichero
-				eliminarLineaFichero(fichero, lista.get(i));
+				herramienta.eliminarLineaFichero(fichero, lista.get(i));
 			}
 		}
 
-	}
-	
-	/**
-	 * Elimina del fichero la linea que se pasa por parametro
-	 * @param fichero fichero del que se eliminara la fila
-	 * @param lineToRemove linea representada por un objeto JSON que se quiere eliminar del fichero
-	 * @throws IOException
-	 */
-	private static void eliminarLineaFichero(File fichero, JSONObject lineToRemove) throws IOException {
-		
-		FileReader fr = new FileReader(fichero);
-		BufferedReader br = new BufferedReader(fr);
-		// Crear un fichero temporar para volcar las lineas que se desean conservar
-		File tempFile = new File(fichero.getAbsolutePath() + ".tmp");
-		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-		
-		String linea = null;
-		// Obtener el parametro "id" del objeto JSON
-		String id = (String) lineToRemove.get("id");
-		while((linea = br.readLine()) != null) {
-			// Comprobar si la linea leida contiene el id del objeto JSON a eliminar
-			if(!linea.contains(id)) {
-				//En caso de no coincidir, copiar la linea al fichero temporal
-				pw.println(linea);
-				pw.flush();
-			}
-		}
-		br.close();
-		pw.close();
-		// Renombrar fichero temporal como fichero legitimo
-		fichero.delete();
-		tempFile.renameTo(fichero);
 	}
 	
 }

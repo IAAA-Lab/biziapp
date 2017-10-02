@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,6 +158,38 @@ public class Herramientas {
 		bf.close();
 		fr.close();
 		return lista;
+	}
+	
+	/**
+	 * Elimina del fichero la linea que se pasa por parametro
+	 * @param fichero fichero del que se eliminara la fila
+	 * @param lineToRemove linea representada por un objeto JSON que se quiere eliminar del fichero
+	 * @throws IOException
+	 */
+	protected void eliminarLineaFichero(File fichero, JSONObject lineToRemove) throws IOException {
+		
+		FileReader fr = new FileReader(fichero);
+		BufferedReader br = new BufferedReader(fr);
+		// Crear un fichero temporar para volcar las lineas que se desean conservar
+		File tempFile = new File(fichero.getAbsolutePath() + ".tmp");
+		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+		
+		String linea = null;
+		// Obtener el parametro "id" del objeto JSON
+		String id = (String) lineToRemove.get("id");
+		while((linea = br.readLine()) != null) {
+			// Comprobar si la linea leida contiene el id del objeto JSON a eliminar
+			if(!linea.contains(id)) {
+				//En caso de no coincidir, copiar la linea al fichero temporal
+				pw.println(linea);
+				pw.flush();
+			}
+		}
+		br.close();
+		pw.close();
+		// Renombrar fichero temporal como fichero legitimo
+		fichero.delete();
+		tempFile.renameTo(fichero);
 	}
 	
 }

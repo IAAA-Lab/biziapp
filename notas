@@ -260,3 +260,17 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 06/08
 21:00 - Instalación de MySQL en local
 	root password: daniel12345
+
+
+
+
+
+--------- OCTUBRE ---------------
+02/10
+11:00 - INICIO
+	Principio de creacion de script para el tratamiento de ficheros xls y convertirlos a CSV
+	Refactor de código para juntar funciones utilizadas por los distintos procesos
+14:00 - DESCASO
+15:00 - VUELTA
+	Realizado el tratamiento y la transformación a fichero CSV
+16:30
