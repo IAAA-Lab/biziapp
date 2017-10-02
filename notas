@@ -48,7 +48,7 @@ PRUEBA DE CONCEPTO
 	3. Generar una tabla que use formato orcFile CREATE TABLE holamundo(...);
 	4. Pasar los datos de una a otra: insert overwrite table holamundo select * from holamundotmp;
 
-12/06
+12/06 (NO RECOGER EN ESFUERZOS)
 09:30 - Instalación Eclipse Neon
 09:40 - Programa de prueba
 
@@ -175,6 +175,7 @@ PRUEBA DE CONCEPTO
 				Al añadir fichero elimina el anterior.
 19:00 - FIN. Pendiente revisar comportamiento inesperado.
 
+----------------JULIO-----------
 03/07
 10:30 - Tutorial Docker Compose (https://docs.docker.com/compose/gettingstarted/#prerequisites)
 11:30 - Se detecta que en algunas ocaciones la conexión con el cliente beeline a la BD no funciona correctamente. Solo es necesario
@@ -247,6 +248,8 @@ PRUEBA DE CONCEPTO
 15:00 - Descanso
 17:00 - Acoplar JHipster con Hive
 21:00 - FIN
+
+--------------- AGOSTO -----------------
 
 03/08
 09:20 - Retomar TFG tras vacaciones

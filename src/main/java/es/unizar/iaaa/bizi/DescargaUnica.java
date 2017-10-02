@@ -36,8 +36,8 @@ public class DescargaUnica {
 
 		// Llamar a metodo de descarga y recoger lo que devuelve
 		usoEstacion = new UsoEstaciones();
-		String fecha = obtenerFecha();
-		usoEstacion.descargar(fecha);
+//		String fecha = obtenerFecha();
+//		usoEstacion.descargar(fecha);
 		
 		// Descargar ficheros que han fallado en otro momento
 		Configuracion config = new Configuracion();
@@ -121,10 +121,23 @@ public class DescargaUnica {
 			Object obj = parser.parse(line);
 			JSONObject jsonObject = (JSONObject) obj;
 			//TODO: HACER QUE NO META ELEMENTOS CON UN MISMO ID
-			lista.add(jsonObject);
+			// No insertar objetos repetidos (evitar que un mismo fichero se descargue varias veces)
+			boolean noContenido = true;
+			String idAinsertar = (String) jsonObject.get("id");
+			for (int i=0; i<lista.size();i++) {
+				String idLeido = (String) lista.get(i).get("id");
+				if(idLeido.equals(idAinsertar)) {
+					noContenido = false;
+					break;
+				}
+			}
+			if(noContenido) {
+				lista.add(jsonObject);
+			}
 		}
 		bf.close();
-		fr.close();	
+		fr.close();
+		System.out.println(lista);
 		return lista;
 	}
 	
