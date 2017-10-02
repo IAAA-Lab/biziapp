@@ -23,6 +23,7 @@ import org.json.simple.parser.ParseException;
 public class DescargaUnica {
 	
 	private static UsoEstaciones usoEstacion;
+	private static Herramientas herramienta;
 	
 	public static void main(String[] args) throws IOException, ParseException,InterruptedException {
 		
@@ -34,10 +35,11 @@ public class DescargaUnica {
 //		 intentaran descargar
 //		 una vez descargada la del día actual
 
+		herramienta = new Herramientas();
 		// Llamar a metodo de descarga y recoger lo que devuelve
 		usoEstacion = new UsoEstaciones();
-//		String fecha = obtenerFecha();
-//		usoEstacion.descargar(fecha);
+		String fecha = obtenerFecha();
+		usoEstacion.descargar(fecha);
 		
 		// Descargar ficheros que han fallado en otro momento
 		Configuracion config = new Configuracion();
@@ -77,7 +79,7 @@ public class DescargaUnica {
 	 */
 	private static void repetirDescarga(File fichero) throws IOException, ParseException {
 		// Crear lista con los ficheros que se van a intentar descargar
-		ArrayList<JSONObject> lista = recuperarEntradasFallidas(fichero);
+		ArrayList<JSONObject> lista = herramienta.obtenerEntradas(fichero);
 		
 		// Recorrer lista
 		for (int i = 0; i < lista.size(); i++) {
@@ -94,51 +96,6 @@ public class DescargaUnica {
 			}
 		}
 
-	}
-	
-	/**
-	 * Recupera las lineas (objetos JSON) del fichero, almacenandolas en una lista.
-	 * 
-	 * @param errorFile
-	 *            fichero de donde se extraen los objetos JSON
-	 * @return lista de JSONObject
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	private static ArrayList<JSONObject> recuperarEntradasFallidas(File errorFile) throws IOException, ParseException{
-		
-		ArrayList<JSONObject> lista = new ArrayList<>();
-		
-		JSONParser parser = new JSONParser();
-		FileReader fr = new FileReader(errorFile);
-		BufferedReader bf = new BufferedReader(fr);
-		
-		String line = null;
-		// lectura del fichero y obtener el JSON de los ficheros que se van a volver
-		// a descargar
-		while((line = bf.readLine())!=null) {
-			// Tratar la linea como un objeto JSON
-			Object obj = parser.parse(line);
-			JSONObject jsonObject = (JSONObject) obj;
-			//TODO: HACER QUE NO META ELEMENTOS CON UN MISMO ID
-			// No insertar objetos repetidos (evitar que un mismo fichero se descargue varias veces)
-			boolean noContenido = true;
-			String idAinsertar = (String) jsonObject.get("id");
-			for (int i=0; i<lista.size();i++) {
-				String idLeido = (String) lista.get(i).get("id");
-				if(idLeido.equals(idAinsertar)) {
-					noContenido = false;
-					break;
-				}
-			}
-			if(noContenido) {
-				lista.add(jsonObject);
-			}
-		}
-		bf.close();
-		fr.close();
-		System.out.println(lista);
-		return lista;
 	}
 	
 	/**

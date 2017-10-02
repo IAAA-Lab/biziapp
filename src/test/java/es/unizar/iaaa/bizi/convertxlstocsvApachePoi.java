@@ -26,7 +26,7 @@ import org.apache.poi.ss.util.CellReference;
 
 public class convertxlstocsvApachePoi {
 
-	// TODO: Modificar extraer id y nombre de estaci�n. Hacer genericos
+	// TODO: Modificar extraer id y nombre de estacion. Hacer genericos
 
 	private static final String nombreFicheroXLS = "usoEstacion3.xls";
 	private static final String EXCEL_FILE_LOCATION = "C:\\Users\\686013\\Desktop\\" + nombreFicheroXLS;

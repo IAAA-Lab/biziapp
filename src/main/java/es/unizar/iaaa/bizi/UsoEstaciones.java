@@ -36,8 +36,10 @@ public class UsoEstaciones {
 	private static WebDriver driver;
 	private static StringBuffer verificationErrors = new StringBuffer();
 	private static Configuracion config;
+	private static Herramientas herramienta;
 	private static String downloadPath;
 	private static String registerPath;
+	
 
 	public UsoEstaciones() {
 		config = new Configuracion();
@@ -50,6 +52,7 @@ public class UsoEstaciones {
 			// Si no existe se crea
 			registerDirectory.mkdir();
 		}
+		herramienta = new Herramientas();
 	}
 
 	/**
@@ -94,14 +97,12 @@ public class UsoEstaciones {
 			archivo.read();
 			archivo.close();
 
-			// TODO: TRASPASAR LA CREACION DEL LOG A ESTE PUNTO, TANTO PARA EXITO COMO FALLO
-			// Asi tenemos todos los parametros necesarios para añadir al fichero log
-			// TODO: MIRAR FICHERO MapToJson EN TEST
-			generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
+			// Generar fichero log
+			herramienta.generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return 1;
 			
 		} catch (Exception e) {
-			generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
+			herramienta.generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return -1;
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -292,73 +293,6 @@ public class UsoEstaciones {
 			result = dest.getAbsolutePath();
 		}
 		return result;
-	}
-
-	/**
-	 * Genera una entrada en el fichero log correspondiente(error.log o
-	 * download.log) El contenido de la linea es un objeto JSON.
-	 * 
-	 * @param registro
-	 *            Timestamp de la operacion a registrar
-	 * @param estado
-	 *            Estado de la operacion a registrar
-	 * @param fechaFichero
-	 *            Fecha del contenido del fichero que se ha descargado o intentado
-	 *            descargar
-	 * @param pathCompleto
-	 *            Ruta completa del fichero descargado, NULL en caso de error
-	 * @param categoria
-	 *            Representa la categoria del fichero descargado (definido por la
-	 *            web clearchannel)
-	 * @param subcategoria
-	 *            Representa la subcategoria del fichero descargado (definido por la
-	 *            web clearchannel)
-	 * @throws JsonProcessingException
-	 */
-	private void generarLog(Timestamp registro, Estado estado, String fechaFichero, String pathCompleto,
-			String categoria, String subcategoria, Tipo tipo) throws JsonProcessingException {
-		// regPath: ruta donde se encuentran los ficheros de log
-		String regPath = registerPath + System.getProperty("file.separator");
-		File myFile = null;
-		File generalFile = new File(regPath+"general.log");
-		
-		// Generar mapa con los elementos de la entrada a log
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String, String> testMap = new HashMap<String, String>();
-		testMap.put("id", (categoria+subcategoria+fechaFichero.replaceAll("/", "")).replaceAll(" ", ""));
-		testMap.put("tipo", tipo.toString());
-		testMap.put("Registro", registro.toString());
-		testMap.put("Estado", estado.toString());
-		testMap.put("FechaFichero", fechaFichero);
-		testMap.put("PathCompleto", pathCompleto);
-		testMap.put("Categoria", categoria);
-		testMap.put("Subcategoria", subcategoria);
-		
-		// Generar un string con formato JSON a partir del mapa
-		String json = mapper.writeValueAsString(testMap);
-
-		// Comprobar en que fichero de log se debe escribir
-		if(estado.equals(Estado.ERROR)) {
-			myFile = new File(regPath + "error.log");
-		}else if (estado.equals(Estado.SUCCESSDOWNLOAD)) {
-			myFile = new File(regPath + "download.log");
-		}
-		// Realizar escritura en fichero log
-		FileWriter fw;
-		try {
-			fw = new FileWriter(myFile, true);
-			fw.write(json);
-			fw.append("\n");
-			fw.close();
-			// Escribir la entrada en el fichero log general del sistema
-			fw = new FileWriter(generalFile, true);
-			fw.write(json);
-			fw.append("\n");
-			fw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
