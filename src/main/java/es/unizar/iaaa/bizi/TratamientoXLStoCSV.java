@@ -113,7 +113,7 @@ public class TratamientoXLStoCSV {
 			Map<String, ArrayList<String>> datos = extraerDatosExcel(sheet);
 			String fechaUso = extraerFechaDeUso(sheet);
 			String fechaExtraccion = extraerFechaDeExtraccion(sheet);
-
+			
 			excelFile.close();
 			// Nombre del fichero que se ha tratado
 			String nombreFicheroXLS = pathFicheroXLS

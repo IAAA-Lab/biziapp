@@ -25,12 +25,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Herramientas {
 	private static Configuracion config;
-	private static String downloadPath;
 	private static String registerPath;
 
 	public Herramientas() {
 		config = new Configuracion();
-		downloadPath = System.getProperty("user.dir") + config.getDownloadPath();
 		registerPath = System.getProperty("user.dir") + config.getLogPath();
 	}
 	
