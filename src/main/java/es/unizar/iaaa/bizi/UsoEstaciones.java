@@ -27,7 +27,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -98,11 +97,11 @@ public class UsoEstaciones {
 			// TODO: TRASPASAR LA CREACION DEL LOG A ESTE PUNTO, TANTO PARA EXITO COMO FALLO
 			// Asi tenemos todos los parametros necesarios para añadir al fichero log
 			// TODO: MIRAR FICHERO MapToJson EN TEST
-			generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones");
+			generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return 1;
 			
 		} catch (Exception e) {
-			generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones");
+			generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return -1;
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -317,7 +316,7 @@ public class UsoEstaciones {
 	 * @throws JsonProcessingException
 	 */
 	private void generarLog(Timestamp registro, Estado estado, String fechaFichero, String pathCompleto,
-			String categoria, String subcategoria) throws JsonProcessingException {
+			String categoria, String subcategoria, Tipo tipo) throws JsonProcessingException {
 		// regPath: ruta donde se encuentran los ficheros de log
 		String regPath = registerPath + System.getProperty("file.separator");
 		File myFile = null;
@@ -327,6 +326,7 @@ public class UsoEstaciones {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, String> testMap = new HashMap<String, String>();
 		testMap.put("id", (categoria+subcategoria+fechaFichero.replaceAll("/", "")).replaceAll(" ", ""));
+		testMap.put("tipo", tipo.toString());
 		testMap.put("Registro", registro.toString());
 		testMap.put("Estado", estado.toString());
 		testMap.put("FechaFichero", fechaFichero);

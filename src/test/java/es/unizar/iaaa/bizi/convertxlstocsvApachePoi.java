@@ -9,11 +9,8 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,16 +20,13 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 
 public class convertxlstocsvApachePoi {
 
-	// TODO: Modificar extraer id y nombre de estación. Hacer genericos
+	// TODO: Modificar extraer id y nombre de estaciï¿½n. Hacer genericos
 
 	private static final String nombreFicheroXLS = "usoEstacion3.xls";
 	private static final String EXCEL_FILE_LOCATION = "C:\\Users\\686013\\Desktop\\" + nombreFicheroXLS;

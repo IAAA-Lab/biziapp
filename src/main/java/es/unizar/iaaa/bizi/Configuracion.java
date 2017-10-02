@@ -64,4 +64,10 @@ public class Configuracion {
 		return result;
 	}
 	
+	protected String getCsvPath() {
+		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
+		String result = fileLocation.get("csvDirectory").toString();
+		return result;
+	}
+	
 }
