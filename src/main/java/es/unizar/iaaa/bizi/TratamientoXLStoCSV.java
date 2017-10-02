@@ -14,11 +14,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -223,20 +221,27 @@ public class TratamientoXLStoCSV {
 
 	/**
 	 * Genera fichero CSV.
-	 * @param datos Mapa clava/valor con los datos extraidos del fichero xls.
-	 * @param fechaUso Fecha que especifica de cuando es la informacion contenida en el fichero. En formato dd/MM/yyyy
-	 * @param fechaExtraccion Fecha que especifica de cuando se realizo la descarga del fichero. En formato dd/MM/yyyy
-	 * @param nombreFicheroXLS Nombre que tiene el fichero xls de donde se obtuvieron los datos.
+	 * 
+	 * @param datos
+	 *            Mapa clava/valor con los datos extraidos del fichero xls.
+	 * @param fechaUso
+	 *            Fecha que especifica de cuando es la informacion contenida en el
+	 *            fichero. En formato dd/MM/yyyy
+	 * @param fechaExtraccion
+	 *            Fecha que especifica de cuando se realizo la descarga del fichero.
+	 *            En formato dd/MM/yyyy
+	 * @param nombreFicheroXLS
+	 *            Nombre que tiene el fichero xls de donde se obtuvieron los datos.
 	 */
 	private static String crearCSV(Map<String, ArrayList<String>> datos, String fechaUso, String fechaExtraccion,
 			String nombreFicheroXLS) {
 
 		// Prueba de generacion de nombre con messageFormat
-		String nombreFicheroCSV = MessageFormat.format("{0}_{1}.csv", nombreFicheroXLS.substring(0, nombreFicheroXLS.lastIndexOf(".")),
-				fechaExtraccion.replace("/", ""));
+		String nombreFicheroCSV = MessageFormat.format("{0}_{1}.csv",
+				nombreFicheroXLS.substring(0, nombreFicheroXLS.lastIndexOf(".")), fechaExtraccion.replace("/", ""));
 
 		String ruta = csvPath + System.getProperty("file.separator") + nombreFicheroCSV;
-		
+
 		try {
 			File archivo = new File(ruta);
 			BufferedWriter bw;
@@ -257,9 +262,18 @@ public class TratamientoXLStoCSV {
 					// Extraer el nombre de la estacion
 					String nombreEstacion = dato.getKey().substring(dato.getKey().indexOf("- ") + 1).trim();
 
+					// Cambiar formato de las fechas a YYYY-MM-DD
+					String[] fechaUsoSplit = fechaUso.split("/");
+					String nuevaFechaUso = MessageFormat.format("{0}-{1}-{2}", fechaUsoSplit[2], fechaUsoSplit[1],
+							fechaUsoSplit[0]);
+
+					String[] fechaExtraccionSplit = fechaExtraccion.split("/");
+					String nuevaFechaExtraccion = MessageFormat.format("{0}-{1}-{2}", fechaExtraccionSplit[2],
+							fechaExtraccionSplit[1], fechaExtraccionSplit[0]);
+
 					for (int i = 0; i < dato.getValue().size(); i++) {
-						bw.write(dato.getKey() + "," + idEstacion + "," + nombreEstacion + "," + fechaUso + ","
-								+ dato.getValue().get(i) + fechaExtraccion + "," + nombreFicheroCSV + ","
+						bw.write(dato.getKey() + "," + idEstacion + "," + nombreEstacion + "," + nuevaFechaUso + ","
+								+ dato.getValue().get(i) + nuevaFechaExtraccion + "," + nombreFicheroCSV + ","
 								+ nombreFicheroXLS + "\n");
 					}
 				}

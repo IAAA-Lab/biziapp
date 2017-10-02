@@ -1,6 +1,7 @@
 package es.unizar.iaaa.bizi;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +9,8 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
+import com.google.inject.spi.Message;
 
 public class PruebasVarias {
 
@@ -34,7 +37,16 @@ public class PruebasVarias {
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //		String formattedString = date.format(formatter);
 //		System.out.println(formattedString);
-		
+//		
+//		String fecha = "20/03/2017";
+//		String[] fechaSeparada = fecha.split("/");
+//		System.out.println(fechaSeparada[0]);
+//		System.out.println(fechaSeparada[1]);
+//		System.out.println(fechaSeparada[2]);
+//		
+//		String nuevaFecha = MessageFormat.format("{0}-{1}-{2}",fechaSeparada[2],fechaSeparada[1], fechaSeparada[0]);
+//		
+//		System.out.println(nuevaFecha);
 	}
 
 }
