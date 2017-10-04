@@ -273,4 +273,19 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 14:00 - DESCASO
 15:00 - VUELTA
 	Realizado el tratamiento y la transformación a fichero CSV
-16:30
+16:30 - FIN
+
+04/10
+10:30 - INICIO
+	Despliegue de docker
+	Comienzo clase de insercion a la base de datos
+11:50 - DESCANSO
+12:20 - VUELTA
+	Pruebas de insercion de datos
+	Continuacion de clase insercion de datos
+15:50 - COMER
+16:20 - VUELTA
+	Inserciones en hadoop controlando que no se inserten registros duplicados.
+	Se recoge en ficheros log las inserciones correctas
+18:10 - FIN
+

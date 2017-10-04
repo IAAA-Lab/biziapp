@@ -69,8 +69,7 @@ public class ConexionHive {
 		// res.getString(3));
 		// }
 
-		// Prueba de creación e insercion de datos desde máquina exterior:
-		
+		// Prueba de creaciï¿½n e insercion de datos desde mï¿½quina exterior:
 		String nombreTablaUsoEstaciones = "usoEstaciones";
 		String createTableUsoEstaciones = "create table " + nombreTablaUsoEstaciones
 				+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso String,"

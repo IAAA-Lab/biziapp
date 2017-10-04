@@ -1,6 +1,7 @@
 package es.unizar.iaaa.bizi;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -47,6 +48,10 @@ public class PruebasVarias {
 //		String nuevaFecha = MessageFormat.format("{0}-{1}-{2}",fechaSeparada[2],fechaSeparada[1], fechaSeparada[0]);
 //		
 //		System.out.println(nuevaFecha);
+		
+//		System.out.println(FileSystems.getDefault().getPath("/home/dani/git/UNIZAR-TFG-BIZI/csvFiles/3.1-Usos de las estaciones01102017_02102017.csv"));
+		
+		System.out.println(System.getProperty("user.dir"));
 	}
 
 }

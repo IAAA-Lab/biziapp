@@ -70,4 +70,10 @@ public class Configuracion {
 		return result;
 	}
 	
+	protected String getDockerSharedDirectory() {
+		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
+		String result = fileLocation.get("dockerSharedDirectory").toString();
+		return result;
+	}
+	
 }

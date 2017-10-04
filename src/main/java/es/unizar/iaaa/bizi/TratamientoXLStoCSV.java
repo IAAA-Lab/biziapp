@@ -74,7 +74,7 @@ public class TratamientoXLStoCSV {
 				for (int i = 0; i < lista.size(); i++) {
 					// Obtener el objeto JSON
 					JSONObject jsonObject = lista.get(i);
-					// Extraer la fecha del fichero que se va a descargar
+					// Extraer la ruta del fichero que se va a tratar
 					String pathFicheroXLS = (String) jsonObject.get("PathCompleto");
 					System.out.println(pathFicheroXLS);
 					// Realizar el tratamiento TODO: Habra que modificar para cuando hayan otros tipos descargados
