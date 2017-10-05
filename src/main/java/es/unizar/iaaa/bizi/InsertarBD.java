@@ -24,17 +24,21 @@ public class InsertarBD {
 	private static String registerPath;
 	private static String csvPath;
 	private static Herramientas herramienta;
-	private static String driverName = "org.apache.hive.jdbc.HiveDriver";
 	private static String dockerSharedPath;
+	private static String driverNameDB, jdbcConnector, userDB, passwordDB;
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		// TODO Auto-generated method stub
 		
 		config = new Configuracion();
-		registerPath = System.getProperty("user.dir") + config.getLogPath();
-		csvPath = System.getProperty("user.dir") + config.getCsvPath();
-		dockerSharedPath = System.getProperty("user.dir") + config.getDockerSharedDirectory();
-		System.out.println(dockerSharedPath);
+		jdbcConnector = config.getJdbcConnector();
+		driverNameDB = config.getDriverNameDB();
+		String[] credentialDB = config.getCredentialDB().split(":");
+		userDB = credentialDB[0];
+		passwordDB = credentialDB[1];
+		registerPath = config.getLogPath();
+		csvPath = config.getCsvPath();
+		dockerSharedPath = config.getDockerSharedDirectory();
+		
 		// Comprobar que la carpeta donde se generan los logs existe
 		File registerDirectory = new File(registerPath);
 		if (!registerDirectory.exists()) {
@@ -57,8 +61,7 @@ public class InsertarBD {
 		}
 		herramienta = new Herramientas();
 
-		String registerTransformedPath = System.getProperty("user.dir") + config.getLogPath()
-		+ System.getProperty("file.separator") + "transformed.log";
+		String registerTransformedPath = config.getLogPath() + System.getProperty("file.separator") + "transformed.log";
 		
 		// Leer fichero de log de ficheros ya convertidos a CSV(transformed.log)
 		File transformedLogFile = new File(registerTransformedPath);
@@ -67,23 +70,19 @@ public class InsertarBD {
 			ArrayList<JSONObject> lista = herramienta.obtenerEntradas(transformedLogFile);
 			
 			if(!lista.isEmpty()) {
-				System.out.println(lista);
 				for (int i = 0; i < lista.size(); i++) {
 					// Obtener el objeto JSON
 					JSONObject jsonObject = lista.get(i);
 					// Realizar la insercion TODO: Habra que modificar para cuando hayan otros tipos descargados
 					int result = insertarDatos(jsonObject);
-//					// Si la insercion se desarrolla correctamente
+					// Si la insercion se desarrolla correctamente
 					if(result==1) {
-//					// Eliminar la linea del fichero
+					// Eliminar la linea del fichero
 						herramienta.eliminarLineaFichero(transformedLogFile, lista.get(i));
 					}
-				}
-				
+				}	
 			}
-			
 		}
-		
 	}
 	
 	private static int insertarDatos(JSONObject jsonObject) throws JsonProcessingException {
@@ -97,23 +96,25 @@ public class InsertarBD {
 		String nombreFicheroCSV = pathFicheroCSV.substring(pathFicheroCSV.lastIndexOf(System.getProperty("file.separator")) + 1);
 		Path origenPath = FileSystems.getDefault().getPath(pathFicheroCSV);
 		Path destPath = FileSystems.getDefault().getPath(dockerSharedPath + System.getProperty("file.separator") + nombreFicheroCSV);
-		System.out.println(destPath);
+		
 		try {
 			Files.copy(origenPath, destPath,StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 			return -1;
 		}
 		
 		try {
-			Class.forName(driverName);
+			Class.forName(driverNameDB);
 		} catch (ClassNotFoundException e) {
+			// Eliminar fichero de la carpeta compartida del docker
+			File fileToDelete = new File(destPath.toString());
+			fileToDelete.delete();
 //			e.printStackTrace();
 			return -1;
 		}
 		// Conectar con la base de datos
-		try (Connection con = DriverManager.getConnection("jdbc:hive2://155.210.155.121:10000/default", "hive", "hive");) {
+		try (Connection con = DriverManager.getConnection(jdbcConnector, userDB, passwordDB);) {
 			
 			Statement stmt = con.createStatement();
 
@@ -164,21 +165,24 @@ public class InsertarBD {
 			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
 			con.close();
 			
+			
+			// Eliminar fichero de la carpeta compartida del docker
+			File fileToDelete = new File(destPath.toString());
+			fileToDelete.delete();
+			
+			// Generar entrada en el fichero log correspondiente
 			String fechaFichero = (String) jsonObject.get("FechaFichero");
-			
-			// TODO: Eliminar fichero de la carpeta compartida
-			
 			herramienta.generarLog(timestamp, Estado.SUCCESStoHADOOP, fechaFichero, pathFicheroCSV, "Uso de las estaciones",
 					"3.1-Usos de las estaciones", Tipo.USOESTACION);
 			return 1;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Eliminar fichero de la carpeta compartida del docker
+			File fileToDelete = new File(destPath.toString());
+			fileToDelete.delete();
 //			e.printStackTrace();
 			return -1;
 		}
-
-		// Realizar la insercion
 
 	}
 

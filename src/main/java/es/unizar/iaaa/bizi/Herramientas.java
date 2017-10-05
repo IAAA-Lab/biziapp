@@ -29,7 +29,7 @@ public class Herramientas {
 
 	public Herramientas() {
 		config = new Configuracion();
-		registerPath = System.getProperty("user.dir") + config.getLogPath();
+		registerPath = config.getLogPath();
 	}
 	
 	/**

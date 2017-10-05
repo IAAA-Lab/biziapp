@@ -43,9 +43,9 @@ public class UsoEstaciones {
 
 	public UsoEstaciones() {
 		config = new Configuracion();
-		downloadPath = System.getProperty("user.dir") + config.getDownloadPath();
+		downloadPath = config.getDownloadPath();
 		chromeDriverLocation = config.getChromeDriverLocation();
-		registerPath = System.getProperty("user.dir") + config.getLogPath();
+		registerPath = config.getLogPath();
 		// Comprobar que la carpeta donde se generan los logs existe
 		File registerDirectory = new File(registerPath);
 		if (!registerDirectory.exists()) {

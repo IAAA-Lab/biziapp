@@ -289,3 +289,10 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Se recoge en ficheros log las inserciones correctas
 18:10 - FIN
 
+05/10
+11:30 - INICIO
+	Refactor código, incluir comentarios
+	Estudio de distintas opciones para mejorar el almacenamiento:
+		- Convertir las fechas a Date
+		- Posibilidad de añadir timestamp de cuando se realiza la insercion
+		- Estudiar como utilizar las particiones en Hive

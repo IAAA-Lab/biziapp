@@ -41,8 +41,8 @@ public class TratamientoXLStoCSV {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		config = new Configuracion();
-		registerPath = System.getProperty("user.dir") + config.getLogPath();
-		csvPath = System.getProperty("user.dir") + config.getCsvPath();
+		registerPath = config.getLogPath();
+		csvPath = config.getCsvPath();
 		// Comprobar que la carpeta donde se generan los logs existe
 		File registerDirectory = new File(registerPath);
 		if (!registerDirectory.exists()) {
@@ -58,8 +58,7 @@ public class TratamientoXLStoCSV {
 		}
 		herramienta = new Herramientas();
 
-		String registerDownloadPath = System.getProperty("user.dir") + config.getLogPath()
-				+ System.getProperty("file.separator") + "download.log";
+		String registerDownloadPath = config.getLogPath() + System.getProperty("file.separator") + "download.log";
 
 		// Lectura del fichero log en busca de alguna descarga fallida anterior
 		File downloadLogFile = new File(registerDownloadPath);
@@ -76,7 +75,6 @@ public class TratamientoXLStoCSV {
 					JSONObject jsonObject = lista.get(i);
 					// Extraer la ruta del fichero que se va a tratar
 					String pathFicheroXLS = (String) jsonObject.get("PathCompleto");
-					System.out.println(pathFicheroXLS);
 					// Realizar el tratamiento TODO: Habra que modificar para cuando hayan otros tipos descargados
 					int result = tratarXLS(pathFicheroXLS);
 					// Si el tratamiento se desarrolla correctamente
@@ -248,7 +246,6 @@ public class TratamientoXLStoCSV {
 
 			if (!archivo.exists()) {
 				bw = new BufferedWriter(new FileWriter(archivo));
-				System.out.println("Generando fichero: " + nombreFicheroCSV);
 
 				// Introducir cabeceras
 				bw.write("nombreCompleto,idEstacion,nombreEstacion," + "fechaDeUso,intervaloDeTiempo,devolucionTotal,"

@@ -17,14 +17,14 @@ public class DescargaUnica {
 	
 	public static void main(String[] args) throws IOException, ParseException,InterruptedException {
 		
-//		 Desde aqui se llamará a las descargas diarias de ficheros, indicando la fecha
-//		 a descargar
-//		 La respuesta obtenida desde la gestion de la descarga será almacenada en un
-//		 fichero log.
-//		 En caso de que el fichero log contenga entradas de descargas fallidas, se
-//		 intentaran descargar
-//		 una vez descargada la del día actual
-
+		/*
+		 * Desde aqui se llamará a las descargas diarias de ficheros, indicando la fecha
+		 * a descargar La respuesta obtenida desde la gestion de la descarga será
+		 * almacenada en un fichero log. En caso de que el fichero log contenga entradas
+		 * de descargas fallidas, se intentaran descargar una vez descargada la del día
+		 * actual
+		 */
+		 
 		herramienta = new Herramientas();
 		// Llamar a metodo de descarga y recoger lo que devuelve
 		usoEstacion = new UsoEstaciones();
@@ -33,7 +33,7 @@ public class DescargaUnica {
 		
 		// Descargar ficheros que han fallado en otro momento
 		Configuracion config = new Configuracion();
-		String registerErrorPath = System.getProperty("user.dir") + config.getLogPath() + System.getProperty("file.separator") + "error.log";
+		String registerErrorPath = config.getLogPath() + System.getProperty("file.separator") + "error.log";
 		
 		// Lectura del fichero log en busca de alguna descarga fallida anterior
 		File errorLogFile = new File(registerErrorPath);
@@ -85,7 +85,6 @@ public class DescargaUnica {
 				herramienta.eliminarLineaFichero(fichero, lista.get(i));
 			}
 		}
-
 	}
 	
 }

@@ -14,8 +14,10 @@ public class Configuracion {
 	private JSONParser parser;
 	private static Object ficheroJson;
 	private static JSONObject jsonObject;
+	private static String userDir;
 	
 	public Configuracion() {
+		userDir = System.getProperty("user.dir");
 		parser = new JSONParser();
 		try {
 			ficheroJson = parser.parse(new FileReader(System.getProperty("user.dir")+"/config.json"));
@@ -27,7 +29,7 @@ public class Configuracion {
 	}
 	
 	/**
-	 * Obtiene parametros de login del fichero JSON
+	 * Obtiene parametros de login del fichero de configuracion JSON
 	 * @return ["user","password"]
 	 */
 	protected ArrayList<String> getCredenciales() {
@@ -39,41 +41,97 @@ public class Configuracion {
 		result.add(password);
 		return result;
 	}
-	
+	/**
+	 * Obtiene la URL de acceso al servicio web del fichero de configuracion JSON
+	 * @return url 
+	 */
 	protected String getBaseURL() {
 		JSONObject legacySystem = (JSONObject) jsonObject.get("legacySystem");
-		String result = legacySystem.get("baseURL").toString();
-		return result;
+		String url = legacySystem.get("baseURL").toString();
+		return url;
 	}
-	
+	/**
+	 * Obtiene la ruta donde se encuentra el fichero ChromeDrive del fichero de configuracion JSON
+	 * @return ruta completa hasta el fichero ChromeDriver. Ej Linux: /home/herramientas/chromedriver
+	 */
 	protected String getChromeDriverLocation() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
 		String result = fileLocation.get("chromeDriverLocation").toString();
 		return result;
 	}
 	
+	/**
+	 * Obtiene la ruta donde se almacenan los ficheros descargados del fichero de configuracion JSON
+	 * @return ruta completa de la carpeta de descargas
+	 */
 	protected String getDownloadPath() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
-		String result = fileLocation.get("downloadLocation").toString();
+		String result = userDir + fileLocation.get("downloadLocation").toString();
 		return result;
 	}
-	
+	/**
+	 * Obtiene la ruta donde se generan los ficheros de log del fichero de configuracion JSON
+	 * @return ruta completa de la carpeta de logs
+	 */
 	protected String getLogPath() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
-		String result = fileLocation.get("logsDirectory").toString();
+		String result = userDir + fileLocation.get("logsDirectory").toString();
 		return result;
 	}
 	
+	/**
+	 * Obtiene la ruta donde se guardan los ficheros csv del fichero de configuracion JSON
+	 * @return ruta completa de la carpeta de ficheros csv
+	 */
 	protected String getCsvPath() {
 		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
-		String result = fileLocation.get("csvDirectory").toString();
+		String result = userDir + fileLocation.get("csvDirectory").toString();
+		return result;
+	}
+	/**
+	 * Obtiene la ruta de la carpeta que se encuentra compartida entre el sistema host y el docker
+	 * @return ruta completa de la carpeta compartida
+	 */
+	protected String getDockerSharedDirectory() {
+		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
+		String result = userDir + fileLocation.get("dockerSharedDirectory").toString();
 		return result;
 	}
 	
-	protected String getDockerSharedDirectory() {
-		JSONObject fileLocation = (JSONObject) jsonObject.get("fileLocation");
-		String result = fileLocation.get("dockerSharedDirectory").toString();
+	/**
+	 * Genera la cadena necesaria para realizar la conexión con JDBC a partir de un fichero JSON
+	 * @return ej: jdbc:hive2//host:port/dbName
+	 */
+	protected String getJdbcConnector() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+		String jdbc = connectionDB.get("jdbc").toString();
+		String host = connectionDB.get("host").toString();
+		String port = connectionDB.get("port").toString();
+		String database = connectionDB.get("database").toString();
+		String result= jdbc + host + ":" + port + "/" + database;
 		return result;
+	}
+	
+	/**
+	 * Obtiene parametros de login para la base de datos del fichero de configuracion JSON
+	 * @return "user":"password"
+	 */
+	protected String getCredentialDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+		String user = connectionDB.get("user").toString();
+		String password = connectionDB.get("password").toString();
+		String credentialDB = user + ":" + password;
+		return credentialDB;
+	}
+	
+	/**
+	 * Obtiene la cadena correspondiente con el nombre del driver de la base de datos usada.
+	 * @return ej: "org.apache.hive.jdbc.HiveDriver"
+	 */
+	protected String getDriverNameDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+		String driverName = connectionDB.get("driverName").toString();
+		return driverName;
 	}
 	
 }
