@@ -118,9 +118,12 @@ public class InsertarBD {
 			
 			Statement stmt = con.createStatement();
 
+			
+			// Crear tabla temporal para la carga de los nuevos datos.
 			String nombreTablaUsoEstacionesTmp = "USOESTACIONESTMP";
-			// TODO: HABRA QUE TENER EN CUENTA QUE EN ESTE MOMENTO SE ESTA INSERTANDO EN
-			// DEFAULT, HAY QUE CAMBIARLO
+			// Eliminar la tabla temporal si exite.
+			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
+						
 			String createTableUsoEstacionesTmp = "create table if not exists " + nombreTablaUsoEstacionesTmp
 					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso String,"
 					+ "intervaloDeTiempo String, devolucionTotal int,devolucionMedia float,retiradasTotal int,"

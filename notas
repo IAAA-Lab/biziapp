@@ -296,3 +296,4 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 		- Convertir las fechas a Date
 		- Posibilidad de añadir timestamp de cuando se realiza la insercion
 		- Estudiar como utilizar las particiones en Hive
+13:30 - DESCANSO

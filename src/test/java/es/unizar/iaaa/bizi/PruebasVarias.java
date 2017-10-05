@@ -10,11 +10,14 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import org.apache.log4j.Logger;
 
 import com.google.inject.spi.Message;
 
 public class PruebasVarias {
 
+//	final static Logger logger = Logger.getLogger(PruebasVarias.class);
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -51,7 +54,19 @@ public class PruebasVarias {
 		
 //		System.out.println(FileSystems.getDefault().getPath("/home/dani/git/UNIZAR-TFG-BIZI/csvFiles/3.1-Usos de las estaciones01102017_02102017.csv"));
 		
-		System.out.println(System.getProperty("user.dir"));
+//		System.out.println(System.getProperty("user.dir"));
+		
+//		try{
+//			System.out.println(logger.getEffectiveLevel());
+//			System.out.println(logger.isTraceEnabled());
+//			int i= 10/0;
+//			
+//		}catch(ArithmeticException ex){
+//			logger.error("Sorry, something wrong!");
+//			logger.trace("AQUI");
+//			logger.debug("Sorry, something wrong!");
+//			logger.fatal("FATAAAAAAAAAAAAAAAAAAAAL");
+//		}
 	}
 
 }
