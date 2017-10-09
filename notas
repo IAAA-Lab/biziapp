@@ -297,3 +297,11 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 		- Posibilidad de añadir timestamp de cuando se realiza la insercion
 		- Estudiar como utilizar las particiones en Hive
 13:30 - DESCANSO
+
+08/10
+15:00 - INICIO
+	Redacción memoria
+18:00 - FIN
+
+09/10
+10:30 - INICIO
