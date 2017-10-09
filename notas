@@ -305,3 +305,12 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 
 09/10
 10:30 - INICIO
+	Instalación de JHipster
+	Desinstalar PostgreSQL
+11:30 - DESCANSO // HASTA AQUI SE METIERON LAS HORAS
+12:00 - VUELTA
+	Instalación de MySQL
+	Creación de aplicación web BiziApp con JHipster
+	Modificaciones en la insercia a hive (cambio de tipos: de String a Date para las fechas)
+	Creacion de tabla de prueba en mysql
+14:00 - COMER

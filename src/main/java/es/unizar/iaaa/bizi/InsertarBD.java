@@ -125,9 +125,9 @@ public class InsertarBD {
 			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
 						
 			String createTableUsoEstacionesTmp = "create table if not exists " + nombreTablaUsoEstacionesTmp
-					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso String,"
+					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso DATE,"
 					+ "intervaloDeTiempo String, devolucionTotal int,devolucionMedia float,retiradasTotal int,"
-					+ "retiradasMedia float, neto float, total float, fechaObtencionDatos String, ficheroCSV  String,"
+					+ "retiradasMedia float, neto float, total float, fechaObtencionDatos DATE, ficheroCSV  String,"
 					+ "ficheroXLS  String) " + "row format delimited fields terminated by \",\" "
 					+ "lines terminated BY \'\n\' " + "tblproperties(\"skip.header.line.count\"=\"1\")";
 
@@ -143,11 +143,11 @@ public class InsertarBD {
 			stmt.execute(loadDataCSV);
 			
 			// Trasladar los datos de la tabla anterior a una table con formato de almacenamiento ORC
-			String nombreTablaUsoEstacionesORC = "USOESTACIONESORC";
+			String nombreTablaUsoEstacionesORC = "USOESTACIONES";
 			String createTableUsoEstacionesORC = "create table if not exists " + nombreTablaUsoEstacionesORC
-					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso String,"
+					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso DATE,"
 					+ "intervaloDeTiempo String, devolucionTotal int,devolucionMedia float,retiradasTotal int,"
-					+ "retiradasMedia float, neto float, total float, fechaObtencionDatos String, ficheroCSV  String,"
+					+ "retiradasMedia float, neto float, total float, fechaObtencionDatos DATE, ficheroCSV  String,"
 					+ "ficheroXLS  String) STORED AS ORC";
 			
 			stmt.execute(createTableUsoEstacionesORC);
