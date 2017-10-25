@@ -307,10 +307,32 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 10:30 - INICIO
 	Instalación de JHipster
 	Desinstalar PostgreSQL
-11:30 - DESCANSO // HASTA AQUI SE METIERON LAS HORAS
+11:30 - DESCANSO
 12:00 - VUELTA
 	Instalación de MySQL
-	Creación de aplicación web BiziApp con JHipster
-	Modificaciones en la insercia a hive (cambio de tipos: de String a Date para las fechas)
+	Modificaciones en la insercion a hive (cambio de tipos: de String a Date para las fechas)
 	Creacion de tabla de prueba en mysql
+	Creación de aplicación web BiziApp con JHipster
 14:00 - COMER
+
+23/10
+10:00 - INICIO
+	Preparar reunion con Pellicer
+10:30 - DESAYUNAR
+11:00 - VUELTA
+	Modificar Dockerfile para introducir sqoop (NO CONSEGUIDO)
+	Pruebas con Talend para sqoop (No avanzado)
+	Crear clase java sqoop (FALLIDO)
+	Investigacion: pasar de el modelo secuencial hadoop/hive-->MySQL a uno en paralelo donde el proceso de carga de datos se produzca en ambas bases de datos desde el fichero csv (NO VALIDO)
+	Reunion con pellicer
+19:00 - FIN
+
+25/10
+10:00 - INICIO
+	Script para instalar sqoop en docker
+11:00 - DESCANSO
+12:00 - VUELTA
+	Script para instalar sqoop en docker
+	Realizar exportacion de hadoop a mysql, ej:
+	sqoop export --connect jdbc:mysql://155.210.155.121:3306/prueba --table hola --export-dir /user/hive/warehouse/prueba.db/hola --username root --password dani.1989 --direct
+

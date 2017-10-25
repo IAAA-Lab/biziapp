@@ -28,6 +28,10 @@ dependencies {
 	compile "org.apache.hadoop:hadoop-common:2.8.1"
 	// https://mvnrepository.com/artifact/org.apache.sqoop/sqoop-client
 	compile "org.apache.sqoop:sqoop-client:1.99.7"
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile "com.googlecode.json-simple:json-simple:1.1.1"
+	
+	
 	
 	
 	
