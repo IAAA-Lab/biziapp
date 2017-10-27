@@ -118,9 +118,12 @@ public class InsertarBD {
 			
 			Statement stmt = con.createStatement();
 
+			// Crear base de datos si no existe
+			String createBD = "CREATE DATABASE IF NOT EXISTS BIZIAPP";
+			stmt.execute(createBD);
 			
 			// Crear tabla temporal para la carga de los nuevos datos.
-			String nombreTablaUsoEstacionesTmp = "USOESTACIONESTMP";
+			String nombreTablaUsoEstacionesTmp = "BIZIAPP.USOESTACIONESTMP";
 			// Eliminar la tabla temporal si exite.
 			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
 						
@@ -141,14 +144,18 @@ public class InsertarBD {
 			String loadDataCSV = "LOAD DATA LOCAL INPATH '" + pathFileInDocker + "' INTO TABLE "
 					+ nombreTablaUsoEstacionesTmp;
 			stmt.execute(loadDataCSV);
-			
+			/*
+			 * IMPORTANTE: NO ES NECESARIO EL PASO DE CONVERTIR A ORC.
+			 * 			HAY QUE ELIMINAR LOS PASOS SIGUIENTES
+			 * 			PERO HAY QUE TENER CUIDADO CON EL TEMA DE INSERTAR ENTRADAS REPETIDAS
+			 */
 			// Trasladar los datos de la tabla anterior a una table con formato de almacenamiento ORC
-			String nombreTablaUsoEstacionesORC = "USOESTACIONES";
+			String nombreTablaUsoEstacionesORC = "BIZIAPP.USOESTACIONES";
 			String createTableUsoEstacionesORC = "create table if not exists " + nombreTablaUsoEstacionesORC
 					+ "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso DATE,"
 					+ "intervaloDeTiempo String, devolucionTotal int,devolucionMedia float,retiradasTotal int,"
 					+ "retiradasMedia float, neto float, total float, fechaObtencionDatos DATE, ficheroCSV  String,"
-					+ "ficheroXLS  String) STORED AS ORC";
+					+ "ficheroXLS  String)";
 			
 			stmt.execute(createTableUsoEstacionesORC);
 			
@@ -165,7 +172,7 @@ public class InsertarBD {
 			stmt.execute(insertDataORCsinRepetidos);
 			
 			// Eliminar la tabla temporal
-			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
+//			stmt.execute("drop table if exists " + nombreTablaUsoEstacionesTmp);
 			con.close();
 			
 			

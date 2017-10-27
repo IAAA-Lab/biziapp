@@ -335,4 +335,22 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Script para instalar sqoop en docker
 	Realizar exportacion de hadoop a mysql, ej:
 	sqoop export --connect jdbc:mysql://155.210.155.121:3306/prueba --table hola --export-dir /user/hive/warehouse/prueba.db/hola --username root --password dani.1989 --direct
+	Crear app Jhipster
+18:00 - FIN
+
+27/10
+11:00 - INICIO
+	Descargar ejemplo de scheduling con spring - git clone https://github.com/spring-guides/gs-scheduling-tasks.git
+	cron = "segundos minutos horas diaDelMes mes diaDeLaSemana"
+	Pruebas de lanzamiento de tareas automatizadas con Scheduling Tasks de spring
+12:00 - DESAYUNAR
+12:30 - VUELTA
+	Crear script base de datos en MySQL para las tablas de gestión de tareas
+13:30 - COMIDA
+14:30 - VUELTA
+	Pruebas de scheduling en un proyecto JHipster
+	Creacion de tabla usoestaciones en mysql a partir de JHipster
+	Prueba: Insertar datos en la tabla a partir de sqoop en el docker
+	sqoop export --connect jdbc:mysql://155.210.155.121:3306/biziApp --table usoestaciones --export-dir /user/hive/warehouse/biziapp.db/usoestaciones --username root --password dani.1989 --direct
+	IMPORTANTE: NO USAR FORMATO ORC AL ALMACENAR
 
