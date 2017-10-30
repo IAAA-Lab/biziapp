@@ -190,4 +190,35 @@ public class Herramientas {
 		tempFile.renameTo(fichero);
 	}
 	
+	/**
+	 * Renombrar el fichero anadiendole la fecha de la información que contiene
+	 * 
+	 * @param downloadPath
+	 *            donde se encuentra el fichero a renombrar
+	 * @param nombreFichero
+	 *            nombre que tiene el fichero a renombrar
+	 * @param fecha
+	 *            fecha que se quiere anadir al nombre (formato "dd/MM/yyyy")
+	 * @return Ruta absoluta del fichero renombrado
+	 */
+	public String renameFile(String downloadPath, String nombreFichero, String fecha) {
+		// Obtener path completo del fichero
+		String path = downloadPath + System.getProperty("file.separator") + nombreFichero;
+		File fichero = new File(path);
+		String result = null;
+
+		// Comprobar si existe el fichero
+		if (fichero.exists()) {
+			// Obtener nombre sin extension
+			String nombreSinExt = nombreFichero.substring(0, nombreFichero.lastIndexOf("."));
+			// Anadir al nombre la fecha y de nuevo la extension
+			String nuevoNombre = nombreSinExt + fecha.replaceAll("/", "") + ".xls";
+			// Renombrar
+			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
+			fichero.renameTo(dest);
+			result = dest.getAbsolutePath();
+		}
+		return result;
+	}
+	
 }

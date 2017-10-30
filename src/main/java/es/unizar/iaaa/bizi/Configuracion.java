@@ -102,8 +102,8 @@ public class Configuracion {
 	 * Genera la cadena necesaria para realizar la conexión con JDBC a partir de un fichero JSON
 	 * @return ej: jdbc:hive2//host:port/dbName
 	 */
-	protected String getJdbcConnector() {
-		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+	protected String getJdbcHiveConnector() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionHiveDB");
 		String jdbc = connectionDB.get("jdbc").toString();
 		String host = connectionDB.get("host").toString();
 		String port = connectionDB.get("port").toString();
@@ -116,8 +116,8 @@ public class Configuracion {
 	 * Obtiene parametros de login para la base de datos del fichero de configuracion JSON
 	 * @return "user":"password"
 	 */
-	protected String getCredentialDB() {
-		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+	protected String getCredentialHiveDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionHiveDB");
 		String user = connectionDB.get("user").toString();
 		String password = connectionDB.get("password").toString();
 		String credentialDB = user + ":" + password;
@@ -128,10 +128,48 @@ public class Configuracion {
 	 * Obtiene la cadena correspondiente con el nombre del driver de la base de datos usada.
 	 * @return ej: "org.apache.hive.jdbc.HiveDriver"
 	 */
-	protected String getDriverNameDB() {
-		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionDB");
+	protected String getDriverNameHiveDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionHiveDB");
 		String driverName = connectionDB.get("driverName").toString();
 		return driverName;
 	}
+	
+	/**
+	 * Genera la cadena necesaria para realizar la conexión con JDBC a partir de un fichero JSON
+	 * @return ej: jdbc:mysql//host:port/dbName
+	 */
+	protected String getJdbcMysqlConnector() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionMysqlDB");
+		String jdbc = connectionDB.get("jdbc").toString();
+		String host = connectionDB.get("host").toString();
+		String port = connectionDB.get("port").toString();
+		String database = connectionDB.get("database").toString();
+		String result= jdbc + host + ":" + port + "/" + database;
+		return result;
+	}
+	
+	/**
+	 * Obtiene parametros de login para la base de datos del fichero de configuracion JSON
+	 * @return "user":"password"
+	 */
+	protected String getCredentialMysqlDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionMysqlDB");
+		String user = connectionDB.get("user").toString();
+		String password = connectionDB.get("password").toString();
+		String credentialDB = user + ":" + password;
+		return credentialDB;
+	}
+	
+	/**
+	 * Obtiene la cadena correspondiente con el nombre del driver de la base de datos usada.
+	 * @return ej: "com.mysql.jdbc.Driver"
+	 */
+	protected String getDriverNameMysqlDB() {
+		JSONObject connectionDB = (JSONObject) jsonObject.get("connectionMysqlDB");
+		String driverName = connectionDB.get("driverName").toString();
+		return driverName;
+	}
+	
+	
 	
 }

@@ -33,7 +33,6 @@ public class UsoEstaciones {
 	private static WebDriver driver;
 	private static StringBuffer verificationErrors = new StringBuffer();
 	private static Configuracion config;
-	private static Herramientas herramienta;
 	private static String downloadPath;
 	private static String registerPath;
 	
@@ -49,7 +48,6 @@ public class UsoEstaciones {
 			// Si no existe se crea
 			registerDirectory.mkdir();
 		}
-		herramienta = new Herramientas();
 	}
 
 	/**
@@ -58,16 +56,8 @@ public class UsoEstaciones {
 	 *            fecha del fichero que se desea descargar. Formato 'dd/MM/yyyy'
 	 * @throws JsonProcessingException 
 	 */
-	public int descargar(String fecha) throws JsonProcessingException {
-		/*
-		 * Variables para la generacion de logs timestamp: guardar momento en el que se
-		 * genera la accion fichero: apunta al directorio, mas adelante se le da el
-		 * nombre del fichero a abrir mensaje: entrada que se incluira en el fichero log
-		 * correspondiente
-		 */
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	public int descargar(String fecha) {
 		
-
 		try {
 			String date = fecha;
 			setUp();
@@ -88,18 +78,9 @@ public class UsoEstaciones {
 			// Desconexion
 			tearDown();
 
-			// Renombrar el fichero e intentar acceder a el para ver que existe
-			String pathFichero = renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fecha);
-			FileReader archivo = new FileReader(pathFichero);
-			archivo.read();
-			archivo.close();
-
-			// Generar fichero log
-			herramienta.generarLog(timestamp, Estado.SUCCESSDOWNLOAD, fecha, pathFichero, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return 1;
 			
 		} catch (Exception e) {
-			herramienta.generarLog(timestamp, Estado.ERROR, fecha, null, "Uso de las estaciones", "3.1-Usos de las estaciones",Tipo.USOESTACION);
 			return -1;
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -259,37 +240,6 @@ public class UsoEstaciones {
 
 		// Devolver foco a origen
 		driver.switchTo().defaultContent();
-	}
-
-	/**
-	 * Renombrar el fichero anadiendole la fecha de la información que contiene
-	 * 
-	 * @param downloadPath
-	 *            donde se encuentra el fichero a renombrar
-	 * @param nombreFichero
-	 *            nombre que tiene el fichero a renombrar
-	 * @param fecha
-	 *            fecha que se quiere anadir al nombre (formato "dd/MM/yyyy")
-	 * @return Ruta absoluta del fichero renombrado
-	 */
-	private static String renameFile(String downloadPath, String nombreFichero, String fecha) {
-		// Obtener path completo del fichero
-		String path = downloadPath + System.getProperty("file.separator") + nombreFichero;
-		File fichero = new File(path);
-		String result = null;
-
-		// Comprobar si existe el fichero
-		if (fichero.exists()) {
-			// Obtener nombre sin extension
-			String nombreSinExt = nombreFichero.substring(0, nombreFichero.lastIndexOf("."));
-			// Anadir al nombre la fecha y de nuevo la extension
-			String nuevoNombre = nombreSinExt + fecha.replaceAll("/", "") + ".xls";
-			// Renombrar
-			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
-			fichero.renameTo(dest);
-			result = dest.getAbsolutePath();
-		}
-		return result;
 	}
 
 }

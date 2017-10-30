@@ -30,6 +30,9 @@ dependencies {
 	compile "org.apache.sqoop:sqoop-client:1.99.7"
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	compile "com.googlecode.json-simple:json-simple:1.1.1"
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile "mysql:mysql-connector-java:6.0.6"
+	
 	
 	
 	

@@ -353,4 +353,43 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Prueba: Insertar datos en la tabla a partir de sqoop en el docker
 	sqoop export --connect jdbc:mysql://155.210.155.121:3306/biziApp --table usoestaciones --export-dir /user/hive/warehouse/biziapp.db/usoestaciones --username root --password dani.1989 --direct
 	IMPORTANTE: NO USAR FORMATO ORC AL ALMACENAR
+17:30 - FIN
+
+28/10
+14:00 - INICIO
+	Memoria
+16:00 - COMER
+19:00 - VUELTA
+	Generar aplicación JHipster "jhipsterBizi"
+	Añadir entidad "Usoestacion"
+	Comenzar script de generacion de fechas a insertar en la BD de tareas.
+20:30 - DESCANSO
+23:00 - VUELTA
+	Insertar en la BD tareas desde JHipster
+	DUDA PELLICER: Como hacer que un metodo solo pueda tener un solo hilo en ejecucion a la vez
+	Inicio de descarga de ficheros: Solo probado la obtencion de los items a descargar de la BD y a modificar el estado de proceso en la BD a 'PROCESIGN"
+00:00 - FIN. IMPORTANTE: HAY QUE TRASLADAR FICHERO CONF.JSON A JHIPSTER Y ADAPTARLO
+
+29/10
+10:30 - INICIO
+	Memoria - Análisis de riesgos
+	Presupuesto - Primera aproximación de costes
+12:30 - DESCANSO
+18:30 - VUELTA
+	Diversas pruebas con JHipster sobre ApplicationProperties, para intentar obtener valores declarados en el fichero properties-*.yml (NO CONSEGUIDO)
+20:30 - FIN
+
+30/10
+10:30 - INICIO
+	Comienzo de migracion de procesos a JHipster
+11:00 - DESAYUNO
+12:00 - VUELTA
+	Descarga de ficheros y agregar registro en tabla generarCSV una vez obtenido el fichero.
+	Integrada la descarga de ficheros completa en JHipster con funcionamiento correcto, a falta de controlar @Scheduled
+15:00 - COMER
+15:30 - VUELTA
+	Modificada la base de datos tarea, para que los ids de la tabla generarCSV y insertarHadoop no sean auto_increment y añadido nuevo estado 'ERROR'
+	Acoplamiento de funciones a JHipster 
+17:00 - REUNIÓN PELLICER
+18:00 - FIN
 

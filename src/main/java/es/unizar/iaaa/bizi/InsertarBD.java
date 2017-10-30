@@ -30,9 +30,9 @@ public class InsertarBD {
 	public static void main(String[] args) throws IOException, ParseException {
 		
 		config = new Configuracion();
-		jdbcConnector = config.getJdbcConnector();
-		driverNameDB = config.getDriverNameDB();
-		String[] credentialDB = config.getCredentialDB().split(":");
+		jdbcConnector = config.getJdbcHiveConnector();
+		driverNameDB = config.getDriverNameHiveDB();
+		String[] credentialDB = config.getCredentialHiveDB().split(":");
 		userDB = credentialDB[0];
 		passwordDB = credentialDB[1];
 		registerPath = config.getLogPath();
