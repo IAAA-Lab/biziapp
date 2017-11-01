@@ -393,3 +393,17 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 17:00 - REUNIÓN PELLICER
 18:00 - FIN
 
+
+01/11
+13:00 - INICIO
+	Comienzo de acoplamiento de insercion en base de datos Hadoop
+	Sqoop necesita que se le diga las columnas a rellenar, en caso contrario no inserta bien, debido a que la tabla en MySQL tiene una columna mas(id auto_increment):
+	sqoop export --connect jdbc:mysql://192.168.1.36:3306/jhipsterBizi --table usoestacion --export-dir /user/hive/warehouse/biziapp.db/usoestacionestmp --username root --password dani.1989 --direct --columns "nombre_completo, id_estacion, nombre_estacion, fecha_de_uso, intervalo_de_tiempo, devolucion_total, devolucion_media, retiradas_total, retiradas_media, neto, total, fecha_obtencion_datos, fichero_csv, fichero_xls"
+	Buscar solución para que al realizar el sqoop no duplique lo que ya está contenido:
+		- Poner todas las columnas en mysql como PK????
+15:00 - COMIDA
+16:30 - VUELTA
+	Acoplamiento de insertarHadoop en jhipster
+	Probar a lanzar todas las tareas con @Scheduled(cron = "...")
+	Problema con dependencias a la hora de añadir a gradle las entradas necesarias para conectar con hive
+18:30 - FIN

@@ -67,6 +67,11 @@ public class PruebasVarias {
 //			logger.debug("Sorry, something wrong!");
 //			logger.fatal("FATAAAAAAAAAAAAAAAAAAAAL");
 //		}
+		
+		System.out.println(FileSystems.getDefault().getPath("/docker-hive/compartida" + System.getProperty("file.separator")));
+		
+		System.out.println(FileSystems.getDefault().getPath("/home/dani/Escritorio/jhipsterBizi/csvFiles/3.1-Usos de las estaciones31102017_01112017.csv"));
+		
 	}
 
 }

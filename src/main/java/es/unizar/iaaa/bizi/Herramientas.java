@@ -221,4 +221,20 @@ public class Herramientas {
 		return result;
 	}
 	
+	/**
+	 * Comprueba si un fichero existe
+	 * @param pathCompleto 
+	 * @return 1 = fichero existe. -1 = fichero no existe
+	 */
+	public int comprobarFichero(String pathCompleto) {
+        int result=-1;
+        File fichero = new File(pathCompleto);
+        if (fichero.exists()) {
+            result = 1;
+        } else {
+            result = -1;
+        }
+        return result;
+    }
+	
 }
