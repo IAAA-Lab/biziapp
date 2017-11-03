@@ -407,3 +407,33 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Probar a lanzar todas las tareas con @Scheduled(cron = "...")
 	Problema con dependencias a la hora de añadir a gradle las entradas necesarias para conectar con hive
 18:30 - FIN
+
+02/11
+10:30 - INICIO
+	Solucionar problemas de dependencias en gradle
+13:00 - COMIDA
+14:00 - VUELTA
+	Solucionar problemas de dependencias en gradle
+18:30 - FIN
+
+03/11
+11:30 - INICIO
+	Solucionar problemas de dependencias en gradle
+	Solucionado: Solo es necesaria la libreria de hive-jdbc
+			compile ("org.apache.hive:hive-jdbc:2.1.1"){
+        			exclude group: 'org.apache.logging.log4j'
+    			}
+	Ya se introducen datos en hadoop a partir de jhipster
+13:00 - FIN 
+14:30 - VUELTA
+	Realizar prueba de cambiar directorio de descargas u otro
+
+
+compile "org.apache.hive:hive-exec:2.1.1"
+	
+compile "org.apache.hive:hive-metastore:2.1.1"
+	compile "org.apache.hive:hive-service:2.1.1"
+	compile "org.apache.calcite:calcite-avatica:1.6.0"
+	compile "org.apache.calcite:calcite-core:1.12.0"
+	compile "org.apache.hadoop:hadoop-common:2.8.1"
+

@@ -1,18 +1,5 @@
 package es.unizar.iaaa.bizi;
 
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import org.apache.log4j.Logger;
-
-import com.google.inject.spi.Message;
 
 public class PruebasVarias {
 
@@ -68,9 +55,9 @@ public class PruebasVarias {
 //			logger.fatal("FATAAAAAAAAAAAAAAAAAAAAL");
 //		}
 		
-		System.out.println(FileSystems.getDefault().getPath("/docker-hive/compartida" + System.getProperty("file.separator")));
-		
-		System.out.println(FileSystems.getDefault().getPath("/home/dani/Escritorio/jhipsterBizi/csvFiles/3.1-Usos de las estaciones31102017_01112017.csv"));
+//		System.out.println(FileSystems.getDefault().getPath("/docker-hive/compartida" + System.getProperty("file.separator")));
+//		
+//		System.out.println(FileSystems.getDefault().getPath("/home/dani/Escritorio/jhipsterBizi/csvFiles/3.1-Usos de las estaciones31102017_01112017.csv"));
 		
 	}
 

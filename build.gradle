@@ -19,13 +19,9 @@ dependencies {
 	compile "org.seleniumhq.selenium:selenium-chrome-driver:3.0.1"
 	compile "org.seleniumhq.selenium:selenium-support:3.0.1"
 	compile "org.apache.poi:poi-ooxml:3.16"
-	compile "org.apache.hive:hive-exec:2.1.1"
+	
 	compile "org.apache.hive:hive-jdbc:2.1.1"
-	compile "org.apache.hive:hive-metastore:2.1.1"
-	compile "org.apache.hive:hive-service:2.1.1"
-	compile "org.apache.calcite:calcite-avatica:1.6.0"
-	compile "org.apache.calcite:calcite-core:1.12.0"
-	compile "org.apache.hadoop:hadoop-common:2.8.1"
+	
 	// https://mvnrepository.com/artifact/org.apache.sqoop/sqoop-client
 	compile "org.apache.sqoop:sqoop-client:1.99.7"
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple

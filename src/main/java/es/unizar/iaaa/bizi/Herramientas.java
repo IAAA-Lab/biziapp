@@ -5,31 +5,31 @@
  */
 package es.unizar.iaaa.bizi;
 
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+//import java.io.FileReader;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//import java.sql.Timestamp;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.Map;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Herramientas {
-	private static Configuracion config;
-	private static String registerPath;
+//	private static Configuracion config;
+//	private static String registerPath;
 
 	public Herramientas() {
-		config = new Configuracion();
-		registerPath = config.getLogPath();
+//		config = new Configuracion();
+//		registerPath = config.getLogPath();
 	}
 	
 	/**
@@ -54,6 +54,9 @@ public class Herramientas {
 	 * @param tipo Representa el tipo de fichero que se ha descargado 
 	 * @throws JsonProcessingException
 	 */
+	/*
+	 * 
+	 
 	protected void generarLog(Timestamp registro, Estado estado, String fechaFichero, String pathCompleto,
 			String categoria, String subcategoria, Tipo tipo) throws JsonProcessingException {
 		// regPath: ruta donde se encuentran los ficheros de log
@@ -111,6 +114,7 @@ public class Herramientas {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	/**
 	 * Recupera las lineas (objetos JSON) del fichero, almacenandolas en una lista.
@@ -122,6 +126,9 @@ public class Herramientas {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
+	/*
+	 * 
+	 
 	protected ArrayList<JSONObject> obtenerEntradas(File fichero) throws IOException, ParseException {
 
 		ArrayList<JSONObject> lista = new ArrayList<>();
@@ -157,6 +164,7 @@ public class Herramientas {
 		fr.close();
 		return lista;
 	}
+	*/
 	
 	/**
 	 * Elimina del fichero la linea que se pasa por parametro
@@ -164,6 +172,9 @@ public class Herramientas {
 	 * @param lineToRemove linea representada por un objeto JSON que se quiere eliminar del fichero
 	 * @throws IOException
 	 */
+	/*
+	 * 
+	 
 	protected void eliminarLineaFichero(File fichero, JSONObject lineToRemove) throws IOException {
 		
 		FileReader fr = new FileReader(fichero);
@@ -189,6 +200,7 @@ public class Herramientas {
 		fichero.delete();
 		tempFile.renameTo(fichero);
 	}
+	*/
 	
 	/**
 	 * Renombrar el fichero anadiendole la fecha de la información que contiene

@@ -10,8 +10,6 @@ import es.unizar.iaaa.bizi.Configuracion;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.FileReader;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +22,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class UsoEstaciones {
 

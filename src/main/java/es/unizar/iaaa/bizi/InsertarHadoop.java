@@ -11,12 +11,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * VERSION JHIPSTER
@@ -142,7 +139,6 @@ public class InsertarHadoop {
 		
 		
 		try {
-			System.out.println("LLEGO AQUIxxx");
 			Class.forName(driverNameHive).newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// Eliminar fichero de la carpeta compartida del docker
@@ -178,6 +174,7 @@ public class InsertarHadoop {
 			// Generar Path que sea congruente con el sistema de ficheros del docker
 			String pathFileInDocker = System.getProperty("file.separator") + dockerSharedPath.substring(dockerSharedPath.lastIndexOf(System.getProperty("file.separator"))+1);
 			pathFileInDocker += System.getProperty("file.separator") +nombreFicheroCSV;
+			System.out.println(pathFileInDocker);
 			
 			// Carga de datos en la tabla auxiliar
 			String loadDataCSV = "LOAD DATA LOCAL INPATH '" + pathFileInDocker + "' INTO TABLE "
