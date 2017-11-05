@@ -426,14 +426,21 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Ya se introducen datos en hadoop a partir de jhipster
 13:00 - FIN 
 14:30 - VUELTA
-	Realizar prueba de cambiar directorio de descargas u otro
+	Refactor codigo: Limpieza de warnings
+	Prueba de generacion de tabla con el atributo UNIQUE en una columna:
+		create table nombre(id int, nombre varchar(10) UNIQUE, PRIMARY KEY(id));
+16:00 - FIN
+
+05/11
+12:00 - INICIO
+	Preparar reunión con Pellicer
+	Unir proyecto JhipsterBizi con proyecto general
+12:40 - PARADA
+12:50 - VUELTA
 
 
-compile "org.apache.hive:hive-exec:2.1.1"
-	
-compile "org.apache.hive:hive-metastore:2.1.1"
-	compile "org.apache.hive:hive-service:2.1.1"
-	compile "org.apache.calcite:calcite-avatica:1.6.0"
-	compile "org.apache.calcite:calcite-core:1.12.0"
-	compile "org.apache.hadoop:hadoop-common:2.8.1"
+.gitignore:
+
+/myconfig.json
+
 
