@@ -437,10 +437,6 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Unir proyecto JhipsterBizi con proyecto general
 12:40 - PARADA
 12:50 - VUELTA
-
-
-.gitignore:
-
-/myconfig.json
-
+	Unión de proyecto finalizada (Pendiente añadir elementos externos) (¡cambiar nombre fichero conf.json -> myconf.json!)
+13:30 - CAMBIO A MEMORIA
 
