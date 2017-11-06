@@ -453,3 +453,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
             Funciona correctamente, al lanzar sqoop no mete valores repetidos gracias a que la columna hashcode es UNIQUE
 14:00 - COMER
 15:00 - VUELTA
+    Generada la Entity Usoestacion en JHipster:
+        Antes de lanzarlo: Se ha modificado el fichero xml y /domain/Usoestacion(Utiliza notacion JPA) indicando que la columna hashcode es UNIQUE.
+    Se prueba el sqoop varias veces y no introduce valores repetidos
+16:00 - REUNION CON PELLICER
