@@ -1,0 +1,79 @@
+
+<div>
+    <h2><span data-translate="jhipsterApp.usoestacion.detail.title">Usoestacion</span> {{vm.usoestacion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipsterApp.usoestacion.nombreCompleto">Nombre Completo</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.nombreCompleto}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.idEstacion">Id Estacion</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.idEstacion}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.nombreEstacion">Nombre Estacion</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.nombreEstacion}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.fechaDeUso">Fecha De Uso</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.fechaDeUso | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.intervaloDeTiempo">Intervalo De Tiempo</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.intervaloDeTiempo}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.devolucionTotal">Devolucion Total</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.devolucionTotal}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.devolucionMedia">Devolucion Media</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.devolucionMedia}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.retiradasTotal">Retiradas Total</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.retiradasTotal}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.retiradasMedia">Retiradas Media</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.retiradasMedia}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.neto">Neto</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.neto}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.total">Total</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.total}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.fechaObtencionDatos">Fecha Obtencion Datos</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.fechaObtencionDatos | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.ficheroCSV">Fichero CSV</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.ficheroCSV}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.ficheroXLS">Fichero XLS</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.ficheroXLS}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.usoestacion.hashcode">Hashcode</span></dt>
+        <dd>
+            <span>{{vm.usoestacion.hashcode}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="usoestacion-detail.edit({id:vm.usoestacion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

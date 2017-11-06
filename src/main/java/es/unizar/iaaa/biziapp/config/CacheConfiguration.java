@@ -40,6 +40,7 @@ public class CacheConfiguration {
             cm.createCache(es.unizar.iaaa.biziapp.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(es.unizar.iaaa.biziapp.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(es.unizar.iaaa.biziapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(es.unizar.iaaa.biziapp.domain.Usoestacion.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,124 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUsoestacionLabel" data-translate="jhipsterApp.usoestacion.home.createOrEditLabel">Create or edit a Usoestacion</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.usoestacion.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.usoestacion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.nombreCompleto" for="field_nombreCompleto">Nombre Completo</label>
+            <input type="text" class="form-control" name="nombreCompleto" id="field_nombreCompleto"
+                    ng-model="vm.usoestacion.nombreCompleto"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.idEstacion" for="field_idEstacion">Id Estacion</label>
+            <input type="number" class="form-control" name="idEstacion" id="field_idEstacion"
+                    ng-model="vm.usoestacion.idEstacion"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.nombreEstacion" for="field_nombreEstacion">Nombre Estacion</label>
+            <input type="text" class="form-control" name="nombreEstacion" id="field_nombreEstacion"
+                    ng-model="vm.usoestacion.nombreEstacion"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.fechaDeUso" for="field_fechaDeUso">Fecha De Uso</label>
+                <div class="input-group">
+                    <input id="field_fechaDeUso" type="text" class="form-control" name="fechaDeUso" uib-datepicker-popup="{{dateformat}}" ng-model="vm.usoestacion.fechaDeUso" is-open="vm.datePickerOpenStatus.fechaDeUso"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaDeUso')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.intervaloDeTiempo" for="field_intervaloDeTiempo">Intervalo De Tiempo</label>
+            <input type="text" class="form-control" name="intervaloDeTiempo" id="field_intervaloDeTiempo"
+                    ng-model="vm.usoestacion.intervaloDeTiempo"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.devolucionTotal" for="field_devolucionTotal">Devolucion Total</label>
+            <input type="number" class="form-control" name="devolucionTotal" id="field_devolucionTotal"
+                    ng-model="vm.usoestacion.devolucionTotal"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.devolucionMedia" for="field_devolucionMedia">Devolucion Media</label>
+            <input type="number" class="form-control" name="devolucionMedia" id="field_devolucionMedia"
+                    ng-model="vm.usoestacion.devolucionMedia"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.retiradasTotal" for="field_retiradasTotal">Retiradas Total</label>
+            <input type="number" class="form-control" name="retiradasTotal" id="field_retiradasTotal"
+                    ng-model="vm.usoestacion.retiradasTotal"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.retiradasMedia" for="field_retiradasMedia">Retiradas Media</label>
+            <input type="number" class="form-control" name="retiradasMedia" id="field_retiradasMedia"
+                    ng-model="vm.usoestacion.retiradasMedia"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.neto" for="field_neto">Neto</label>
+            <input type="number" class="form-control" name="neto" id="field_neto"
+                    ng-model="vm.usoestacion.neto"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.total" for="field_total">Total</label>
+            <input type="number" class="form-control" name="total" id="field_total"
+                    ng-model="vm.usoestacion.total"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.fechaObtencionDatos" for="field_fechaObtencionDatos">Fecha Obtencion Datos</label>
+                <div class="input-group">
+                    <input id="field_fechaObtencionDatos" type="text" class="form-control" name="fechaObtencionDatos" uib-datepicker-popup="{{dateformat}}" ng-model="vm.usoestacion.fechaObtencionDatos" is-open="vm.datePickerOpenStatus.fechaObtencionDatos"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaObtencionDatos')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.ficheroCSV" for="field_ficheroCSV">Fichero CSV</label>
+            <input type="text" class="form-control" name="ficheroCSV" id="field_ficheroCSV"
+                    ng-model="vm.usoestacion.ficheroCSV"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.ficheroXLS" for="field_ficheroXLS">Fichero XLS</label>
+            <input type="text" class="form-control" name="ficheroXLS" id="field_ficheroXLS"
+                    ng-model="vm.usoestacion.ficheroXLS"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.usoestacion.hashcode" for="field_hashcode">Hashcode</label>
+            <input type="text" class="form-control" name="hashcode" id="field_hashcode"
+                    ng-model="vm.usoestacion.hashcode"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

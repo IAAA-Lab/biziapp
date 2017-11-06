@@ -1,0 +1,71 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nombreCompleto",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "idEstacion",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "nombreEstacion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaDeUso",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "intervaloDeTiempo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "devolucionTotal",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "devolucionMedia",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "retiradasTotal",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "retiradasMedia",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "neto",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "total",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "fechaObtencionDatos",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "ficheroCSV",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ficheroXLS",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hashcode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171106141952",
+    "entityTableName": "usoestacion",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "no"
+}

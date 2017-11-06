@@ -1,0 +1,35 @@
+{
+    "jhipsterApp": {
+        "usoestacion" : {
+            "home": {
+                "title": "Usoestacions",
+                "createLabel": "Create a new Usoestacion",
+                "createOrEditLabel": "Create or edit a Usoestacion"
+            },
+            "created": "A new Usoestacion is created with identifier {{ param }}",
+            "updated": "A Usoestacion is updated with identifier {{ param }}",
+            "deleted": "A Usoestacion is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Usoestacion {{ id }}?"
+            },
+            "detail": {
+                "title": "Usoestacion"
+            },
+            "nombreCompleto": "Nombre Completo",
+            "idEstacion": "Id Estacion",
+            "nombreEstacion": "Nombre Estacion",
+            "fechaDeUso": "Fecha De Uso",
+            "intervaloDeTiempo": "Intervalo De Tiempo",
+            "devolucionTotal": "Devolucion Total",
+            "devolucionMedia": "Devolucion Media",
+            "retiradasTotal": "Retiradas Total",
+            "retiradasMedia": "Retiradas Media",
+            "neto": "Neto",
+            "total": "Total",
+            "fechaObtencionDatos": "Fecha Obtencion Datos",
+            "ficheroCSV": "Fichero CSV",
+            "ficheroXLS": "Fichero XLS",
+            "hashcode": "Hashcode"
+        }
+    }
+}

@@ -1,0 +1,88 @@
+<div>
+    <h2 data-translate="jhipsterApp.usoestacion.home.title">Usoestacions</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="usoestacion.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="jhipsterApp.usoestacion.home.createLabel">
+                        Create new Usoestacion
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nombreCompleto"><span data-translate="jhipsterApp.usoestacion.nombreCompleto">Nombre Completo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="idEstacion"><span data-translate="jhipsterApp.usoestacion.idEstacion">Id Estacion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nombreEstacion"><span data-translate="jhipsterApp.usoestacion.nombreEstacion">Nombre Estacion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fechaDeUso"><span data-translate="jhipsterApp.usoestacion.fechaDeUso">Fecha De Uso</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="intervaloDeTiempo"><span data-translate="jhipsterApp.usoestacion.intervaloDeTiempo">Intervalo De Tiempo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="devolucionTotal"><span data-translate="jhipsterApp.usoestacion.devolucionTotal">Devolucion Total</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="devolucionMedia"><span data-translate="jhipsterApp.usoestacion.devolucionMedia">Devolucion Media</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="retiradasTotal"><span data-translate="jhipsterApp.usoestacion.retiradasTotal">Retiradas Total</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="retiradasMedia"><span data-translate="jhipsterApp.usoestacion.retiradasMedia">Retiradas Media</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="neto"><span data-translate="jhipsterApp.usoestacion.neto">Neto</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="total"><span data-translate="jhipsterApp.usoestacion.total">Total</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fechaObtencionDatos"><span data-translate="jhipsterApp.usoestacion.fechaObtencionDatos">Fecha Obtencion Datos</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ficheroCSV"><span data-translate="jhipsterApp.usoestacion.ficheroCSV">Fichero CSV</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ficheroXLS"><span data-translate="jhipsterApp.usoestacion.ficheroXLS">Fichero XLS</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hashcode"><span data-translate="jhipsterApp.usoestacion.hashcode">Hashcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usoestacion in vm.usoestacions track by usoestacion.id">
+                    <td><a ui-sref="usoestacion-detail({id:usoestacion.id})">{{usoestacion.id}}</a></td>
+                    <td>{{usoestacion.nombreCompleto}}</td>
+                    <td>{{usoestacion.idEstacion}}</td>
+                    <td>{{usoestacion.nombreEstacion}}</td>
+                        <td>{{usoestacion.fechaDeUso | date:'mediumDate'}}</td>
+                    <td>{{usoestacion.intervaloDeTiempo}}</td>
+                    <td>{{usoestacion.devolucionTotal}}</td>
+                    <td>{{usoestacion.devolucionMedia}}</td>
+                    <td>{{usoestacion.retiradasTotal}}</td>
+                    <td>{{usoestacion.retiradasMedia}}</td>
+                    <td>{{usoestacion.neto}}</td>
+                    <td>{{usoestacion.total}}</td>
+                        <td>{{usoestacion.fechaObtencionDatos | date:'mediumDate'}}</td>
+                    <td>{{usoestacion.ficheroCSV}}</td>
+                    <td>{{usoestacion.ficheroXLS}}</td>
+                    <td>{{usoestacion.hashcode}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="usoestacion-detail({id:usoestacion.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="usoestacion.edit({id:usoestacion.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="usoestacion.delete({id:usoestacion.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

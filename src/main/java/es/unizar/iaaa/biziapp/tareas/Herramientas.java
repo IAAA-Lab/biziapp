@@ -70,10 +70,10 @@ public class Herramientas {
             sha256.update(cadena.getBytes("UTF-8"));
             byte[] digest = sha256.digest();
             StringBuffer sb=new StringBuffer();
-            for(int i=0;i < digest.length;i++){
-                sb.append(String.format("%02x", digest[i]));
+            for (byte aDigest : digest) {
+                sb.append(String.format("%02x", aDigest));
             }
-            String hash=sb.toString();
+            String hash = sb.toString();
             return hash;
 
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
