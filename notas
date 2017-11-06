@@ -457,3 +457,8 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         Antes de lanzarlo: Se ha modificado el fichero xml y /domain/Usoestacion(Utiliza notacion JPA) indicando que la columna hashcode es UNIQUE.
     Se prueba el sqoop varias veces y no introduce valores repetidos
 16:00 - REUNION CON PELLICER
+17:00 - FIN REUNION
+    Modificada la vista de la lista de Usoestacion en JHipster:
+        Modificando usoestacions.html
+    Comienzo generar funcion JS para descargar JSON con datos.
+18:30 - FIN
