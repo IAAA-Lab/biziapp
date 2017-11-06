@@ -176,7 +176,7 @@ public class InsertarHadoop {
                 + "(nombreCompleto String, idEstacion int, nombreEstacion String, fechaDeUso DATE,"
                 + "intervaloDeTiempo String, devolucionTotal int,devolucionMedia float,retiradasTotal int,"
                 + "retiradasMedia float, neto float, total float, fechaObtencionDatos DATE, ficheroCSV  String,"
-                + "ficheroXLS  String, hashCode)" + "row format delimited fields terminated by \",\" "
+                + "ficheroXLS  String, hashCode String) " + "row format delimited fields terminated by \",\" "
                 + "lines terminated BY \'\n\' ";
 
             stmt.execute(createTableUsoEstaciones);

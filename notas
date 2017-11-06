@@ -451,3 +451,5 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     Prueba con sqoop añadiendo en MySQL columna con UNIQUE
     PRUEBA: Modificado campo hashcode(UNIQUE) en la tabla usoestacion_2 en base de datos de jhipsterbizi.
             Funciona correctamente, al lanzar sqoop no mete valores repetidos gracias a que la columna hashcode es UNIQUE
+14:00 - COMER
+15:00 - VUELTA

@@ -33,7 +33,6 @@ public class Gestor {
 
     // Lanzar Generador de fechas
 //    @Scheduled(cron = "0 0 17 * * *")
-    @Scheduled(initialDelay = 1000, fixedRate = 500000)
     public void generarFecha(){
         log.info("Lanzando generador de fecha");
         GeneradorFechas gf = new GeneradorFechas();
@@ -43,7 +42,6 @@ public class Gestor {
 
     // Lanzar descarga de ficheros
 //    @Scheduled(cron = "0 5 17 * * *")
-
     public void descargarFichero(){
         log.info("Lanzando descarga de fichero");
         DescargarFichero df = new DescargarFichero();
@@ -61,7 +59,6 @@ public class Gestor {
     }
 
     // Lanzar inserción de datos a hadoop
-
     public void insertarBD(){
         log.info("Lanzando insercion en hadoop");
         InsertarHadoop ih = new InsertarHadoop();
