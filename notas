@@ -89,13 +89,13 @@ PRUEBA DE CONCEPTO
 	Anotación: Para el nombrado de los ficheros de salida, mirar messageFormat.
 	Hecho nombrado con messageFormat. DEPURARLO MAS ADELANTE
 16:00 - Pruebas de carga de datos y consultas en hortonworks
-	ANOTACIÓN: Modificar el formato de las fechas de DD/MM/YYYY a YYYY-MM-DD. 
+	ANOTACIÓN: Modificar el formato de las fechas de DD/MM/YYYY a YYYY-MM-DD.
 		Para poder convertirlo en la BD a tipo Date. (Idea: hacerlo con un split y luego un messageFormat)
 17:00 - Fin. No se ha llegado a probar el último paso porque la maquina virtual no termina de arrancar
 
 20/06
 11:00 - Carga de datos por medio de interfaz gráfica de HDP.
-	ANOTACIÓN: Cambiar el guión(-) por guión bajo(_) en el nombre del fichero CSV 
+	ANOTACIÓN: Cambiar el guión(-) por guión bajo(_) en el nombre del fichero CSV
 11:30 - Conversación con Pellicer: Probar a integrar JHipster cambiando la BD por la BD de Hortonworks(Hive - ip y puerto).
 		Para la descarga de ficheros: Estudiar como se realiza la petición de los datos (sobretodo la fecha)
 		y utilizar la funcionalidad de SeleniumHQ para realizar peticiones por httpRequest.
@@ -108,7 +108,7 @@ PRUEBA DE CONCEPTO
 10:30 - JHipster instalación (maven, MySQL, H2, ...)
 	Cambio de puerto: src/main/resources/config/application-dev.yml
 16:00 - JHipster instalación (gradle, MySQL, MySQL, ...)
-17:20 - Tutorial blog con JHipster 
+17:20 - Tutorial blog con JHipster
 	JHipster 2.x (https://www.youtube.com/watch?v=ZGF4gEM4FuA) REALIZADO CON EXITO
 	JHipster 4 (https://www.youtube.com/watch?v=XRREt1KB4Y8&feature=youtu.be) Igual que el anterior
 	Lanzar desde consola: gradlew bootrun
@@ -119,7 +119,7 @@ PRUEBA DE CONCEPTO
 11:40 - Acoplar Hive a JHipster. NO LOGRADO
 13:15 - Pellicer plantea que hay que empezar a pensar en la propuesta de proyecto.
 13:20 - Se decide sustituir la actual máquina virtual (Hortonworks), debido a la lentitud a la hora de iniciar. Se procede a instalar
-	una máquina virtual prediseñada (bitnami), que dispone de Hadoop y Hive. (https://bitnami.com/stack/hadoop/virtual-machine) 
+	una máquina virtual prediseñada (bitnami), que dispone de Hadoop y Hive. (https://bitnami.com/stack/hadoop/virtual-machine)
 	(https://docs.bitnami.com/virtual-machine/apps/hadoop/)
 13:40 - Instalación de Bitnami-hadooop completada
 	username: bitnami	password: pumuki.2017
@@ -145,7 +145,7 @@ PRUEBA DE CONCEPTO
 12:30 - Probar desde Putty que funcionan correctamente hadoop y Hive
 	https://docs.bitnami.com/virtual-machine/apps/hadoop/#how-to-run-a-test-job-in-hadoop
 	https://docs.bitnami.com/virtual-machine/apps/hadoop/#how-to-test-hive
-13:00 - Detectado problema al realizar mapreduce. Se procede a intentar solucionar. 
+13:00 - Detectado problema al realizar mapreduce. Se procede a intentar solucionar.
 15:53 - No se consigue solucionar el problema, ya que se debe a problemas de memoria de la propia máquina.
 	Se decide volver a utilizar dockers (https://github.com/big-data-europe/docker-hive/blob/master/README.md)
 15:55 - Instalar Docker en Windows - Problemas con virtualización
@@ -389,7 +389,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 15:00 - COMER
 15:30 - VUELTA
 	Modificada la base de datos tarea, para que los ids de la tabla generarCSV y insertarHadoop no sean auto_increment y añadido nuevo estado 'ERROR'
-	Acoplamiento de funciones a JHipster 
+	Acoplamiento de funciones a JHipster
 17:00 - REUNIÓN PELLICER
 18:00 - FIN
 
@@ -424,7 +424,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         			exclude group: 'org.apache.logging.log4j'
     			}
 	Ya se introducen datos en hadoop a partir de jhipster
-13:00 - FIN 
+13:00 - FIN
 14:30 - VUELTA
 	Refactor codigo: Limpieza de warnings
 	Prueba de generacion de tabla con el atributo UNIQUE en una columna:
@@ -440,3 +440,12 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	Unión de proyecto finalizada (Pendiente añadir elementos externos) (¡cambiar nombre fichero conf.json -> myconf.json!)
 13:30 - CAMBIO A MEMORIA
 17:00 - COMER
+18:00 - VUELTA
+    Modelado BPMN de los procesos ETL
+19:00 - FIN
+
+06/11
+11:00 - INICIO
+    Introducir en proyecto JHipster las clases que realizan las tareas
+    Modificar myconfig.json (introducir login en legacySystem)
+    Prueba con sqoop añadiendo en MySQL columna con UNIQUE

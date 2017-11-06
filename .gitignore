@@ -127,7 +127,6 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
-/myconfig.json
 
 ######################
 # Gradle Wrapper
@@ -143,3 +142,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+/myConfig.json

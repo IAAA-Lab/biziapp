@@ -1,0 +1,22 @@
+entity Usoestacion {
+	nombreCompleto String,
+	idEstacion Integer,
+	nombreEstacion String,
+	fechaDeUso LocalDate,
+	intervaloDeTiempo String,
+	devolucionTotal Integer,
+	devolucionMedia Float,
+	retiradasTotal Integer,
+	retiradasMedia Float,
+	neto Float,
+	total Float,
+	fechaObtencionDatos LocalDate,
+	ficheroCSV String,
+	ficheroXLS String,
+    hashcode String
+}
+
+// Set pagination options
+paginate Usoestacion with pagination
+
+dto * with mapstruct
