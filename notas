@@ -470,6 +470,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 13:00 - COMER
 17:00 - VUELTA
     Redacción de memoria
+18:30 - FIN
     
     
     
