@@ -44,10 +44,6 @@
             }
         }
 
-        // AÑADIDO POR MI
-
-        // FIN AÑADIDO POR MI
-
         function loadPage(page) {
             vm.page = page;
             vm.transition();
