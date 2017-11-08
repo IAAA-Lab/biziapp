@@ -301,11 +301,8 @@ public class TratamientoFicheros {
                     // Escribir en el fichero
                     for (int i = 0; i < dato.getValue().size(); i++) {
                         // Generar hash de la linea a insertar
-                        // TODO: Tener en cuenta que el nombre del fichero CSV es variable segun cuando se genere
-                        // TODO: HAY QUE QUITARLO
                         String hash = herramienta.generarHash(dato.getKey() + "," + idEstacion + "," + nombreEstacion + "," + nuevaFechaUso + ","
-                            + dato.getValue().get(i) + nuevaFechaExtraccion + "," + nombreFicheroCSV + ","
-                            + nombreFicheroXLS);
+                            + dato.getValue().get(i) + "," + nombreFicheroXLS);
                         // Insertar linea
                         bw.write(dato.getKey() + "," + idEstacion + "," + nombreEstacion + "," + nuevaFechaUso + ","
                             + dato.getValue().get(i) + nuevaFechaExtraccion + "," + nombreFicheroCSV + ","

@@ -471,6 +471,17 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 17:00 - VUELTA
     Redacción de memoria
 18:30 - FIN
-    
-    
-    
+
+08/11
+10:30 - INICIO
+    Lectura sobre Gestión de configuracion (Software Engineering, Ian Sommerville)
+    Instalación de MySQL Workbench - Utilizar ingenieria inversa para generar el esquema de la BD de JHipster
+    Aproximación de modelo E/R de BD JHipster
+    Memoria
+13:30 - COMER
+15:00 - VUELTA
+    Generar que sea posible descargar el fichero json desde interfaz JHipster
+19:30 - PARADA
+20:30 - CONTINUAR
+    Pruebas con diferentes librerias de angularjs para la descarga de ficheros (Preguntar a Alvaro)
+22:00 - FIN
