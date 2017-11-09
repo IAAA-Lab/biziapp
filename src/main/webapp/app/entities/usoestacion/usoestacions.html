@@ -12,14 +12,29 @@
                 <!--</button>-->
             <!--</div>-->
         <!--</div>-->
+        <div class="row">
+            <div class="col-xs-12 no-padding-left">
+                <button ng-click="vm.download(vm.datosPagina)" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                        Descargar datos mostrados
+                    </span>
+                </button>
+                <button ng-click="vm.downloadAll()" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                    Descargar todos los datos
+                    </span>
+                </button>
+            </div>
+        </div>
     </div>
+
     <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nombreCompleto"><span data-translate="jhipsterApp.usoestacion.nombreCompleto">Nombre Completo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="nombreCompleto"><span data-translate="jhipsterApp.usoestacion.nombreCompleto">Nombre Completo</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="idEstacion"><span data-translate="jhipsterApp.usoestacion.idEstacion">Id Estacion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="nombreEstacion"><span data-translate="jhipsterApp.usoestacion.nombreEstacion">Nombre Estacion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fechaDeUso"><span data-translate="jhipsterApp.usoestacion.fechaDeUso">Fecha De Uso</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -40,7 +55,7 @@
             <tbody>
                 <tr ng-repeat="usoestacion in vm.usoestacions track by usoestacion.id">
                     <td><a ui-sref="usoestacion-detail({id:usoestacion.id})">{{usoestacion.id}}</a></td>
-                    <td>{{usoestacion.nombreCompleto}}</td>
+                    <!--<td>{{usoestacion.nombreCompleto}}</td>-->
                     <td>{{usoestacion.idEstacion}}</td>
                     <td>{{usoestacion.nombreEstacion}}</td>
                         <td>{{usoestacion.fechaDeUso | date:'mediumDate'}}</td>

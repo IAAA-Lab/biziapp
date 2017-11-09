@@ -490,3 +490,6 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 13:00 - INICIO
    Pruebas de descarga con la librería angular-file-saver (no logrado)
 14:00 - COMER
+16:30 - VUELTA
+    [JHipster - AngularJS] Desarrollo de descarga en JSON de contenido mostrado en pantalla(20 elementos)
+    [JHipster - AngularJS] Desarrollo de descarga en JSON de todos los datos almacenados en la base de datos
