@@ -485,3 +485,8 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 20:30 - CONTINUAR
     Pruebas con diferentes librerias de angularjs para la descarga de ficheros (Preguntar a Alvaro)
 22:00 - FIN
+
+09/11
+13:00 - INICIO
+   Pruebas de descarga con la librería angular-file-saver (no logrado)
+14:00 - COMER
