@@ -494,3 +494,18 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     [JHipster - AngularJS] Desarrollo de descarga en JSON de contenido mostrado en pantalla(20 elementos)
     [JHipster - AngularJS] Desarrollo de descarga en JSON de todos los datos almacenados en la base de datos
 18:30 - FIN
+
+10/11
+11:00 - INICIO
+    Incluir tablas de tareas en JHipster + modificaciones en el codigo para trabajar con ellas
+	- Para que sea consistente el createdat y el updatedat es necesario modificar en la bd y darle los parametros:
+		| createdat     | timestamp    | NO   |     | CURRENT_TIMESTAMP |                             |
+		| updatedat     | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+	- En el fichero de JHipster /domain/<nombreEntidad> modificar la linea:
+		@Column(name = "createdat", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",  insertable=false, updatable=false)
+		private Instant createdat;
+		@Column(name = "updatedat", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",  insertable=false, updatable=false)
+		private Instant updatedat;
+	- Por ultimo, sería recomendable quitar la posibilidad de que el usuario pueda modificar esos dos campos a mano
+    (Pendiente: realizar lo anterior en el proyecto bueno)
+15:00 - FIN
