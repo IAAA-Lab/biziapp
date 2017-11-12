@@ -521,3 +521,11 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         - ER MySQL
         - ER Legado
 19:00 - FIN
+
+12/10
+10:00 - INICIO
+    Memoria
+13:30 - DESCANSO
+15:00 - VUELTA
+    Memoria
+16:30 - FIN
