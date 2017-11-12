@@ -509,3 +509,15 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 	- Por ultimo, sería recomendable quitar la posibilidad de que el usuario pueda modificar esos dos campos a mano
     (Pendiente: realizar lo anterior en el proyecto bueno)
 15:00 - FIN
+
+11/10
+13:00 - INICIO
+    Modelado de diagramas:
+        - Despliegue
+        - Componentes
+14:00 - COMER
+16:00 - VUELTA
+    Modelado de diagramas:
+        - ER MySQL
+        - ER Legado
+19:00 - FIN
