@@ -2,7 +2,7 @@
     "jhipsterApp": {
         "usoestacion" : {
             "home": {
-                "title": "Usoestacions",
+                "title": "Usoestaciones",
                 "createLabel": "Crear nuevo Usoestacion",
                 "createOrEditLabel": "Crear o editar Usoestacion"
             },

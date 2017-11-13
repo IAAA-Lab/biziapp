@@ -510,7 +510,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     (Pendiente: realizar lo anterior en el proyecto bueno)
 15:00 - FIN
 
-11/10
+11/11
 13:00 - INICIO
     Modelado de diagramas:
         - Despliegue
@@ -522,7 +522,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         - ER Legado
 19:00 - FIN
 
-12/10
+12/11
 10:00 - INICIO
     Memoria
 13:30 - DESCANSO
@@ -530,10 +530,23 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     Memoria
 16:30 - FIN
 
-13/10
+13/11
 11:00 - INICIO
     Crear tablas de tareas en JHipster
     Modificar procesos tarea en JHipster para adaptarlos a las nuevas tablas
-
-    alter table tratamiento modify column created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-    alter table tratamiento modify column updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+    Modificadas columnas en las tablas de la base de datos:
+        alter table <<nombreTabla>> modify column created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+        alter table <<nombreTabla>> modify column updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+14:00 - COMER
+15:00 - VUELTA
+    Modificar front-end para la gestion de las tareas
+        Quitar que se puedan añadir tareas
+        Quitar que se pueda modificar cualquier parametro, excepto el estado
+        Quitar opción de eliminar tareas
+    Hacer que las tareas solo las pueda ver el administrador:
+        - Modificar state.js de cada entidad para indicar que es ROLE_ADMIN la autorizacion
+        - Modificar el nadvar añadiendo en cada etiqueta <li> el atributo has-authority="ROLE_ADMIN"
+        - Modificar las clases resources de cada entidad para indicar que solo pueden realizarse las cosas con rol admin @Secured(AuthoritiesConstants.ADMIN)
+    Añadir la descarga de datos en Uso Estaciones.
+    Generar proceso de creación de historico
+    Generar proceso de limpieza de procesos colgados (poner estados PROCESING en WAITING)

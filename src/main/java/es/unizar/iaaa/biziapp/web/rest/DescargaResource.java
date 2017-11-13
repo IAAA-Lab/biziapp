@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import es.unizar.iaaa.biziapp.domain.Descarga;
 
 import es.unizar.iaaa.biziapp.repository.DescargaRepository;
+import es.unizar.iaaa.biziapp.security.AuthoritiesConstants;
 import es.unizar.iaaa.biziapp.web.rest.util.HeaderUtil;
 import es.unizar.iaaa.biziapp.web.rest.util.PaginationUtil;
 import es.unizar.iaaa.biziapp.service.dto.DescargaDTO;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -55,6 +57,7 @@ public class DescargaResource {
      */
     @PostMapping("/descargas")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<DescargaDTO> createDescarga(@Valid @RequestBody DescargaDTO descargaDTO) throws URISyntaxException {
         log.debug("REST request to save Descarga : {}", descargaDTO);
         if (descargaDTO.getId() != null) {
@@ -79,6 +82,7 @@ public class DescargaResource {
      */
     @PutMapping("/descargas")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<DescargaDTO> updateDescarga(@Valid @RequestBody DescargaDTO descargaDTO) throws URISyntaxException {
         log.debug("REST request to update Descarga : {}", descargaDTO);
         if (descargaDTO.getId() == null) {
@@ -100,6 +104,7 @@ public class DescargaResource {
      */
     @GetMapping("/descargas")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<DescargaDTO>> getAllDescargas(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Descargas");
         Page<Descarga> page = descargaRepository.findAll(pageable);
@@ -115,6 +120,7 @@ public class DescargaResource {
      */
     @GetMapping("/descargas/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<DescargaDTO> getDescarga(@PathVariable Long id) {
         log.debug("REST request to get Descarga : {}", id);
         Descarga descarga = descargaRepository.findOne(id);
@@ -130,6 +136,7 @@ public class DescargaResource {
      */
     @DeleteMapping("/descargas/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteDescarga(@PathVariable Long id) {
         log.debug("REST request to delete Descarga : {}", id);
         descargaRepository.delete(id);

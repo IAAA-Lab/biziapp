@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import es.unizar.iaaa.biziapp.domain.Insercion;
 
 import es.unizar.iaaa.biziapp.repository.InsercionRepository;
+import es.unizar.iaaa.biziapp.security.AuthoritiesConstants;
 import es.unizar.iaaa.biziapp.web.rest.util.HeaderUtil;
 import es.unizar.iaaa.biziapp.web.rest.util.PaginationUtil;
 import es.unizar.iaaa.biziapp.service.dto.InsercionDTO;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -55,6 +57,7 @@ public class InsercionResource {
      */
     @PostMapping("/insercions")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<InsercionDTO> createInsercion(@Valid @RequestBody InsercionDTO insercionDTO) throws URISyntaxException {
         log.debug("REST request to save Insercion : {}", insercionDTO);
         if (insercionDTO.getId() != null) {
@@ -79,6 +82,7 @@ public class InsercionResource {
      */
     @PutMapping("/insercions")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<InsercionDTO> updateInsercion(@Valid @RequestBody InsercionDTO insercionDTO) throws URISyntaxException {
         log.debug("REST request to update Insercion : {}", insercionDTO);
         if (insercionDTO.getId() == null) {
@@ -100,6 +104,7 @@ public class InsercionResource {
      */
     @GetMapping("/insercions")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<InsercionDTO>> getAllInsercions(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Insercions");
         Page<Insercion> page = insercionRepository.findAll(pageable);
@@ -115,6 +120,7 @@ public class InsercionResource {
      */
     @GetMapping("/insercions/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<InsercionDTO> getInsercion(@PathVariable Long id) {
         log.debug("REST request to get Insercion : {}", id);
         Insercion insercion = insercionRepository.findOne(id);
@@ -130,6 +136,7 @@ public class InsercionResource {
      */
     @DeleteMapping("/insercions/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteInsercion(@PathVariable Long id) {
         log.debug("REST request to delete Insercion : {}", id);
         insercionRepository.delete(id);

@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import es.unizar.iaaa.biziapp.domain.Tratamiento;
 
 import es.unizar.iaaa.biziapp.repository.TratamientoRepository;
+import es.unizar.iaaa.biziapp.security.AuthoritiesConstants;
 import es.unizar.iaaa.biziapp.web.rest.util.HeaderUtil;
 import es.unizar.iaaa.biziapp.web.rest.util.PaginationUtil;
 import es.unizar.iaaa.biziapp.service.dto.TratamientoDTO;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -55,6 +57,7 @@ public class TratamientoResource {
      */
     @PostMapping("/tratamientos")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<TratamientoDTO> createTratamiento(@Valid @RequestBody TratamientoDTO tratamientoDTO) throws URISyntaxException {
         log.debug("REST request to save Tratamiento : {}", tratamientoDTO);
         if (tratamientoDTO.getId() != null) {
@@ -79,6 +82,7 @@ public class TratamientoResource {
      */
     @PutMapping("/tratamientos")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<TratamientoDTO> updateTratamiento(@Valid @RequestBody TratamientoDTO tratamientoDTO) throws URISyntaxException {
         log.debug("REST request to update Tratamiento : {}", tratamientoDTO);
         if (tratamientoDTO.getId() == null) {
@@ -100,6 +104,7 @@ public class TratamientoResource {
      */
     @GetMapping("/tratamientos")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<TratamientoDTO>> getAllTratamientos(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Tratamientos");
         Page<Tratamiento> page = tratamientoRepository.findAll(pageable);
@@ -115,6 +120,7 @@ public class TratamientoResource {
      */
     @GetMapping("/tratamientos/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<TratamientoDTO> getTratamiento(@PathVariable Long id) {
         log.debug("REST request to get Tratamiento : {}", id);
         Tratamiento tratamiento = tratamientoRepository.findOne(id);
@@ -130,6 +136,7 @@ public class TratamientoResource {
      */
     @DeleteMapping("/tratamientos/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteTratamiento(@PathVariable Long id) {
         log.debug("REST request to delete Tratamiento : {}", id);
         tratamientoRepository.delete(id);

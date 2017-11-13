@@ -16,15 +16,16 @@
         <div class="form-group">
             <label class="control-label" data-translate="jhipsterApp.tratamiento.idTarea" for="field_idTarea">Id Tarea</label>
             <input type="number" class="form-control" name="idTarea" id="field_idTarea"
-                    ng-model="vm.tratamiento.idTarea"
-                    />
+                    ng-model="vm.tratamiento.idTarea" readonly />
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="jhipsterApp.tratamiento.tipo" for="field_tipo">Tipo</label>
-            <select class="form-control" name="tipo" ng-model="vm.tratamiento.tipo" id="field_tipo" required>
-                <option value="USOESTACIONES" data-translate="jhipsterApp.Tipo.USOESTACIONES">USOESTACIONES</option>
-                <option value="MATRIZMOVIMIENTOS" data-translate="jhipsterApp.Tipo.MATRIZMOVIMIENTOS">MATRIZMOVIMIENTOS</option>
-            </select>
+            <!--<select class="form-control" name="tipo" ng-model="vm.tratamiento.tipo" id="field_tipo" required>-->
+                <!--<option value="USOESTACIONES" data-translate="jhipsterApp.Tipo.USOESTACIONES">USOESTACIONES</option>-->
+                <!--<option value="MATRIZMOVIMIENTOS" data-translate="jhipsterApp.Tipo.MATRIZMOVIMIENTOS">MATRIZMOVIMIENTOS</option>-->
+            <!--</select>-->
+            <input type="text" class="form-control" id="field_tipo" name="tipo"
+                   ng-model="vm.tratamiento.tipo" readonly />
             <div ng-show="editForm.tipo.$invalid">
                 <p class="help-block"
                     ng-show="editForm.tipo.$error.required" data-translate="entity.validation.required">
@@ -36,7 +37,7 @@
             <label class="control-label" data-translate="jhipsterApp.tratamiento.fechaFichero" for="field_fechaFichero">Fecha Fichero</label>
             <input type="text" class="form-control" name="fechaFichero" id="field_fechaFichero"
                     ng-model="vm.tratamiento.fechaFichero"
-                    required/>
+                    required readonly/>
             <div ng-show="editForm.fechaFichero.$invalid">
                 <p class="help-block"
                     ng-show="editForm.fechaFichero.$error.required" data-translate="entity.validation.required">
@@ -48,7 +49,7 @@
             <label class="control-label" data-translate="jhipsterApp.tratamiento.pathFicheroXLS" for="field_pathFicheroXLS">Path Fichero XLS</label>
             <input type="text" class="form-control" name="pathFicheroXLS" id="field_pathFicheroXLS"
                     ng-model="vm.tratamiento.pathFicheroXLS"
-                    required/>
+                    required readonly/>
             <div ng-show="editForm.pathFicheroXLS.$invalid">
                 <p class="help-block"
                     ng-show="editForm.pathFicheroXLS.$error.required" data-translate="entity.validation.required">
@@ -71,26 +72,26 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="jhipsterApp.tratamiento.createdAt" for="field_createdAt">Created At</label>
-                <div class="input-group">
-                    <input id="field_createdAt" type="text" class="form-control" name="createdAt" datetime-picker="{{dateformat}}" ng-model="vm.tratamiento.createdAt" is-open="vm.datePickerOpenStatus.createdAt"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdAt')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="jhipsterApp.tratamiento.updatedAt" for="field_updatedAt">Updated At</label>
-                <div class="input-group">
-                    <input id="field_updatedAt" type="text" class="form-control" name="updatedAt" datetime-picker="{{dateformat}}" ng-model="vm.tratamiento.updatedAt" is-open="vm.datePickerOpenStatus.updatedAt"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedAt')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="jhipsterApp.tratamiento.createdAt" for="field_createdAt">Created At</label>-->
+                <!--<div class="input-group">-->
+                    <!--<input id="field_createdAt" type="text" class="form-control" name="createdAt" datetime-picker="{{dateformat}}" ng-model="vm.tratamiento.createdAt" is-open="vm.datePickerOpenStatus.createdAt"-->
+                    <!--/>-->
+                    <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdAt')"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="jhipsterApp.tratamiento.updatedAt" for="field_updatedAt">Updated At</label>-->
+                <!--<div class="input-group">-->
+                    <!--<input id="field_updatedAt" type="text" class="form-control" name="updatedAt" datetime-picker="{{dateformat}}" ng-model="vm.tratamiento.updatedAt" is-open="vm.datePickerOpenStatus.updatedAt"-->
+                    <!--/>-->
+                    <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedAt')"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+        <!--</div>-->
 
     </div>
     <div class="modal-footer">
