@@ -1,0 +1,72 @@
+<div>
+    <h2 data-translate="jhipsterApp.insercion.home.title">Insercions</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="insercion-mis-tareas.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="jhipsterApp.insercion.home.createLabel">
+                        Create new Insercion
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="idTarea"><span data-translate="jhipsterApp.insercion.idTarea">Id Tarea</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tipo"><span data-translate="jhipsterApp.insercion.tipo">Tipo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fechaFichero"><span data-translate="jhipsterApp.insercion.fechaFichero">Fecha Fichero</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pathFicheroCSV"><span data-translate="jhipsterApp.insercion.pathFicheroCSV">Path Fichero CSV</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estado"><span data-translate="jhipsterApp.insercion.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdAt"><span data-translate="jhipsterApp.insercion.createdAt">Created At</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedAt"><span data-translate="jhipsterApp.insercion.updatedAt">Updated At</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="insercion in vm.insercions track by insercion.id">
+                    <td><a ui-sref="insercion-mis-tareas-detail({id:insercion.id})">{{insercion.id}}</a></td>
+                    <td>{{insercion.idTarea}}</td>
+                    <td data-translate="{{'jhipsterApp.Tipo.' + insercion.tipo}}">{{insercion.tipo}}</td>
+                    <td>{{insercion.fechaFichero}}</td>
+                    <td>{{insercion.pathFicheroCSV}}</td>
+                    <td data-translate="{{'jhipsterApp.Estado.' + insercion.estado}}">{{insercion.estado}}</td>
+                    <td>{{insercion.createdAt | date:'medium'}}</td>
+                    <td>{{insercion.updatedAt | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="insercion-mis-tareas-detail({id:insercion.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="insercion-mis-tareas.edit({id:insercion.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="insercion-mis-tareas.delete({id:insercion.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

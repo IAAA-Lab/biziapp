@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="jhipsterApp.insercion.detail.title">Insercion</span> {{vm.insercion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipsterApp.insercion.idTarea">Id Tarea</span></dt>
+        <dd>
+            <span>{{vm.insercion.idTarea}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.tipo">Tipo</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Tipo.' + vm.insercion.tipo}}">{{vm.insercion.tipo}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.fechaFichero">Fecha Fichero</span></dt>
+        <dd>
+            <span>{{vm.insercion.fechaFichero}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.pathFicheroCSV">Path Fichero CSV</span></dt>
+        <dd>
+            <span>{{vm.insercion.pathFicheroCSV}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.estado">Estado</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Estado.' + vm.insercion.estado}}">{{vm.insercion.estado}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.createdAt">Created At</span></dt>
+        <dd>
+            <span>{{vm.insercion.createdAt | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.insercion.updatedAt">Updated At</span></dt>
+        <dd>
+            <span>{{vm.insercion.updatedAt | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="insercion-mis-tareas-detail.edit({id:vm.insercion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

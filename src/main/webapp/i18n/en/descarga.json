@@ -1,0 +1,27 @@
+{
+    "jhipsterApp": {
+        "descarga" : {
+            "home": {
+                "title": "Descargas",
+                "createLabel": "Create a new Descarga",
+                "createOrEditLabel": "Create or edit a Descarga"
+            },
+            "created": "A new Descarga is created with identifier {{ param }}",
+            "updated": "A Descarga is updated with identifier {{ param }}",
+            "deleted": "A Descarga is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Descarga {{ id }}?"
+            },
+            "detail": {
+                "title": "Descarga"
+            },
+            "tipo": "Tipo",
+            "fechaFichero": "Fecha Fichero",
+            "categoria": "Categoria",
+            "subcategoria": "Subcategoria",
+            "estado": "Estado",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At"
+        }
+    }
+}

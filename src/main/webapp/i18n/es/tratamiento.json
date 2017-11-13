@@ -1,0 +1,27 @@
+{
+    "jhipsterApp": {
+        "tratamiento" : {
+            "home": {
+                "title": "Tratamientos",
+                "createLabel": "Crear nuevo Tratamiento",
+                "createOrEditLabel": "Crear o editar Tratamiento"
+            },
+            "created": "Un nuevo Tratamiento ha sido creado con el identificador {{ param }}",
+            "updated": "Un Tratamiento ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Tratamiento ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Tratamiento {{ id }}?"
+            },
+            "detail": {
+                "title": "Tratamiento"
+            },
+            "idTarea": "Id Tarea",
+            "tipo": "Tipo",
+            "fechaFichero": "Fecha Fichero",
+            "pathFicheroXLS": "Path Fichero XLS",
+            "estado": "Estado",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At"
+        }
+    }
+}

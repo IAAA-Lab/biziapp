@@ -1,0 +1,72 @@
+<div>
+    <h2 data-translate="jhipsterApp.descarga.home.title">Descargas</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="descarga-mis-tareas.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="jhipsterApp.descarga.home.createLabel">
+                        Create new Descarga
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tipo"><span data-translate="jhipsterApp.descarga.tipo">Tipo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fechaFichero"><span data-translate="jhipsterApp.descarga.fechaFichero">Fecha Fichero</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoria"><span data-translate="jhipsterApp.descarga.categoria">Categoria</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="subcategoria"><span data-translate="jhipsterApp.descarga.subcategoria">Subcategoria</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estado"><span data-translate="jhipsterApp.descarga.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdAt"><span data-translate="jhipsterApp.descarga.createdAt">Created At</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedAt"><span data-translate="jhipsterApp.descarga.updatedAt">Updated At</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="descarga in vm.descargas track by descarga.id">
+                    <td><a ui-sref="descarga-mis-tareas-detail({id:descarga.id})">{{descarga.id}}</a></td>
+                    <td data-translate="{{'jhipsterApp.Tipo.' + descarga.tipo}}">{{descarga.tipo}}</td>
+                    <td>{{descarga.fechaFichero}}</td>
+                    <td>{{descarga.categoria}}</td>
+                    <td>{{descarga.subcategoria}}</td>
+                    <td data-translate="{{'jhipsterApp.Estado.' + descarga.estado}}">{{descarga.estado}}</td>
+                    <td>{{descarga.createdAt | date:'medium'}}</td>
+                    <td>{{descarga.updatedAt | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="descarga-mis-tareas-detail({id:descarga.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="descarga-mis-tareas.edit({id:descarga.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="descarga-mis-tareas.delete({id:descarga.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

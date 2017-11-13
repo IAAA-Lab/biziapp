@@ -1,0 +1,11 @@
+{
+    "jhipsterApp": {
+        "Estado" : {
+            "null": "",
+            "WAITING": "WAITING",
+            "PROCESING": "PROCESING",
+            "FINISHED": "FINISHED",
+            "ERROR": "ERROR"
+        }
+    }
+}

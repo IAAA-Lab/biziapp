@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="jhipsterApp.descarga.detail.title">Descarga</span> {{vm.descarga.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipsterApp.descarga.tipo">Tipo</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Tipo.' + vm.descarga.tipo}}">{{vm.descarga.tipo}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.fechaFichero">Fecha Fichero</span></dt>
+        <dd>
+            <span>{{vm.descarga.fechaFichero}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.categoria">Categoria</span></dt>
+        <dd>
+            <span>{{vm.descarga.categoria}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.subcategoria">Subcategoria</span></dt>
+        <dd>
+            <span>{{vm.descarga.subcategoria}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.estado">Estado</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Estado.' + vm.descarga.estado}}">{{vm.descarga.estado}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.createdAt">Created At</span></dt>
+        <dd>
+            <span>{{vm.descarga.createdAt | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.descarga.updatedAt">Updated At</span></dt>
+        <dd>
+            <span>{{vm.descarga.updatedAt | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="descarga-mis-tareas-detail.edit({id:vm.descarga.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

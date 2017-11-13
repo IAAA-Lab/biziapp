@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="jhipsterApp.tratamiento.detail.title">Tratamiento</span> {{vm.tratamiento.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipsterApp.tratamiento.idTarea">Id Tarea</span></dt>
+        <dd>
+            <span>{{vm.tratamiento.idTarea}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.tipo">Tipo</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Tipo.' + vm.tratamiento.tipo}}">{{vm.tratamiento.tipo}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.fechaFichero">Fecha Fichero</span></dt>
+        <dd>
+            <span>{{vm.tratamiento.fechaFichero}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.pathFicheroXLS">Path Fichero XLS</span></dt>
+        <dd>
+            <span>{{vm.tratamiento.pathFicheroXLS}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.estado">Estado</span></dt>
+        <dd>
+            <span data-translate="{{'jhipsterApp.Estado.' + vm.tratamiento.estado}}">{{vm.tratamiento.estado}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.createdAt">Created At</span></dt>
+        <dd>
+            <span>{{vm.tratamiento.createdAt | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.tratamiento.updatedAt">Updated At</span></dt>
+        <dd>
+            <span>{{vm.tratamiento.updatedAt | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="tratamiento-mis-tareas-detail.edit({id:vm.tratamiento.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,104 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myInsercionLabel" data-translate="jhipsterApp.insercion.home.createOrEditLabel">Create or edit a Insercion</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.insercion.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.insercion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.idTarea" for="field_idTarea">Id Tarea</label>
+            <input type="number" class="form-control" name="idTarea" id="field_idTarea"
+                    ng-model="vm.insercion.idTarea"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.tipo" for="field_tipo">Tipo</label>
+            <select class="form-control" name="tipo" ng-model="vm.insercion.tipo" id="field_tipo" required>
+                <option value="USOESTACIONES" data-translate="jhipsterApp.Tipo.USOESTACIONES">USOESTACIONES</option>
+                <option value="MATRIZMOVIMIENTOS" data-translate="jhipsterApp.Tipo.MATRIZMOVIMIENTOS">MATRIZMOVIMIENTOS</option>
+            </select>
+            <div ng-show="editForm.tipo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.tipo.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.fechaFichero" for="field_fechaFichero">Fecha Fichero</label>
+            <input type="text" class="form-control" name="fechaFichero" id="field_fechaFichero"
+                    ng-model="vm.insercion.fechaFichero"
+                    required/>
+            <div ng-show="editForm.fechaFichero.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.fechaFichero.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.pathFicheroCSV" for="field_pathFicheroCSV">Path Fichero CSV</label>
+            <input type="text" class="form-control" name="pathFicheroCSV" id="field_pathFicheroCSV"
+                    ng-model="vm.insercion.pathFicheroCSV"
+                    required/>
+            <div ng-show="editForm.pathFicheroCSV.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.pathFicheroCSV.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.estado" for="field_estado">Estado</label>
+            <select class="form-control" name="estado" ng-model="vm.insercion.estado" id="field_estado" required>
+                <option value="WAITING" data-translate="jhipsterApp.Estado.WAITING">WAITING</option>
+                <option value="PROCESING" data-translate="jhipsterApp.Estado.PROCESING">PROCESING</option>
+                <option value="FINISHED" data-translate="jhipsterApp.Estado.FINISHED">FINISHED</option>
+                <option value="ERROR" data-translate="jhipsterApp.Estado.ERROR">ERROR</option>
+            </select>
+            <div ng-show="editForm.estado.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.estado.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.createdAt" for="field_createdAt">Created At</label>
+                <div class="input-group">
+                    <input id="field_createdAt" type="text" class="form-control" name="createdAt" datetime-picker="{{dateformat}}" ng-model="vm.insercion.createdAt" is-open="vm.datePickerOpenStatus.createdAt"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdAt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipsterApp.insercion.updatedAt" for="field_updatedAt">Updated At</label>
+                <div class="input-group">
+                    <input id="field_updatedAt" type="text" class="form-control" name="updatedAt" datetime-picker="{{dateformat}}" ng-model="vm.insercion.updatedAt" is-open="vm.datePickerOpenStatus.updatedAt"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedAt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

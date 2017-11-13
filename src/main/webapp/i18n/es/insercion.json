@@ -1,0 +1,27 @@
+{
+    "jhipsterApp": {
+        "insercion" : {
+            "home": {
+                "title": "Insercions",
+                "createLabel": "Crear nuevo Insercion",
+                "createOrEditLabel": "Crear o editar Insercion"
+            },
+            "created": "Un nuevo Insercion ha sido creado con el identificador {{ param }}",
+            "updated": "Un Insercion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Insercion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Insercion {{ id }}?"
+            },
+            "detail": {
+                "title": "Insercion"
+            },
+            "idTarea": "Id Tarea",
+            "tipo": "Tipo",
+            "fechaFichero": "Fecha Fichero",
+            "pathFicheroCSV": "Path Fichero CSV",
+            "estado": "Estado",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At"
+        }
+    }
+}

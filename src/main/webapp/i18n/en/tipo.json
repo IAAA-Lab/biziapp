@@ -1,0 +1,9 @@
+{
+    "jhipsterApp": {
+        "Tipo" : {
+            "null": "",
+            "USOESTACIONES": "USOESTACIONES",
+            "MATRIZMOVIMIENTOS": "MATRIZMOVIMIENTOS"
+        }
+    }
+}
