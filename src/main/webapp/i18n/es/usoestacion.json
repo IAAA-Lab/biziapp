@@ -4,6 +4,8 @@
             "home": {
                 "title": "Usoestaciones",
                 "createLabel": "Crear nuevo Usoestacion",
+                "downloadAll": "Descargar todo el contenido",
+                "downloadPage": "Descargar página",
                 "createOrEditLabel": "Crear o editar Usoestacion"
             },
             "created": "Un nuevo Usoestacion ha sido creado con el identificador {{ param }}",
