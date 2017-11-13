@@ -1,0 +1,45 @@
+Entity Descarga {
+	tipo Tipo required,
+	fechaFichero String required,
+	categoria String required,
+	subcategoria String required,
+	estado Estado required,
+	createdAt Instant,
+	updatedAt Instant
+}
+
+Entity Tratamiento {
+	idTarea Long,
+	tipo Tipo required,
+	fechaFichero String required,
+	pathFicheroXLS String required,
+	estado Estado required,
+	createdAt Instant,
+	updatedAt Instant
+}
+
+Entity Insercion {
+	idTarea Long,
+	tipo Tipo required,
+	fechaFichero String required,
+	pathFicheroCSV String required,
+	estado Estado required,
+	createdAt Instant,
+	updatedAt Instant
+}
+
+enum Estado {
+	WAITING, PROCESING, FINISHED, ERROR
+}
+
+enum Tipo {
+	USOESTACIONES, MATRIZMOVIMIENTOS
+}
+
+paginate Descarga with pagination
+paginate Tratamiento with pagination
+paginate Insercion with pagination
+
+dto * with mapstruct
+
+angularSuffix * with misTareas

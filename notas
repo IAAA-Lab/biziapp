@@ -529,3 +529,8 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 15:00 - VUELTA
     Memoria
 16:30 - FIN
+
+13/10
+11:00 - INICIO
+    Crear tablas de tareas en JHipster
+    Modificar procesos tarea en JHipster para adaptarlos a las nuevas tablas
