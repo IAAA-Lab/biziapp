@@ -1,4 +1,4 @@
-Entity Descarga {
+entity Descarga {
 	tipo Tipo required,
 	fechaFichero String required,
 	categoria String required,
@@ -8,8 +8,8 @@ Entity Descarga {
 	updatedAt Instant
 }
 
-Entity Tratamiento {
-	idTarea Long,
+entity Tratamiento {
+	idTarea Long required,
 	tipo Tipo required,
 	fechaFichero String required,
 	pathFicheroXLS String required,
@@ -18,8 +18,8 @@ Entity Tratamiento {
 	updatedAt Instant
 }
 
-Entity Insercion {
-	idTarea Long,
+entity Insercion {
+	idTarea Long required,
 	tipo Tipo required,
 	fechaFichero String required,
 	pathFicheroCSV String required,

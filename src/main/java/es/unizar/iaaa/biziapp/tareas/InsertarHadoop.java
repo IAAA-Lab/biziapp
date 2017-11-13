@@ -1,5 +1,6 @@
 package es.unizar.iaaa.biziapp.tareas;
 
+import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,16 +60,18 @@ public class InsertarHadoop {
         try (Connection con = DriverManager.getConnection(jdbcMysql, userMysql, passwordMysql)) {
             Statement stmtSelect = con.createStatement();
             Statement stmtUpdate = con.createStatement();
+            String nombreTablaInsercion = "insercion";
 
             // Obtener las ultimas X fechas introducidas en tareas.descargas
-            String querySelect = "SELECT * FROM insertarHadoop WHERE estado=1 ORDER BY id DESC LIMIT 1";
+            String querySelect = "SELECT * FROM " + nombreTablaInsercion + " WHERE estado='" + Estado.WAITING + "' ORDER BY id DESC LIMIT 1";
             ResultSet rs = stmtSelect.executeQuery(querySelect);
 
             // Marcarlas como en proceso en tareas.descargas
             while (rs.next()) {
                 // estado=2 => 'PROCESING"
-                stmtUpdate.execute("UPDATE insertarHadoop SET estado=2 where id=" + rs.getInt("id"));
-                String pathFicheroCSV = rs.getString("pathFicheroCSV");
+                stmtUpdate.execute("UPDATE " + nombreTablaInsercion + " SET estado='" + Estado.PROCESING + "' where id=" + rs.getInt("id"));
+                String pathFicheroCSV = rs.getString("path_fichero_csv");
+                int idTarea = rs.getInt("id_tarea");
 
                 int existe = herramienta.comprobarFichero(pathFicheroCSV);
                 // Si el fichero CSV existe
@@ -78,18 +81,19 @@ public class InsertarHadoop {
                     // Si se inserta correctamente
                     if (result == 1) {
                         // estado = 3 => 'FINISHED'
-                        stmtUpdate.execute("UPDATE insertarHadoop SET estado=3 where id=" + rs.getInt("id"));
+                        stmtUpdate.execute("UPDATE " + nombreTablaInsercion + " SET estado='" + Estado.FINISHED + "' where id=" + rs.getInt("id"));
                         log.info("Fichero insertado en Hadoop: {}", pathFicheroCSV);
 
                     } else {
                         // estado = 1 => 'WAITING'
-                        stmtUpdate.execute("UPDATE insertarHadoop SET estado=1 where id=" + rs.getInt("id"));
+                        stmtUpdate.execute("UPDATE " + nombreTablaInsercion + " SET estado='" + Estado.WAITING + "' where id=" + rs.getInt("id"));
                     }
                 } else { // Si el fichero CSV no existe
-                    // Marcar como error la tupla de la tablas.insertarHadoop estado = 4 => 'ERROR'
-                    stmtUpdate.execute("UPDATE insertarHadoop SET estado=4 where id=" + rs.getInt("id"));
-                    // Modificar el estado de la tupla en generarCSV, para que se vuelva a generar el fichero CSV
-                    stmtUpdate.execute("UPDATE generarCSV SET estado=1 where id=" + rs.getInt("id"));
+                    // Marcar como error la tupla de la insercion estado = 4 => 'ERROR'
+                    stmtUpdate.execute("UPDATE " + nombreTablaInsercion + " SET estado='" + Estado.ERROR + "' where id=" + rs.getInt("id"));
+                    // Modificar el estado de la tupla en tratamiento, para que se vuelva a generar el fichero CSV
+                    String nombreTablaTratamiento = "tratamiento";
+                    stmtUpdate.execute("UPDATE " + nombreTablaTratamiento + " SET estado='" + Estado.WAITING + "' where id_tarea=" + idTarea);
                 }
 
             }

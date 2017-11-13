@@ -1,4 +1,5 @@
 package es.unizar.iaaa.biziapp.tareas;
+import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,51 +46,50 @@ public class DescargarFichero {
             Statement stmtSelectDescargas = con.createStatement();
             Statement stmtUpdate = con.createStatement();
             Statement stmtInsert = con.createStatement();
-            Statement stmtSelectGenerarCSV = con.createStatement();
+            Statement stmtSelectTratamiento = con.createStatement();
 
+            String nombreTablaDescarga = "descarga";
             // Obtener las ultimas X fechas introducidas en tareas.descargas
-            String querySelect = "SELECT * FROM descargas WHERE estado=1 ORDER BY id DESC LIMIT 5";
+            String querySelect = "SELECT * FROM " + nombreTablaDescarga + " WHERE estado='" + Estado.WAITING +"' ORDER BY id DESC LIMIT 5";
             ResultSet rs = stmtSelectDescargas.executeQuery(querySelect);
 
             // Marcarlas como en proceso en tareas.descargas
             while (rs.next()) {
                 // estado = 2 => 'PROCESING'
-                stmtUpdate.execute("UPDATE descargas SET estado=2 where id=" + rs.getInt("id"));
+                stmtUpdate.execute("UPDATE " + nombreTablaDescarga + " SET estado='" + Estado.PROCESING + "' where id=" + rs.getInt("id"));
                 // Lanzar proceso de descarga
-                int result = descargar(rs.getInt("id"), rs.getString("tipo"), rs.getString("fechaFichero"),
+                int result = descargar(rs.getInt("id"), rs.getString("tipo"), rs.getString("fecha_fichero"),
                     rs.getString("categoria"), rs.getString("subcategoria"));
                 if(result==1) {
                     // estado = 3 => 'FINISHED'
-                    stmtUpdate.execute("UPDATE descargas SET estado=3 where id=" + rs.getInt("id"));
+                    stmtUpdate.execute("UPDATE " + nombreTablaDescarga + " SET estado='" + Estado.FINISHED + "' where id=" + rs.getInt("id"));
 
-                    // Variables para insertar valores en tabla generarCSV
-                    String nombreTabla = "generarCSV";
-                    int id = rs.getInt("id");
+                    // Variables para insertar valores en tabla tratamiento
+                    String nombreTablaTratamiento = "tratamiento";
+                    int idTarea = rs.getInt("id");
                     String tipo = "'" + rs.getString("tipo") + "'";
-                    String fechaFichero = "'" + rs.getString("fechaFichero") + "'";
+                    String fechaFichero = "'" + rs.getString("fecha_fichero") + "'";
                     String path = "'" + pathFichero +"'";
 
-                    // Comprobar si ya existe la entrada en la tabla generarCSV
-                    querySelect = "SELECT * FROM generarCSV where id=" + id;
-                    ResultSet rs2 = stmtSelectGenerarCSV.executeQuery(querySelect);
-                    // En caso de que no devuelva nada
+                    // Comprobar si ya existe la entrada en la tabla Tratamiento
+                    querySelect = "SELECT * FROM " + nombreTablaTratamiento + " where id=" + idTarea;
+                    ResultSet rs2 = stmtSelectTratamiento.executeQuery(querySelect);
+                    // Si devuelve algo significa que la tupla ya existe y hay que modificarla en vez de crearla
                     if(rs2.next()) {
                         // Modificar el valor para ponerlo en espera de procesamiento
-                        stmtUpdate.execute("UPDATE " + nombreTabla + " SET estado=1 where id=" + rs.getInt("id"));
+                        stmtUpdate.execute("UPDATE " + nombreTablaTratamiento + " SET estado='" + Estado.WAITING + "' where id_tarea=" + idTarea);
                     } else {
                         // Realizar insercion de nueva tupla
-                        String insert = "INSERT INTO " + nombreTabla +
-                            " (id, tipo, fechaFichero, pathFicheroXLS) " +
-                            "VALUES (" + id + ", " + tipo + "," + fechaFichero + "," + path + ");";
+                        String insert = "INSERT INTO " + nombreTablaTratamiento +
+                            " (id_tarea, tipo, fecha_fichero, path_fichero_xls, estado) " +
+                            "VALUES (" + idTarea + ", " + tipo + "," + fechaFichero + "," + path + ",'" + Estado.WAITING +"');";
                         stmtInsert.execute(insert);
-                        log.info("Entrada en tarea.generarCSV. Fecha fichero: {}", fechaFichero);
+                        log.info("Entrada en tratamiento. Fecha fichero: {}", fechaFichero);
                     }
-
-
-
+                // En caso de que el proceso no se complete correctamente
                 }else if(result==-1) {
                     // estado = 1 => 'WAITING'
-                    stmtUpdate.execute("UPDATE descargas SET estado=1 where id=" + rs.getInt("id"));
+                    stmtUpdate.execute("UPDATE " + nombreTablaDescarga + " SET estado='" + Estado.WAITING + "' where id=" + rs.getInt("id"));
                 }
             }
 

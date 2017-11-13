@@ -1,5 +1,7 @@
 package es.unizar.iaaa.biziapp.tareas;
 
+import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
+import es.unizar.iaaa.biziapp.domain.enumeration.Tipo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,15 +37,14 @@ public class GeneradorFechas {
         String fecha = date.format(formatter);
 
         // Generar entrada para la base de datos
-        int tipo = 1; //1 = USOESTACION
         String categoria = "'Uso de las estaciones'";
         String subcategoria = "'3.1-Usos de las estaciones'";
-        String nombreTabla = "descargas";
+        String nombreTabla = "descarga";
         String sqlInsert = "INSERT INTO " + nombreTabla +
-            " (tipo, fechaFichero, categoria, subcategoria) " +
-            "VALUES (" + tipo + ",'" + fecha + "'," + categoria +
-            "," + subcategoria + ");";
-
+            " (tipo, fecha_fichero, categoria, subcategoria, estado) " +
+            "VALUES ('" + Tipo.USOESTACIONES + "','" + fecha + "'," + categoria +
+            "," + subcategoria + ",'" + Estado.WAITING + "');";
+        System.out.println(sqlInsert);
         //Conectar a la base de datos
 
         try {

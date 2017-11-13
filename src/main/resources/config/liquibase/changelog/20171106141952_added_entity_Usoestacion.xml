@@ -79,7 +79,7 @@
             </column>
 
             <column name="hashcode" type="varchar(255)">
-                <constraints nullable="true" unique="true" />
+                <constraints nullable="true" unique="true"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

@@ -41,6 +41,9 @@ public class CacheConfiguration {
             cm.createCache(es.unizar.iaaa.biziapp.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(es.unizar.iaaa.biziapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(es.unizar.iaaa.biziapp.domain.Usoestacion.class.getName(), jcacheConfiguration);
+            cm.createCache(es.unizar.iaaa.biziapp.domain.Descarga.class.getName(), jcacheConfiguration);
+            cm.createCache(es.unizar.iaaa.biziapp.domain.Tratamiento.class.getName(), jcacheConfiguration);
+            cm.createCache(es.unizar.iaaa.biziapp.domain.Insercion.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

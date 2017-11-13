@@ -8,6 +8,9 @@
             "entities": {
                 "main": "Entidades",
                 "usoestacion": "Usoestacion",
+                "descargaMisTareas": "Descarga",
+                "tratamientoMisTareas": "Tratamiento",
+                "insercionMisTareas": "Insercion",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

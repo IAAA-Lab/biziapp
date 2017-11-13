@@ -3,7 +3,6 @@ package es.unizar.iaaa.biziapp.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.jdo.annotations.Unique;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -65,7 +64,6 @@ public class Usoestacion implements Serializable {
     @Column(name = "fichero_xls")
     private String ficheroXLS;
 
-    @Unique
     @Column(name = "hashcode")
     private String hashcode;
 

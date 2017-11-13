@@ -42,6 +42,7 @@ public class Gestor {
 
     // Lanzar descarga de ficheros
 //    @Scheduled(cron = "0 5 17 * * *")
+//    @Scheduled(initialDelay = 2000, fixedRate = 5000000)
     public void descargarFichero(){
         log.info("Lanzando descarga de fichero");
         DescargarFichero df = new DescargarFichero();
