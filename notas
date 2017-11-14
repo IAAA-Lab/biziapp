@@ -545,7 +545,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         Quitar opción de eliminar tareas
     Hacer que las tareas solo las pueda ver el administrador:
         - Modificar state.js de cada entidad para indicar que es ROLE_ADMIN la autorizacion
-        - Modificar el nadvar añadiendo en cada etiqueta <li> el atributo has-authority="ROLE_ADMIN"
+        - Modificar el navbar añadiendo en cada etiqueta <li> el atributo has-authority="ROLE_ADMIN"
         - Modificar las clases resources de cada entidad para indicar que solo pueden realizarse las cosas con rol admin @Secured(AuthoritiesConstants.ADMIN)
     Añadir la descarga de datos en Uso Estaciones.
 16:00 - DESCANSO
@@ -553,7 +553,13 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     Reunión Pellicer para hablar del estado del proyecto y la memoria
 20:30
 
-
+14/11
+11:00 - INICIO
+    Reestructuración memoria
+13:00 - COMER
+14:30 - VUELTA
+    Memoria
+16:00 - DESCANSO
 
 
     PENDIENTE: Generar proceso de creación de historico
