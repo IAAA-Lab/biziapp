@@ -559,7 +559,19 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 13:00 - COMER
 14:30 - VUELTA
     Memoria
-16:00 - DESCANSO
+16:00 - FIN
+
+15/11
+12:00 - INICIO
+    Memoria:
+        Pasar todos los modelos BPMN en PNG a PDF
+13:30 - COMER
+    Memoria:
+        Crear modelo BPMN de visión global
+        Anexo BPMN
+        Completar Anexo sobre el fichero de configuración myConfig.json
+18:00 - PARADA
+
 
 
     PENDIENTE: Generar proceso de creación de historico
