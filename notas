@@ -570,10 +570,9 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         Crear modelo BPMN de visión global
         Anexo BPMN
         Completar Anexo sobre el fichero de configuración myConfig.json
-18:00 - PARADA
+18:00 - FIN
 
 16/11
-
 11:00 - INICIO
     Memoria:
         Implementación - Persistencia
@@ -590,7 +589,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
             Descarga de ficheros
             Tratamiento
             Insercion
-20:00
+20:00 - FIN
 
 
 
