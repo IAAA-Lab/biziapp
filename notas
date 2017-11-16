@@ -572,6 +572,29 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         Completar Anexo sobre el fichero de configuración myConfig.json
 18:00 - PARADA
 
+16/11
+
+11:00 - INICIO
+    Memoria:
+        Implementación - Persistencia
+        Diagrama relacional de BD en MySQL
+13:30 - COMER
+17:00 - VUELTA
+    Memoria:
+        Implementación - Procesos
+            Gestor
+            Generador de fechas
+            Descarga de ficheros
+        Hechos diagramas de secuencia:
+            Generador de fechas
+            Descarga de ficheros
+            Tratamiento
+            Insercion
+20:00
+
+
+
+
 
 
     PENDIENTE: Generar proceso de creación de historico
