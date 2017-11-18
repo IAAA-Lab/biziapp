@@ -594,6 +594,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 17/11
 10:30 - INICIO
     Diagrama de componentes (Tutoria con Ruben Bejar)
+    Memoria - Integración de los diagramas realizados el dia 16/11
 14:30 - FIN
 
 18/11
