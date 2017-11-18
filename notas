@@ -591,9 +591,13 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
             Insercion
 20:00 - FIN
 
+17/11
+10:30 - INICIO
+    Diagrama de componentes (Tutoria con Ruben Bejar)
+14:30 - FIN
 
-
-
+18/11
+12:00 - INICIO
 
 
     PENDIENTE: Generar proceso de creación de historico
