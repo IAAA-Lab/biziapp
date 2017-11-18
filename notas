@@ -599,6 +599,19 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 
 18/11
 12:00 - INICIO
+    Diagrama vision global del sistema
+    Memoria:
+        Añadido diagrama de vision global del sistema
+        Añadido fiagrama de ciclo de vida del proyecto (Planificacion)
+13:30 - COMER
+15:00 - VUELTA
+    Memoria:
+        Completar planificacion
+        Realizado diagrama de gantt
+        Esfuerzos (falta completar)
+        Anexo de ejemplos de ficheros XLS y CSV
+        Anexo de API REST
+20:00 - FIN
 
 
     PENDIENTE: Generar proceso de creación de historico
