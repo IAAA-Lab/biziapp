@@ -30,6 +30,13 @@ public class Gestor {
 ////        }
 //
 //    }
+//    @Scheduled(initialDelay = 2000, fixedRate = 500000)
+    public void generarHistorico(){
+        log.info("Lanzando generador de historico");
+        GeneradorHistorico gh = new GeneradorHistorico();
+        gh.generarHistoricoUsoEstacion();
+        log.info("Finalizado generador de historico");
+    }
 
     // Lanzar Generador de fechas
 //    @Scheduled(cron = "0 0 17 * * *")
@@ -52,6 +59,7 @@ public class Gestor {
 
     // Lanzar conversor de ficheros
 //    @Scheduled(cron = "0 10 17 * * *")
+//    @Scheduled(initialDelay = 10000, fixedRate = 5000000)
     public void tratamientoFichero(){
         log.info("Lanzando tratamiento de fichero");
         TratamientoFicheros tf = new TratamientoFicheros();

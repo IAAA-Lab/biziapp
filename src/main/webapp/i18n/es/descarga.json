@@ -2,7 +2,7 @@
     "jhipsterApp": {
         "descarga" : {
             "home": {
-                "title": "Descargas",
+                "title": "Gestión de Descargas",
                 "createLabel": "Crear nuevo Descarga",
                 "createOrEditLabel": "Crear o editar Descarga"
             },

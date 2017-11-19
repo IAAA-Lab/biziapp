@@ -2,7 +2,7 @@
     "jhipsterApp": {
         "tratamiento" : {
             "home": {
-                "title": "Tratamientos",
+                "title": "Gestión de Tratamientos",
                 "createLabel": "Crear nuevo Tratamiento",
                 "createOrEditLabel": "Crear o editar Tratamiento"
             },

@@ -2,7 +2,7 @@
     "jhipsterApp": {
         "insercion" : {
             "home": {
-                "title": "Inserciones",
+                "title": "Gestión de Inserciones",
                 "createLabel": "Create a new Insercion",
                 "createOrEditLabel": "Create or edit a Insercion"
             },
