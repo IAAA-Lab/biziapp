@@ -624,7 +624,15 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     Memoria:
         Implementación - Explotación (Añadidas imagenes)
         Revisión completa de memoria, recolocación de imagenes, etc...
-16:30 - PARADA
+16:30 - FIN
+
+20/11
+11:00 - INICIO
+    Realizar diagrama de gantt con mermaidjs
+12:00 - PARADA
+15:00 - VUELTA
+    Reunión Pellicer sobre la memoria
+19:00 - FIN
 
 
     PENDIENTE: Generar proceso de limpieza de procesos colgados (poner estados PROCESING en WAITING)
