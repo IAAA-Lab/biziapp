@@ -632,7 +632,9 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 12:00 - PARADA
 15:00 - VUELTA
     Reunión Pellicer sobre la memoria
-19:00 - FIN
-
+19:00 - A CASA
+20:00 - VUELTA
+    Correcciones de la memoria
+01:30 - FIN
 
     PENDIENTE: Generar proceso de limpieza de procesos colgados (poner estados PROCESING en WAITING)
