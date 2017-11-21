@@ -641,5 +641,7 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
 11:30 - INICIO
     Correcciones de la memoria
     Añadidas nuevas secciones de memoria
+    Modificados los diagramas
+19:00 - FIN
 
     PENDIENTE: Generar proceso de limpieza de procesos colgados (poner estados PROCESING en WAITING)
