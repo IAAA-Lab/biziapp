@@ -651,4 +651,3 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
         Conclusion
         Anexo API Rest
 14:00 - COMER
-
