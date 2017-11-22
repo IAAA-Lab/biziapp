@@ -643,3 +643,12 @@ sqoop import --connect jdbc:mysql://localhost:3306/prueba --username root --pass
     Añadidas nuevas secciones de memoria
 
     PENDIENTE: Generar proceso de limpieza de procesos colgados (poner estados PROCESING en WAITING)
+
+22/11
+11:00 - INICIO
+    Rellenado el documento de declaración de autoria y originalidad
+    Memoria:
+        Conclusion
+        Anexo API Rest
+14:00 - COMER
+
