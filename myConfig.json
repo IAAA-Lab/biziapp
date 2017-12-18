@@ -23,7 +23,7 @@
 	"connectionMysqlDB":{
 		"driverName" : "com.mysql.jdbc.Driver",
 		"user" : "root",
-		"password" : "dani.1989",
+		"password" : "",
 		"jdbc" : "jdbc:mysql://",
 		"host" : "localhost",
 		"port" : "3306",
