@@ -18,19 +18,8 @@ public class Gestor {
     private AtomicBoolean lock = new AtomicBoolean();
 //    cron = "segundos minutos horas diaDelMes mes diaDeLaSemana"
 
-//    public void prueba(){
-//        log.info("Me intento Lanzar {}", lock);
-////        if(lock.compareAndSet(false,true)){
-//            log.info("Me lanzo {}", lock);
-//            Pruebas p = new Pruebas();
-//            p.main();
-//            log.info("Acabo {}", lock);
-////            lock.set(false);
-////            log.info("Desbloqueado {}", lock);
-////        }
-//
-//    }
 //    @Scheduled(initialDelay = 2000, fixedRate = 500000)
+    // Lanzar solo una vez al iniciar
     public void generarHistorico(){
         log.info("Lanzando generador de historico");
         GeneradorHistorico gh = new GeneradorHistorico();
@@ -38,8 +27,8 @@ public class Gestor {
         log.info("Finalizado generador de historico");
     }
 
-    // Lanzar Generador de fechas
-//    @Scheduled(cron = "0 0 17 * * *")
+    // Lanzar Generador de fechas (Lanzado a las 00:30 todos los dias)
+//    @Scheduled(cron = "0 30 0 * * *")
     public void generarFecha(){
         log.info("Lanzando generador de fecha");
         GeneradorFechas gf = new GeneradorFechas();
@@ -47,8 +36,8 @@ public class Gestor {
         log.info("Finalizado generador de fecha");
     }
 
-    // Lanzar descarga de ficheros
-//    @Scheduled(cron = "0 5 17 * * *")
+    // Lanzar descarga de ficheros (Lanzado cada 30 minutos)
+//    @Scheduled(cron = "0 30 * * * *")
 //    @Scheduled(initialDelay = 2000, fixedRate = 5000000)
     public void descargarFichero(){
         log.info("Lanzando descarga de fichero");
@@ -58,7 +47,7 @@ public class Gestor {
     }
 
     // Lanzar conversor de ficheros
-//    @Scheduled(cron = "0 10 17 * * *")
+//    @Scheduled(cron = "0 30 * * * *")
 //    @Scheduled(initialDelay = 10000, fixedRate = 5000000)
     public void tratamientoFichero(){
         log.info("Lanzando tratamiento de fichero");
@@ -68,11 +57,19 @@ public class Gestor {
     }
 
     // Lanzar inserción de datos a hadoop
+    //    @Scheduled(cron = "0 30 * * * *")
     public void insertarBD(){
         log.info("Lanzando insercion en hadoop");
         InsertarHadoop ih = new InsertarHadoop();
         ih.insertarHadoop();
         log.info("Finalizada insercion en hadoop");
     }
+
+//    public void supervisorTareas(){
+//        log.info("Lanzando supervisor de tareas");
+//        Supervisor su = new Supervisor();
+//
+//        log.info("Finalizada supervision de tareas");
+//    }
 
 }

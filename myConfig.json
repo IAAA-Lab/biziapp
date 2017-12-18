@@ -1,0 +1,32 @@
+{
+	"fileLocation": {
+		"chromeDriverLocation" : "/home/dani/Escritorio/TFG/herramientas/chromedriver",
+		"logsDirectory" : "/register",
+		"downloadLocation" : "/descargas",
+		"csvDirectory" : "/csvFiles",
+		"dockerSharedDirectory":"/home/dani/git/UNIZAR-TFG-BIZI/docker-hive/compartida"
+	},
+	"legacySystem": {
+		"baseURL" : "http://reportingportal-zar.clearchannel.com/",
+		"user" : "",
+		"password" : ""
+	},
+	"connectionHiveDB":{
+		"driverName" : "org.apache.hive.jdbc.HiveDriver",
+		"user" : "hive",
+		"password" : "hive",
+		"jdbc" : "jdbc:hive2://",
+		"host" : "localhost",
+		"port" : "10000",
+		"database" : "default"
+	},
+	"connectionMysqlDB":{
+		"driverName" : "com.mysql.jdbc.Driver",
+		"user" : "root",
+		"password" : "dani.1989",
+		"jdbc" : "jdbc:mysql://",
+		"host" : "localhost",
+		"port" : "3306",
+		"database" : "jhipster"
+	}
+}

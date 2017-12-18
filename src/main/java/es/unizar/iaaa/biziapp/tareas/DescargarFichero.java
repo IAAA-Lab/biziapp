@@ -14,7 +14,6 @@ import java.sql.Statement;
 /**
  * VERSION JHIPSTER
  * @author dani
- *
  */
 public class DescargarFichero {
 
