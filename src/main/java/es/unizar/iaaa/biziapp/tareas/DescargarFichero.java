@@ -2,6 +2,8 @@ package es.unizar.iaaa.biziapp.tareas;
 import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 
@@ -15,19 +17,21 @@ import java.sql.Statement;
  * VERSION JHIPSTER
  * @author dani
  */
+@Service
 public class DescargarFichero {
 
-    private static Configuracion configuracion;
-    private static String downloadPath;
-    private static String pathFichero = null;
-    private static Herramientas herramienta;
+    @Autowired
+    private Configuracion configuracion;
+
+    @Autowired
+    private UsoEstaciones usoEstaciones;
+
+
     private static final Logger log = LoggerFactory.getLogger(DescargarFichero.class);
 
-    public static void descargarFichero() {
+    public void descargarFichero() {
 
-        configuracion = new Configuracion();
-        herramienta = new Herramientas();
-        downloadPath = configuracion.getDownloadPath();
+        String downloadPath = configuracion.getDownloadPath();
         String driverNameMysql = configuracion.getDriverNameMysqlDB();
         String jdbcMysql = configuracion.getJdbcMysqlConnector();
         String[] credentialMysql = configuracion.getCredentialMysqlDB().split(":");
@@ -57,7 +61,7 @@ public class DescargarFichero {
                 // estado = 2 => 'PROCESING'
                 stmtUpdate.execute("UPDATE " + nombreTablaDescarga + " SET estado='" + Estado.PROCESING + "' where id=" + rs.getInt("id"));
                 // Lanzar proceso de descarga
-                int result = descargar(rs.getInt("id"), rs.getString("tipo"), rs.getString("fecha_fichero"),
+                int result = descargar(downloadPath, rs.getInt("id"), rs.getString("tipo"), rs.getString("fecha_fichero"),
                     rs.getString("categoria"), rs.getString("subcategoria"));
                 if(result==1) {
                     // estado = 3 => 'FINISHED'
@@ -68,7 +72,7 @@ public class DescargarFichero {
                     int idTarea = rs.getInt("id");
                     String tipo = "'" + rs.getString("tipo") + "'";
                     String fechaFichero = "'" + rs.getString("fecha_fichero") + "'";
-                    String path = "'" + pathFichero +"'";
+                    String path = "'" + Herramientas.computeFilename(downloadPath, "3.1-Usos de las estaciones.xls", fechaFichero) +"'";
 
                     // Comprobar si ya existe la entrada en la tabla Tratamiento
                     querySelect = "SELECT * FROM " + nombreTablaTratamiento + " where id=" + idTarea;
@@ -99,14 +103,12 @@ public class DescargarFichero {
 
     }
 
-    private static int descargar(int id, String tipo, String fechaFichero, String categoria, String subcategoria) {
-
-        UsoEstaciones usoEstacion = new UsoEstaciones();
+    private int descargar(String downloadPath, int id, String tipo, String fechaFichero, String categoria, String subcategoria) {
         try {
-            int result = usoEstacion.descargar(fechaFichero);
+            int result = usoEstaciones.descargar(fechaFichero);
             // Renombrar el fichero descargado e intentar acceder a el para ver que existe
             if(result==1) {
-                pathFichero = herramienta.renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fechaFichero);
+                String pathFichero = Herramientas.renameFile(downloadPath, "3.1-Usos de las estaciones.xls", fechaFichero);
                 FileReader archivo = new FileReader(pathFichero);
                 archivo.read();
                 archivo.close();
@@ -118,5 +120,4 @@ public class DescargarFichero {
         }
 
     }
-
 }

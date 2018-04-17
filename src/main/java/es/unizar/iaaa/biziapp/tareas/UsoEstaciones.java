@@ -14,8 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import javax.annotation.PostConstruct;
 
 /**
  * Clase para la descarga de un unico fichero del tipo "Usos de las estaciones"
@@ -23,20 +25,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  * @version 1.0
  * @since 2017-09-19
  */
+@Component
 public class UsoEstaciones {
 
-	private static String chromeDriverLocation;
-	private static WebDriver driver;
-	private static StringBuffer verificationErrors = new StringBuffer();
-	private static Configuracion config;
-	private static String downloadPath;
+    @Autowired
+    private Configuracion configuracion;
 
-
-	public UsoEstaciones() {
-		config = new Configuracion();
-		downloadPath = config.getDownloadPath();
-		chromeDriverLocation = config.getChromeDriverLocation();
-	}
+    private WebDriver driver;
+    private StringBuffer verificationErrors = new StringBuffer();
 
 	/**
 	 *
@@ -49,8 +45,8 @@ public class UsoEstaciones {
 		try {
             setUp();
 			// Login
-			ArrayList<String> credenciales = config.getCredenciales();
-			String baseURL = config.getBaseURL();
+			ArrayList<String> credenciales = configuracion.getCredenciales();
+			String baseURL = configuracion.getBaseURL();
 			login(credenciales, baseURL);
 
 			// Acceso hasta zona de descarga
@@ -78,7 +74,7 @@ public class UsoEstaciones {
 	 *
 	 * @throws Exception
 	 */
-	private static void setUp() throws Exception {
+	private void setUp() throws Exception {
 		ChromeOptions options = new ChromeOptions();
 		Map<String, Object> prefs = new HashMap<>();
 		/*
@@ -94,9 +90,16 @@ public class UsoEstaciones {
 		prefs.put("download.directory_upgrade", true);
 		// Descarga el fichero en el directorio asignado.
 		// en caso de no existir, crea la carpeta
-		prefs.put("download.default_directory", downloadPath);
+		prefs.put("download.default_directory", configuracion.getDownloadPath());
 		options.setExperimentalOption("prefs", prefs);
-		System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
+
+		//Si la variable Docker está activada y estamos en un entorno docker, lanzamos el driver sin interfaz
+		if(configuracion.isDockerMode()) {
+            options.addArguments("--headless","--no-sandbox");
+        } else { //If running on docker, will be on PATH so this step is unnecesary
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+        }
+
 		driver = new ChromeDriver(options);
 		// Hacer que la pantalla se posicione en una zona no visible de la pantalla
 		// Point punto = new Point(10000, 10000);
@@ -109,7 +112,7 @@ public class UsoEstaciones {
 	 *
 	 * @throws Exception
 	 */
-	private static void tearDown() throws Exception {
+	private void tearDown() throws Exception {
 		driver.findElement(By.id("lbLogout")).click();
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
@@ -126,7 +129,7 @@ public class UsoEstaciones {
 	 * @param baseURL
 	 *            url principal de la web legada
 	 */
-	private static void login(ArrayList<String> credenciales, String baseURL) {
+	private  void login(ArrayList<String> credenciales, String baseURL) {
 		driver.get(baseURL + "/login.aspx");
 		driver.findElement(By.id("txtLogin")).clear();
 		driver.findElement(By.id("txtLogin")).sendKeys(credenciales.get(0));
@@ -144,12 +147,12 @@ public class UsoEstaciones {
 	 * @param subcategoria
 	 *            por ejemplo "3.1-Usos de las estaciones"
 	 */
-	private static void accesoA(String categoria, String subcategoria) {
+	private  void accesoA(String categoria, String subcategoria) {
 		driver.findElement(By.linkText(categoria)).click();
 		driver.findElement(By.linkText(subcategoria)).click();
 	}
 
-	private static void rellenarCamposDeBusqueda(String fecha) {
+	private  void rellenarCamposDeBusqueda(String fecha) {
 		// driver.findElement(By.linkText("Uso de las estaciones")).click();
 		// driver.findElement(By.linkText("3.1-Usos de las estaciones")).click();
 
@@ -201,7 +204,7 @@ public class UsoEstaciones {
 
 	}
 
-	private static void descargarFichero() {
+	private  void descargarFichero() {
 		/*
 		 * https://stackoverflow.com/questions/9942928/how-to-handle-iframe-in-webdriver
 		 */

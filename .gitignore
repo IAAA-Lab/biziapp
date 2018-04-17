@@ -6,6 +6,12 @@
 /src/test/javascript/PhantomJS*/
 
 ######################
+# BiziApp Production
+######################
+/biziapp_production/biziapp/
+/biziapp_production/data/
+
+######################
 # Node
 ######################
 /node/
@@ -59,6 +65,7 @@ local.properties
 *.ids
 *.orig
 classes/
+/out/
 
 ######################
 # Visual Studio Code
@@ -142,4 +149,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-

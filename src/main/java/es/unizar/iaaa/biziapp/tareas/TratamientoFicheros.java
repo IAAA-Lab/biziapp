@@ -29,14 +29,19 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * VERSION JHIPSTER
  * @author dani
  *
  */
+@Service
 public class TratamientoFicheros {
 
+    @Autowired
+    private Configuracion configuracion;
     private static Herramientas herramienta;
     private static String csvPath;
     private static String pathCompletoCSV = null;
@@ -45,7 +50,6 @@ public class TratamientoFicheros {
     public void tratarFichero() {
 
         herramienta = new Herramientas();
-        Configuracion configuracion = new Configuracion();
         csvPath = configuracion.getCsvPath();
 
         // Comprobar que la carpeta donde se guardaran los CSV existe

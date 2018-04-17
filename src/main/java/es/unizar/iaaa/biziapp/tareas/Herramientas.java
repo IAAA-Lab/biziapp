@@ -12,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Herramientas {
 
-	public Herramientas(){}
-
 	/**
 	 * Renombrar el fichero anadiendole la fecha de la información que contiene
 	 *
@@ -25,7 +23,7 @@ public class Herramientas {
 	 *            fecha que se quiere anadir al nombre (formato "dd/MM/yyyy")
 	 * @return Ruta absoluta del fichero renombrado
 	 */
-	public String renameFile(String downloadPath, String nombreFichero, String fecha) {
+	public static String renameFile(String downloadPath, String nombreFichero, String fecha) {
 		// Obtener path completo del fichero
 		String path = downloadPath + System.getProperty("file.separator") + nombreFichero;
 		File fichero = new File(path);
@@ -33,19 +31,22 @@ public class Herramientas {
 
 		// Comprobar si existe el fichero
 		if (fichero.exists()) {
-			// Obtener nombre sin extension
-			String nombreSinExt = nombreFichero.substring(0, nombreFichero.lastIndexOf("."));
-			// Anadir al nombre la fecha y de nuevo la extension
-			String nuevoNombre = nombreSinExt + fecha.replaceAll("/", "") + ".xls";
-			// Renombrar
-			File dest = new File(downloadPath + System.getProperty("file.separator") + nuevoNombre);
+			File dest = new File(computeFilename(downloadPath, nombreFichero, fecha));
 			fichero.renameTo(dest);
 			result = dest.getAbsolutePath();
 		}
 		return result;
 	}
 
-    public int comprobarFichero(String pathCompleto) {
+	public static String computeFilename(String downloadPath, String nombreFichero, String fecha) {
+        // Obtener nombre sin extension
+        String nombreSinExt = nombreFichero.substring(0, nombreFichero.lastIndexOf("."));
+        // Anadir al nombre la fecha y de nuevo la extension
+        String nuevoNombre = nombreSinExt + fecha.replaceAll("/", "") + ".xls";
+        return downloadPath + System.getProperty("file.separator") + nuevoNombre;
+    }
+
+    public static int comprobarFichero(String pathCompleto) {
         int result;
         File fichero = new File(pathCompleto);
         System.out.println(pathCompleto);
@@ -62,7 +63,7 @@ public class Herramientas {
      * @param cadena
      * @return cadena encriptada
      */
-    public String generarHash(String cadena){
+    public static String generarHash(String cadena){
 
         MessageDigest sha256;
         try {

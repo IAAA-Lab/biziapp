@@ -1,6 +1,6 @@
 {
   "name": "jhipster",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Description for jhipster",
   "private": true,
   "license": "UNLICENSED",
@@ -59,7 +59,7 @@
     "yargs": "5.0.0"
   },
   "engines": {
-    "node": "^4.3"
+    "node": "^8.5.0"
   },
   "scripts": {
     "test": "gulp test"

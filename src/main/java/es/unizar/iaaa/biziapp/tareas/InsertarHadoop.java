@@ -3,6 +3,8 @@ package es.unizar.iaaa.biziapp.tareas;
 import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,22 +17,23 @@ import java.sql.*;
 /**
  * Created by dani on 29/10/17.
  */
+@Service
 public class InsertarHadoop {
 
-    private static Configuracion config;
+    @Autowired
+    private Configuracion configuracion;
     private static String dockerSharedPath;
     private static final Logger log = LoggerFactory.getLogger(InsertarHadoop.class);
 
-    public static void insertarHadoop() {
+    public void insertarHadoop() {
         Herramientas herramienta = new Herramientas();
-        config = new Configuracion();
-        String csvPath = config.getCsvPath();
-        dockerSharedPath = config.getDockerSharedDirectory();
+        String csvPath = configuracion.getCsvPath();
+        dockerSharedPath = configuracion.getDockerSharedDirectory();
 
         // Configuración MySQL
-        String jdbcMysql = config.getJdbcMysqlConnector();
-        String driverNameMysql = config.getDriverNameMysqlDB();
-        String[] credentialMysqlDB = config.getCredentialMysqlDB().split(":");
+        String jdbcMysql = configuracion.getJdbcMysqlConnector();
+        String driverNameMysql = configuracion.getDriverNameMysqlDB();
+        String[] credentialMysqlDB = configuracion.getCredentialMysqlDB().split(":");
         String userMysql = credentialMysqlDB[0];
         String passwordMysql = credentialMysqlDB[1];
 
@@ -105,7 +108,7 @@ public class InsertarHadoop {
 
     }
 
-    private static int insertarDatos(String pathCompletoCSV) {
+    private int insertarDatos(String pathCompletoCSV) {
 		/*
 		 * Copiar fichero a la carpeta compartida del docker, para poder realizar la
 		 * insercion de los datos.
@@ -123,9 +126,9 @@ public class InsertarHadoop {
         }
 
         // Configuracion Hive
-        String jdbcHive = config.getJdbcHiveConnector();
-        String driverNameHive = config.getDriverNameHiveDB();
-        String[] credentialHiveDB = config.getCredentialHiveDB().split(":");
+        String jdbcHive = configuracion.getJdbcHiveConnector();
+        String driverNameHive = configuracion.getDriverNameHiveDB();
+        String[] credentialHiveDB = configuracion.getCredentialHiveDB().split(":");
         String userHive = credentialHiveDB[0];
         String passwordHive = credentialHiveDB[1];
 
@@ -213,6 +216,5 @@ public class InsertarHadoop {
             e.printStackTrace();
             return -1;
         }
-
     }
 }

@@ -4,6 +4,8 @@ import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import es.unizar.iaaa.biziapp.domain.enumeration.Tipo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,14 +18,15 @@ import java.time.format.DateTimeFormatter;
  * Created by dani on 29/10/17.
  *
  */
+@Service
 public class GeneradorFechas {
 
-    private static Configuracion configuracion;
+    @Autowired
+    private Configuracion configuracion;
     private static final Logger log = LoggerFactory.getLogger(GeneradorFechas.class);
 
     public void generarFechasUsoEstacion() {
 
-        configuracion = new Configuracion();
         String driverNameMysql = configuracion.getDriverNameMysqlDB();
         String jdbcMysql = configuracion.getJdbcMysqlConnector();
         String[] credentialMysql = configuracion.getCredentialMysqlDB().split(":");

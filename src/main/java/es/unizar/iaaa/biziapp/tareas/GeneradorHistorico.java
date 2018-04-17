@@ -4,6 +4,8 @@ import es.unizar.iaaa.biziapp.domain.enumeration.Estado;
 import es.unizar.iaaa.biziapp.domain.enumeration.Tipo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,20 +17,19 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by dani on 19/11/17.
  */
+@Service
 public class GeneradorHistorico {
 
-    private static Configuracion configuracion;
+    @Autowired
+    private Configuracion configuracion;
     private static final Logger log = LoggerFactory.getLogger(GeneradorFechas.class);
 
     public void generarHistoricoUsoEstacion() {
-        configuracion = new Configuracion();
         String driverNameMysql = configuracion.getDriverNameMysqlDB();
         String jdbcMysql = configuracion.getJdbcMysqlConnector();
         String[] credentialMysql = configuracion.getCredentialMysqlDB().split(":");
         String userMysql = credentialMysql[0];
         String passwordMysql = credentialMysql[1];
-
-
 
         // representa los dias que se van a descontar desde hoy
         int historial = -10;

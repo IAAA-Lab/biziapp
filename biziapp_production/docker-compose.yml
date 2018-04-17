@@ -1,0 +1,108 @@
+version: "3"
+
+services:
+    namenode:
+        image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
+        container_name: namenode
+        volumes:
+            - ./data/namenode:/hadoop/dfs/name
+        environment:
+            - CLUSTER_NAME=test
+        env_file:
+            - ./hadoop-hive.env
+        ports:
+            - 50070:50070
+
+    datanode:
+        image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
+        container_name: datanode
+        depends_on:
+            - namenode
+        volumes:
+            - ./data/datanode:/hadoop/dfs/data
+        env_file:
+            - ./hadoop-hive.env
+
+    hive-server:
+        image: localhost:5000/hive-server:latest
+        container_name: hive-server
+        depends_on:
+            - datanode
+            - hive-metastore
+        env_file:
+            - ./hadoop-hive.env
+        environment:
+            HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: jdbc:postgresql://hive-metastore/metastore
+        ports:
+            - 10000:10000
+        volumes:
+            - compartida:/compartida
+            - ./sqoop:/home
+
+    hive-metastore:
+        image: bde2020/hive:2.1.0-postgresql-metastore
+        container_name: hive-metastore
+        depends_on:
+            - hive-metastore-postgresql
+        env_file:
+            - ./hadoop-hive.env
+        command: /opt/hive/bin/hive --service metastore
+
+    hive-metastore-postgresql:
+        image: bde2020/hive-metastore-postgresql:2.1.0
+        container_name: hive-metastore-postgresql
+
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 1234
+            MYSQL_DATABASE: jhipster
+        ports:
+            - 3306:3306
+
+    biziapp:
+        image: localhost:5000/biziapp:latest
+        container_name: biziapp
+        depends_on:
+            - mysql
+            - hive-server
+        env_file:
+            - ./biziapp.env
+        environment:
+            SPRING_PROFILES_ACTIVE: prod,swagger
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/jhipster?useUnicode=true&characterEncoding=utf8&useSSL=false
+        volumes:
+          - compartida:/opt/biziapp/compartida
+          - ./biziapp/download:/opt/biziapp/download
+          - ./biziapp/csv:/opt/biziapp/csv
+        ports:
+            - 8080:8080
+
+    hue:
+        image: bde2020/hdfs-filebrowser:3.11
+        container_name: hue
+        ports:
+            - 8088:8088
+        environment:
+            - NAMENODE_HOST=namenode
+
+    adminer:
+        image: adminer
+        container_name: adminer
+        restart: always
+        ports:
+          - 8081:8080
+
+    portainer:
+        image: portainer/portainer
+        container_name: portainer
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - 9000:9000
+
+volumes:
+  compartida:
